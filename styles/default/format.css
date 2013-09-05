@@ -1,0 +1,859 @@
+
+/* ############### 1. HTML elements ################### */
+
+html {
+    margin:0px;
+    padding:0px;
+    width:100%;
+    height:100%;
+}
+body {
+    margin:0px;
+    padding:0px;
+    width:100%;
+    height:100%;
+    font-family:arial;
+    font-size:10pt;
+    background:#FFF;
+    background: linear-gradient(#EEF, #FFF);
+    color:#000;
+}
+div {
+    margin:0px;
+    padding:0px;
+}
+img {
+    border:0px;
+}
+h1 {
+    margin:5px;
+    padding:4px;
+    font-size:15pt;
+    color:#000;
+}
+h2 {
+    margin:4px;
+    padding:3px;
+    margin-top:10px;
+    margin-bottom:3px;
+    font-size:11pt;
+    color:#000;
+}
+h3 {
+    margin:3px;
+    padding:2px;
+    margin-top:10px;
+    margin-bottom:3px;
+    color:#000;
+    font-size:10pt;
+}
+h4 {
+    margin:2px;
+    padding:1px;
+    margin-top:10px;
+    margin-bottom:3px;
+    color:#000;
+    font-size:10pt;
+}
+p {
+    margin:5px;
+    margin-left:20px;
+    padding:3px;
+}
+ul {
+    margin:1px;
+    padding:1px;
+    list-style-type:none;
+}
+li {
+    margin:1px;
+    padding:1px;
+}
+a {
+    padding: 1px;
+    margin: 3px;
+}
+a:link  {
+    padding:3px;
+    color:#00F;
+    text-decoration:none;
+    font-weight:bold;
+}
+a:visited  {
+    color:#00F;
+    text-decoration:none;
+    font-weight:bold;
+}
+a:hover  {
+    color:#00F;
+    text-decoration:underline;
+    font-weight:bold;
+}
+a:active  {
+    color:#00F;
+    text-decoration:underline;
+    font-weight:bold;
+}
+a:focus  {
+    color:#00F;
+    text-decoration:underline;
+    font-weight:bold;
+}
+table {
+    margin-left:10px;
+    font-size:10pt;
+    border-spacing:1px;
+    width:99%;
+    box-shadow: 2px 2px 10px #787;
+}
+tr {
+    margin:5px;
+}
+th {
+    font-weight:bold;
+    background:#337;
+    color:#FFF;
+    text-align:left;
+    margin:2px;
+    padding:5px;
+}
+td {
+    font-weight:normal;
+    background:#EEF;
+    text-align:left;
+    margin:1px;
+    padding:5px;
+}
+
+/* ############### 2. Forms ################### */
+
+form {
+    margin-top:5px;
+    margin-bottom:5px;
+    padding:7px;
+    box-shadow: 2px 2px 10px #787;
+    border-radius:7px;
+}
+fieldset {
+    border:0px;
+}
+legend {
+    font-weight:bold;
+    font-size:9pt;
+    color:#AAA;
+}
+label {
+    float:left;
+    padding:5px;
+    padding-right:15px;
+    min-width:200px;
+    text-align:right;
+    background:#EEF;
+    margin-top:3px;
+}
+textarea {
+    white-space:normal;
+}
+
+input,
+select,
+textarea
+{
+    padding:5px;
+    float:left;
+    box-shadow: 2px 2px 10px #787;
+    margin-top:1px;
+    width:200px;
+}
+.ts_submit,
+.ts_submit:link,
+.ts_submit:visited,
+input[type="submit"]
+{
+    float:none;
+    clear:none;
+    border:0px;
+    background:#0F0;
+    width:auto;
+    min-width:0px;
+    background: linear-gradient(#8F8, #060);
+    margin:5px;
+    padding:4px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:4px;
+    cursor:pointer;
+    font-weight:bold;
+    color:#000;
+    box-shadow: 2px 2px 10px #787;
+    background-size:20px 50px;
+    transition: all 0.2s ease-in-out;
+}
+.ts_submit:hover,
+input[type="submit"]:hover
+{
+    background-position:100px;
+}
+.ts_cancel,
+.ts_cancel:link,
+.ts_cancel:visited,
+input[type="reset"]
+{
+    float:none;
+    clear:none;
+    border:0px;
+    margin:5px;
+    width:auto;
+    min-width:0px;
+    padding:4px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:4px;
+    cursor:pointer;
+    font-weight:bold;
+    color:#000;
+    background:#F00;
+    background: linear-gradient(#F88, #F00);
+    box-shadow: 2px 2px 10px #877;
+    background-size:20px 50px;
+    transition: all 0.2s ease-in-out;
+}
+.ts_cancel:hover,
+input[type="reset"]:hover
+{
+    background-position:100px;
+}
+.clear {
+    clear:left;
+}
+input:required,
+select:required,
+textarea:required
+{
+    border-left:5px solid #FF3;
+}
+input[type="radio"]:required,
+input[type="checkbox"]:required
+{
+    border-left:0px;
+    background:#FF3;
+}
+input + div,
+select + div,
+textarea + div
+{
+    position:absolute;
+    display:block;
+    float:left;
+    right:30px;
+    padding:5px;
+    margin:2px;
+    border:5px solid #FA0;
+    max-width:20%;
+    min-width:10%;
+    height:auto;
+    min-height:30px;
+    background:#FD8;
+    opacity:0;
+    transition:all 0.5s linear;
+    border-radius:5px;
+}
+input:hover + div,
+input:focus + div,
+select:hover + div,
+select:focus + div,
+textarea:hover + div,
+textarea:focus + div,
+input[type="checkbox"]:hover + label + div,
+input[type="checkbox"]:focus + label + div,
+input[type="radio"]:hover + label + div,
+input[type="radio"]:focus + label + div
+{
+    opacity:1;
+}
+input[type="checkbox"]+label,
+input[type="checkbox"]+div+label,
+input[type="radio"]+label,
+input[type="radio"]+div+label
+{
+    background:transparent;
+    text-align:left;
+}
+input[type="checkbox"],
+input[type="radio"]
+{
+margin:5px;
+margin-top:10px;
+margin-left:200px;
+background:#FFF;
+width:auto;
+}
+
+/* ############### 3. Structure and design ################### */
+
+#root {
+margin-left:auto;
+margin-right:auto;
+width:80%;
+min-width:200px;
+max-width:1200px;
+}
+#header {
+position:relative;
+top:0px;
+height:80px;
+width:100%;
+
+background: #006;
+background: linear-gradient(#000, #006);
+}
+#navig {
+position:relative;
+width:100%;
+background:#444;
+}
+#subnavig {
+position:relative;
+width:100%;
+background:#888;
+}
+#contentframe {
+position:relative;
+min-height:200px;
+width:100%;
+background:#FFF;
+border: 4px solid #EEE;
+border-radius:0 0 10px 10px;
+border-top:0px;
+}
+#content {
+margin:8px;
+padding:8px;
+padding-bottom:20px;
+}
+
+/* ################# header ####################### */
+#logo {
+float:left;
+height:60px;
+margin:4px;
+}
+#logotext {
+float:left;
+color:#FFF;
+margin:10px;
+}
+#header_right {
+position:absolute;
+right:0px;
+top:4px;
+}
+#header_right form {
+padding:1px;
+box-shadow:none;
+border-radius:7px;
+float:left;
+}
+#header_right input {
+padding:2px;
+float:left;
+box-shadow:none;
+margin-top:1px;
+width:auto;
+min-width:none;
+}
+#header_right input:after {
+clear:none;
+}
+#header_right input[type="submit"] {
+float:right;
+margin-right:10px;
+}
+#header_right select {
+background:transparent;
+display:inline-block;
+border:0px;
+border-radius:4px;
+color:#DDD;
+}
+#header_right select:hover,
+#header_right select:focus,
+#header_right select:active
+{
+color:#AAA;
+}
+#header_right a:link,
+#header_right a:visited,
+#header_right a:focus,
+#header_right a:active,
+#header_right a:hover
+{
+color:#DDD;
+font-weight:bold;
+text-decoration:none;
+font-size:10pt;
+margin-right:5px;
+padding:2px;
+}
+#header_right a:focus,
+#header_right a:active,
+#header_right a:hover
+{
+text-decoration:underline;
+}
+
+#login {
+    position:relative;
+    top:20%;
+    padding:10px;
+    border-radius:5px;
+    background:#AAA;
+}
+
+
+
+
+
+
+
+
+#div__footer {
+text-align:center;
+font-size:9pt;
+color:#666;
+padding-top:7px;
+padding-bottom:20px;
+}
+#div__footer_left {
+float:left;
+width:20%;
+text-align:left;
+margin-top:20px;
+}
+#div__footer_middle {
+float:left;
+width:60%;
+text-align:center;
+}
+#div__footer_right {
+float:left;
+width:20%;
+text-align:right;
+margin-top:20px;
+}
+#div__settings {
+position:absolute;
+top:40%;
+right:0px;
+width:28px;
+padding:2px;
+padding-right:4px;
+background:#003;
+text-align:center;
+border-radius:3px;
+}
+
+/* ############### 3.1 Navigation ################### */
+
+#navig {
+list-style:none;
+width:100%;
+margin:0px;
+padding:0px;
+background:#111;
+background:linear-gradient(#444, #111);
+box-shadow:0 2px 1px #9c9c9c;
+}
+#navig li {
+float:left;
+padding:0 0 0 0;
+position:relative;
+min-width:100px;
+}
+#navig a {
+float:left;
+padding:5px 20px 5px 20px;
+color:#999;
+font:bold 12px/25px;
+text-decoration:none;
+text-shadow:0 1px 0 #000;
+border-radius:5px;
+}
+#navig li:hover > a {
+color:#fafafa;
+background:#00A;
+}
+#navig li:hover > ul {
+display: block;
+}
+
+/* Sub-menu */
+#navig ul {
+list-style:none;
+margin:0px;
+padding:0px;
+display:none;
+position:absolute;
+top:30px;
+left:0;
+z-index:99999;
+background:#444;
+background:linear-gradient(#444, #111);
+border-radius:5px;
+}
+#navig ul li {
+float:none;
+margin:0;
+padding:0;
+display:block;
+box-shadow:0 1px 0 #111111, 0 2px 0 #777777;
+}
+#navig ul li:last-child {
+box-shadow: none;
+}
+#navig ul a {
+padding:10px;
+height:auto;
+line-height:1;
+display:block;
+white-space:nowrap;
+float:none;
+text-transform:none;
+}
+#navig ul a:hover {
+background:#0186ba;
+background:linear-gradient(#04acec,  #0186ba);
+}
+#navig ul li:first-child a {
+border-radius:5px 5px 0 0;
+}
+#navig ul li:last-child a {
+border-radius:0 0 5px 5px;
+}
+#navig:after,
+#subnavig:after
+{
+visibility:hidden;
+display:block;
+font-size:0pt;
+content:" ";
+clear:both;
+height:0px;
+}
+
+#subnavig {
+list-style:none;
+margin:0px;
+padding:0px;
+background:#888;
+}
+#subnavig li {
+position:relative;
+float:left;
+padding:0px;
+margin:1px;
+}
+#subnavig li a {
+float:left;
+min-width:100px;
+text-align:center;
+padding:5px;
+margin:0px;
+color:#FFF;
+font:bold 10pt;
+text-decoration:none;
+border-radius:0 0 5px 5px;
+}
+#subnavig li:hover > a {
+color:#000;
+background:#DDD;
+}
+
+/* ############### 4. Misc ################### */
+
+/* *********************** special lists ******************** */
+
+.childlist {
+background: #FFF;
+padding:5px;
+padding-left:20px;
+}
+
+/* ############### TSunic classes ################### */
+
+.ts_subbox
+{
+margin-top:20px;
+}
+.ts_suplinkbox
+{
+margin:0px;
+padding:0px;
+margin-left:10px;
+margin-bottom:15px;
+border-bottom: 1px solid #999;
+}
+.ts_suplinkbox a,
+.ts_suplinkbox a:link,
+.ts_suplinkbox a:visited
+{
+border-left:2px solid #999;
+padding:1px;
+margin:0px;
+padding-left:6px;
+padding-right:6px;
+}
+.ts_suplinkbox a:hover {
+text-decoration:none;
+border-bottom:2px solid #00F;
+border-top:1px solid #00F;
+background:#DDF;
+}
+
+.ts_sublinkbox
+{
+text-align:right;
+margin:0px;
+margin-top:10px;
+padding:0px;
+margin-left:10px;
+margin-bottom:15px;
+border-bottom: 1px solid #999;
+}
+.ts_sublinkbox a,
+.ts_sublinkbox a:link,
+.ts_sublinkbox a:visited
+{
+border-right:2px solid #999;
+padding:0px;
+margin:0px;
+padding-left:6px;
+padding-right:6px;
+}
+.ts_sublinkbox a:hover {
+text-decoration:none;
+border-bottom:2px solid #00F;
+border-top:1px solid #00F;
+background:#DDF;
+}
+
+/* other classes and objects */
+.div_error {
+width:100%;
+background:#F99;
+padding:2px;
+font-size:10pt;
+font-weight:bold;
+margin-bottom:20px;
+border-radius:5px;
+}
+.div_info {
+width:100%;
+background:#FF9;
+padding:2px;
+font-size:10pt;
+font-weight:bold;
+margin-bottom:20px;
+border-radius:5px;
+}
+
+/* ########################## popup ############################### */
+.ts_js_blackbg {
+position:fixed;
+top:0px;
+left:0px;
+height:100%;
+width:100%;
+background:url(../../files/project/bg_shadow.png);
+}
+.ts_js_popup {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:0px;
+    padding:0px;
+    margin-top:-70px;
+    margin-left:-175px;
+    height:auto;
+    min-height:140px;
+    max-height:300px;
+    width:auto;
+    min-width:350px;
+    max-width:500px;
+    background:#FFF;
+    border:0px;
+    border-right:4px solid black;
+    border-bottom:4px solid black;
+}
+.ts_js_popup_button_in {
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    margin:0px;
+    padding:5px;
+    height:20px;
+    text-align:right;
+}
+.ts_popupbox_header {
+    position:absolute;
+    top:0px;
+    left:0px;
+    margin:0px;
+    padding:0px;
+    height:40px;
+    width:350px;
+    background:#55F;
+}
+.ts_popupbox_header_in {
+    position:absolute;
+    top:0px;
+    left:0px;
+    margin:10px;
+    padding:0px;
+    height:20px;
+    width:330px;
+    color:#EEE;
+    font-size:13pt;
+    font-weight:bold;
+}
+.ts_popupbox_content {
+    position:absolute;
+    left:0px;
+    top:40px;
+    margin:0px;
+    padding:0px;
+    width:350px;
+    background:#EEF;
+    min-height:100px;
+    height:auto;
+}
+.ts_popupbox_content_in {
+    position:absolute;
+    left:10px;
+    top:10px;
+    margin:0px;
+    padding:0px;
+    width:330px;
+    min-height:100px;
+    height:auto;
+}
+.ts_popupbox_buttondiv {
+    position:absolute;
+    right:10px;
+    bottom:12px;
+    margin:0px;
+    padding:5px;
+    height:20px;
+    text-align:right;
+}
+.ts_popupbox_button {
+    position:relative;
+    margin:0px;
+    margin-left:10px;
+    padding:5px;
+    text-align:center;
+}
+
+/* ##################### info- and error-boxes #################### */
+
+.ts_js_msgbox {
+    position:absolute;
+    top:80px;
+    right:0px;
+    height:auto;
+    min-height:20px;
+    max-height:100px;
+    width:350px;
+}
+.ts_js_msgbox_error {
+    width:350px;
+    background:#A00;
+    cursor:pointer;
+}
+.ts_js_msgbox_error_header {
+    position:absolute;
+    top:10px;
+    left:0px;
+    width:60px;
+    font-weight:bold;
+    color:#FFF;
+    text-align:center;
+}
+.ts_js_msgbox_error_content {
+    position:relative;
+    top:0px;
+    left:60px;
+    width:270px;
+    background:#FAA;
+    padding-top:3px;
+    padding-bottom:3px;
+    height:auto;
+    min-height:30px;
+}
+.ts_js_msgbox_info {
+    width:350px;
+    background:#FC0;
+    cursor:pointer;
+}
+.ts_js_msgbox_info_header {
+    position:absolute;
+    top:10px;
+    left:0px;
+    width:60px;
+    font-weight:bold;
+    color:#FFF;
+    text-align:center;
+}
+.ts_js_msgbox_info_content {
+    position:relative;
+    top:0px;
+    left:60px;
+    width:270px;
+    background:#FFA;
+    padding-top:3px;
+    padding-bottom:3px;
+    height:auto;
+    min-height:30px;
+}
+
+/* formstyle */
+.formstyle th,
+    .formstyle tr th {
+    font-weight:bold;
+    background:#AA8;
+    text-align:right;
+    margin:4px;
+    margin-right:0px;
+    padding:5px;
+    min-width:120px;
+}
+.formstyle td,
+    .formstyle tr td {
+    font-weight:normal;
+    background:#DDC;
+    text-align:left;
+    margin:4px;
+    margin-left:0px;
+    padding:5px;
+    min-width:200px;
+}
+
+/* delete and edit images */
+.system_deleteImage {
+    border:0px;
+    margin:0px;
+    padding:0px;
+}
+.system_editImage {
+    border:0px;
+    margin:0px;
+    padding:0px;
+}
+
+/* noTemplateFound error */
+#div_system__noTemplateFound {
+    width:80%;
+    padding:7px;
+    background:#F88;
+    border:2px solid black;
+}

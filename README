@@ -1,0 +1,9 @@
+JSunic - just a try...
+
+This could be the future (of TSunic): JSunic.
+The abbreviation "JS" stands for... ok, try to guess.
+
+Move all data handling to the client side (JavaScript) and use the cloud for
+saving encrypted data packets only.
+
+This is work in progress. No working solution yet.

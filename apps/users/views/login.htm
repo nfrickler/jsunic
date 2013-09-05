@@ -1,0 +1,27 @@
+<div id="login">
+    <h1>Welcome on JSunic!</h1>
+    <p>Please log in, to get access to your data.</p>
+    <p>
+	You don't have an account yet?
+	<a href="#" onclick="
+	    JSunic.run('JSunic.appview(\'users\', \'register\');');">
+	    Register now!</a>
+    </p>
+    <form action="#" onsubmit="login();">
+	<fieldset>
+	    <legend>Login</legend>
+	    <label for="email">Username</label>
+	    <input type="text" placeholder="Your e-mail address"
+		id="email" />
+	    <div>Your e-mail address</div>
+	    <div style="clear:both;"></div>
+
+	    <label for="password">Password</label>
+	    <input type="text" placeholder="Your password"
+		id="password" />
+	    <div>Your password</div>
+	    <div style="clear:both;"></div>
+	</fieldset>
+	<input type="submit" value="Login" />
+    </form>
+</div>

@@ -1,0 +1,36 @@
+<div id="login">
+    <h1>Welcome on JSunic!</h1>
+    <p>Please fill in the following form to create a new account.</p>
+    <p>
+	You have an account already?
+	<a href="#" onclick="
+	    JSunic.run('JSunic.appview(\'users\', \'login\');');">
+	    Login now!</a>
+    </p>
+    <form action="#" onsubmit="register();">
+	<fieldset>
+	    <legend>Registration</legend>
+	    <label for="email">Username</label>
+	    <input type="text" placeholder="Your e-mail address"
+		id="email" />
+	    <div>Your e-mail address</div>
+	    <div style="clear:both;"></div>
+
+	    <label for="password">Password</label>
+	    <input type="text" placeholder="Your password"
+		id="password" />
+	    <div>Your password</div>
+	    <div style="clear:both;"></div>
+
+	    <label for="mbr">Data service</label>
+	    <input type="text" placeholder="Link to your data-service"
+		id="mbr" />
+	    <div>
+		Enter a link to your data service. This service will
+		be used to save all your encrypted data.
+	    </div>
+	    <div style="clear:both;"></div>
+	</fieldset>
+	<input type="submit" value="Register" />
+    </form>
+</div>
