@@ -6,7 +6,7 @@ var JSunic;
 function init () {
 
     // Create JSunic object
-    JSunic = new JSunic();
+    JSunic = new JSunicObj();
 
     // show login
     JSunic.run("JSunic.appview('users', 'login');");
@@ -16,7 +16,7 @@ function init () {
  * JSunic object
  * This object offers the most important methods and attributes
  */
-function JSunic () {
+function JSunicObj () {
 
     /**
      * Command queue
@@ -41,6 +41,11 @@ function JSunic () {
     this.path = "";
 
     /**
+     * Time of idle
+     */
+    this.idle= 0;
+
+    /**
      * Path to mbr
      */
     this.mbr = "http://localhost/jsunic/services/mbr/";
@@ -49,6 +54,16 @@ function JSunic () {
      * Path to apps
      */
     this.path_apps = "http://localhost/jsunic/apps/";
+
+    /**
+     * Selected language
+     */
+    this.lang = "en";
+
+    /**
+     * Array of language replacements
+     */
+    this.lang_translations = new Array();
 
     /**
      * Symkey of user
@@ -81,22 +96,26 @@ function JSunic () {
      */
     this._run = _run;
     function _run () {
+	this.idle++;
 
 	// ready?
 	if (!this.ready) {
-	    setTimeout("JSunic._run();", 100);
+	    setTimeout("JSunic._run();", 1);
 	    return;
 	}
 
 	// no commands?
 	if (this.queue.length < 1) {
-	    setTimeout("JSunic._run();", 200);
+	    var timeout = (this.idle > 400) ? 1000 : this.idle;
+	    if (timeout < 20) timeout = 20;
+	    setTimeout("JSunic._run();", timeout);
 	    return;
 	}
 
 	// get and run next command
+	this.idle = 0;
 	eval(this.queue.shift());
-	setTimeout("JSunic._run();", 100);
+	setTimeout("JSunic._run();", 1);
     }
 
     /**
@@ -286,6 +305,7 @@ function JSunic () {
      */
     this.appview = appview;
     function appview (app, view) {
+	JSunic.run("JSunic.loadLanguage('"+app+"');");
 
 	// Is cached?
 	if (app in this.appviewcache && view in this.appviewcache[app]) {
@@ -304,6 +324,44 @@ function JSunic () {
 	    },
 	    "html"
 	);
+    }
+
+    /**
+     * Parse current HTML
+     */
+    this.parseHTML = parseHTML;
+    function parseHTML () {
+	// Set language
+	document.body.innerHTML = document.body.innerHTML.replace(
+	    /\b[A-Z][A-Z0-9_]+\b/g, function(match, contents, offset, s) {
+		if (match in JSunic.lang_translations) {
+		    return JSunic.lang_translations[match];
+		}
+		return match;
+	    }
+	);
+    }
+
+    /**
+     * Load language
+     */
+    this.loadLanguage = loadLanguage;
+    function loadLanguage (app) {
+	this.ready = false;
+	$.ajax({
+	    url: this.path_apps+app+"/lang/"+this.lang+".js",
+	    dataType: "script",
+	    cache: true,
+	    success: function (response) {
+		// load language in lang_translations
+		$.extend(JSunic.lang_translations, lang);
+		JSunic.run("JSunic.parseHTML();");
+		JSunic.ready = true;
+	    },
+	    error: function (msg) {
+		alert('error: '+msg);
+	    }
+	});
     }
 
     /**
@@ -373,3 +431,18 @@ function register () {
 
     return false;
 }
+
+/**
+ * Remove duplicate elements in array
+ */
+function arrayUnique (array) {
+    var a = array.concat();
+    for(var i = 0; i < a.length; i++) {
+	for(var j = i+1; j < a.length; j++) {
+	    if(a[i] === a[j])
+		a.splice(j--, 1);
+	}
+    }
+
+    return a;
+};

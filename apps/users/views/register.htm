@@ -1,36 +1,38 @@
-<div id="login">
-    <h1>Welcome on JSunic!</h1>
-    <p>Please fill in the following form to create a new account.</p>
+<div id="users__register">
+    <h1>USERS__REGISTER__H1</h1>
+    <p>USERS__REGISTER__INFOTEXT</p>
     <p>
-	You have an account already?
+	USERS__REGISTER__HAVEACCOUNT
 	<a href="#" onclick="
 	    JSunic.run('JSunic.appview(\'users\', \'login\');');">
-	    Login now!</a>
+	    USERS__REGISTER__LOGINNOW</a>
     </p>
     <form action="#" onsubmit="register();">
 	<fieldset>
-	    <legend>Registration</legend>
-	    <label for="email">Username</label>
-	    <input type="text" placeholder="Your e-mail address"
+	    <legend>USERS__REGISTER__FORM__LEGEND</legend>
+	    <label for="email">USERS__REGISTER__FORM__EMAIL</label>
+	    <input type="text"
+		placeholder="USERS__REGISTER__FORM__EMAIL__PLACEHOLDER"
 		id="email" />
-	    <div>Your e-mail address</div>
+	    <div>USERS__REGISTER__FORM__EMAIL__HELP</div>
 	    <div style="clear:both;"></div>
 
-	    <label for="password">Password</label>
-	    <input type="text" placeholder="Your password"
+	    <label for="password">USERS__REGISTER__FORM__PASSWORD</label>
+	    <input type="text"
+		placeholder="USERS__REGISTER__FORM__PASSWORD__PLACEHOLDER"
 		id="password" />
-	    <div>Your password</div>
+	    <div>USERS__REGISTER__FORM__HELP</div>
 	    <div style="clear:both;"></div>
 
-	    <label for="mbr">Data service</label>
-	    <input type="text" placeholder="Link to your data-service"
+	    <label for="mbr">USERS__REGISTER__FORM__MBR</label>
+	    <input type="text"
+		placeholder="USERS__REGISTER__FORM__MBR__PLACEHOLDER"
 		id="mbr" />
 	    <div>
-		Enter a link to your data service. This service will
-		be used to save all your encrypted data.
+		USERS__REGISTER__FORM__MBR__HELP
 	    </div>
 	    <div style="clear:both;"></div>
 	</fieldset>
-	<input type="submit" value="Register" />
+	<input type="submit" value="USERS__REGISTER__FORM__SUBMIT" />
     </form>
 </div>
