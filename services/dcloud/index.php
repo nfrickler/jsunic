@@ -32,7 +32,7 @@ case "int":
 	error("Invalid id (int)!");
     break;
 case "varchar":
-    if (preg_match('#[^a-zA-Z0-9=]#', $id) != 0)
+    if (preg_match('#[^a-zA-Z0-9@\.]#', $id) != 0)
 	error("Invalid id (varchar)!");
     break;
 default:
@@ -52,8 +52,9 @@ if ($id) {
 	    SET id = '$id', data = '$data'
 	    ON DUPLICATE KEY UPDATE data = '$data'
 	;";
-	if (!$Db->doUpdate($sql))
+	if (!$Db->doUpdate($sql)) {
 	    error("Update failed!");
+	}
 	send("Updated");
     } elseif ($data === 0) {
 	// Fetch

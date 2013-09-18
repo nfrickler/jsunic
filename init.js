@@ -9,7 +9,7 @@ function init () {
     JSunic = new JSunicObj();
 
     // show login
-    JSunic.run("JSunic.appview('users', 'login');");
+    JSunic.appview('users', 'login');
 }
 
 /**
@@ -17,17 +17,6 @@ function init () {
  * This object offers the most important methods and attributes
  */
 function JSunicObj () {
-
-    /**
-     * Command queue
-     */
-    this.queue = new Array();
-
-    /**
-     * Queued command will be executed only,
-     * if ready flag is true
-     */
-    this.ready = true;
 
     /**
      * Temporary data of ajax-calls
@@ -84,42 +73,12 @@ function JSunicObj () {
     this.appviewcache = new Array();
 
     /**
-     * Add command to queue
+     * List of ajax requests and responses
      */
-    this.run = run;
-    function run (cmd) {
-	this.queue.push(cmd);
-    }
+    this.ajax_req = new Array();
 
     /**
-     * Run next command in queue
-     */
-    this._run = _run;
-    function _run () {
-	this.idle++;
-
-	// ready?
-	if (!this.ready) {
-	    setTimeout("JSunic._run();", 1);
-	    return;
-	}
-
-	// no commands?
-	if (this.queue.length < 1) {
-	    var timeout = (this.idle > 400) ? 1000 : this.idle;
-	    if (timeout < 20) timeout = 20;
-	    setTimeout("JSunic._run();", timeout);
-	    return;
-	}
-
-	// get and run next command
-	this.idle = 0;
-	eval(this.queue.shift());
-	setTimeout("JSunic._run();", 1);
-    }
-
-    /**
-     * Save data packet
+     * Save data packet via ajax call
      */
     this.save = save;
     function save (data, id) {
@@ -130,61 +89,51 @@ function JSunicObj () {
 	// Encrypt data
 	data = this.encrypt(data);
 
-	// Save via ajax-call
-	ready = false;
-	$.get(
+	// Save data
+	this.loadOnce(
 	    this.path+"index.php?data="
 		+encodeURIComponent(data)+"&id="+id,
-	    {language: "php", version: 5},
-	    function(responseText){
-
+	    function (response) {
 		// get id
-		this.tmp_id = $(responseText).find("data").text();
-
-		// Set ready
-		JSunic.ready = true;
+		this.tmp_id = $(response).find("data").text();
 	    },
-	    "xml"
+	    function (response) {
+		JSunic.error("Failed to save data!");
+	    },
+	    'xml'
 	);
     }
 
     /**
-     * Load data packet
+     * Load data packet via ajax call
      */
     this.get = get;
     function get (id) {
-	ready = false;
-
-	// Get data via ajax-call
-	$.get(
+	this.loadOnce(
 	    this.path+"index.php?id="+id,
-	    {language: "php", version: 5},
-	    function (responseText) {
-		var data = $(responseText).find("data").text();
+	    function (response) {
+		var data = $(response).find("data").text();
 
 		// decrypt data
 		data = JSunic.decrypt(data);
 		JSunic.tmp_data = data;
-
-		JSunic.ready = true;
 	    },
-	    "xml"
+	    function (response) {
+		JSunic.error("Failed to load data!");
+	    },
+	    'xml'
 	);
     }
 
     /**
-     * Log user in
+     * Log user in by loading master boot record (MBR)
      */
     this.login = login;
     function login (email) {
-	ready = false;
-
-	// load MBR (master boot record)
-	$.get(
+	this.loadOnce(
 	    this.mbr+"index.php?id="+encodeURIComponent(email),
-	    {language: "php", version: 5},
-	    function (responseText) {
-		var data = $(responseText).find("data").text();
+	    function (response) {
+		var data = $(response).find("data").text();
 
 		// decrypt data
 		data = JSunic.decrypt(data);
@@ -196,12 +145,13 @@ function JSunicObj () {
 		    return;
 		}
 		JSunic.path = data;
-		JSunic.run("JSunic.appview('users', 'desktop');");
+		JSunic.appview('users', 'desktop');
 		JSunic.info("Login successful.");
-
-		JSunic.ready = true;
 	    },
-	    "xml"
+	    function (response) {
+		JSunic.fatalError("Failed to load MBR!");
+	    },
+	    'xml'
 	);
     }
 
@@ -210,18 +160,17 @@ function JSunicObj () {
      */
     this.register = register;
     function register (email, mbr) {
-	ready = false;
 
 	// encrypt mbr
 	mbr = this.encrypt(mbr);
 
 	// load MBR (master boot record)
-	$.get(
+	this.loadOnce(
 	    this.mbr+"index.php?id="+encodeURIComponent(email)+
 		"&data="+encodeURIComponent(mbr),
-	    function (responseText) {
-		var data = $(responseText).find("data").text();
-		var error = $(responseText).find("error").text();
+	    function (response) {
+		var data = $(response).find("data").text();
+		var error = $(response).find("error").text();
 
 		// error?
 		if (!data && error) {
@@ -241,15 +190,15 @@ function JSunicObj () {
 		    return;
 		}
 		JSunic.path = data;
-		JSunic.run("JSunic.appview('users', 'login');");
+		JSunic.appview('users', 'login');
 		JSunic.info("Registration successful.");
-
-		JSunic.ready = true;
 	    },
-	    "xml"
+	    function (response) {
+		JSunic.error("An error occurred during registration!");
+	    },
+	    'xml'
 	);
     }
-
 
     /**
      * Encrypt data
@@ -305,24 +254,18 @@ function JSunicObj () {
      */
     this.appview = appview;
     function appview (app, view) {
-	JSunic.run("JSunic.loadLanguage('"+app+"');");
-
-	// Is cached?
-	if (app in this.appviewcache && view in this.appviewcache[app]) {
-	    $("#root").html(this.appviewcache[app][view]);
-	    return;
-	}
 
 	// load view
-	this.ready = false;
-	$.get(
+	this.loadOnce(
 	    this.path_apps+app+"/views/"+view+".htm",
 	    function (response) {
 		$("#root").html(response);
-//		JSunic.appviewcache[app][view] = response;
-		JSunic.ready = true;
+		JSunic.loadLanguage(app);
 	    },
-	    "html"
+	    function (response) {
+		JSunic.error("Failed to load view!");
+	    },
+	    'html'
 	);
     }
 
@@ -347,21 +290,19 @@ function JSunicObj () {
      */
     this.loadLanguage = loadLanguage;
     function loadLanguage (app) {
-	this.ready = false;
-	$.ajax({
-	    url: this.path_apps+app+"/lang/"+this.lang+".js",
-	    dataType: "script",
-	    cache: true,
-	    success: function (response) {
+
+	this.loadOnce(
+	    this.path_apps+app+"/lang/"+this.lang+".js",	
+	    function (response) {
 		// load language in lang_translations
 		$.extend(JSunic.lang_translations, lang);
-		JSunic.run("JSunic.parseHTML();");
+		JSunic.parseHTML();
 		JSunic.ready = true;
 	    },
-	    error: function (msg) {
+	    function (response) {
 		alert('error: '+msg);
 	    }
-	});
+	);
     }
 
     /**
@@ -373,6 +314,15 @@ function JSunicObj () {
     }
 
     /**
+     * Fatale errors. Exit JSunic
+     */
+    this.error = error;
+    function fatalError (msg) {
+	alert("Fatal error: "+msg);
+	location.href = '?';
+    }
+
+    /**
      * Handle infos
      */
     this.info= info;
@@ -380,7 +330,83 @@ function JSunicObj () {
 	alert("Info: "+msg);
     }
 
-    this._run();
+
+    /**
+     * Wrapper for ajax calls, that should only be called once
+     */
+    this.loadOnce = loadOnce;
+    function loadOnce (uri, success_cb, fail_cb, type) {
+
+	// Check, if already loaded
+	for (var i in this.ajax_req) {
+	    if (i.uri == uri) {
+		if (i.success) {
+		    success_cb(i.response);
+		} else {
+		    success_cb(i.fail_cb);
+		}
+		return true;
+	    }
+	}
+
+	// Load
+	this.load(uri, success_cb, fail_cb, type);
+	return true;
+    }
+
+    /**
+     * Wrapper for ajax calls
+     */
+    this.load = load;
+    function load (uri, success_cb, fail_cb, type) {
+
+	// Delete old requests
+	var ajax = this.getAjax(uri);
+	if (ajax) ajax = {};
+
+	// Create new request
+	this.ajax_req.push({
+	    uri: uri,
+	    success_cb: success_cb,
+	    fail_cb: fail_cb,
+	    type: type,
+	    ok: 0,
+	});
+
+	$.ajax({
+	    url: uri,
+	    dataType: type,
+	    success: function (response) {
+		var req = JSunic.getAjax(uri);
+		if (req) {
+		    req.ok = 1;
+		    req.response = response;
+		    if (success_cb) success_cb(response);
+		}
+		/* discard */
+	    },
+	    error: function (response) {
+		if (req) {
+		    req.ok = -1;
+		    req.response = response;
+		    if (error_cb) error_cb(response);
+		}
+		/* discard */
+	    }
+	});
+    }
+
+    /**
+     * Get ajax object to uri
+     */
+    this.getAjax = getAjax;
+    function getAjax (uri) {
+	for (var i in this.ajax_req) {
+	    if (this.ajax_req[i].uri == uri) {
+		return this.ajax_req[i];
+	    }
+	}
+    }
 };
 
 /**
@@ -402,7 +428,7 @@ function login () {
     JSunic.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
 
     // try to log in
-    JSunic.run("JSunic.login('"+email+"');");
+    JSunic.login(email);
 
     return false;
 }
@@ -427,7 +453,7 @@ function register () {
     JSunic.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
 
     // try to log in
-    JSunic.run("JSunic.register('"+email+"', '"+mbr+"');");
+    JSunic.register(email, mbr);
 
     return false;
 }
