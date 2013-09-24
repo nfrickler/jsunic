@@ -1,0 +1,364 @@
+html, body {
+    padding:0px;
+    margin:0px;
+    width:100%;
+    height:100%;
+}
+body {
+    font-size:10pt;
+    font-family:arial;
+    font-weight:normal;
+    background:#CCD;
+    color:#000;
+    text-align:left;
+}
+div {
+    margin:0px;
+    padding:0px;
+}
+h1 {
+    margin:3px;
+    margin-top:10px;
+    padding:3px;
+    font-size:12pt;
+    font-weight:bold;
+}
+h2 {
+    margin:3px;
+    margin-top:5px;
+    padding:3px;
+    font-size:11pt;
+    font-weight:bold;
+}
+dl {
+    margin:3px;
+    padding:0px;
+}
+dt {
+    margin:0px;
+    margin-left:10px;
+    padding:2px;
+    font-weight:bold;
+}
+dd {
+    margin:0px;
+    margin-left:20px;
+    padding:3px;
+}
+p {
+    margin:0px;
+    margin-left:10px;
+    padding:4px;
+}
+form {
+    margin:10px;
+}
+fieldset {
+    font-size:9pt;
+    font-weight:bold;
+}
+label {
+    display:block;
+    float:left;
+    width:200px;
+    margin:1px;
+    padding:0px;
+    padding-right:10px;
+    padding-top:6px;
+    text-align:right;
+    font-weight:bold;
+    background:#FFF;
+    height:22px;
+}
+.label_classic {
+    background:none;
+    text-align:left;
+    width:auto;
+    height:auto;
+}
+input,
+textarea,
+select
+{
+    display:block;
+    float:left;
+    margin:2px;
+    width:30%;
+}
+.js_checkbox {
+    width:auto;
+}
+select {
+    width:31%;
+}
+input[type="submit"] {
+    width:auto;
+    float:none;
+    display:inline;
+    margin:5px;
+    padding:3px;
+    padding-left:10px;
+    padding-right:10px;
+    background:#9F9;
+}
+input[type="reset"] {
+    width:auto;
+    float:none;
+    display:inline;
+    margin:5px;
+    padding:3px;
+    padding-left:10px;
+    padding-right:10px;
+    background:#F99;
+}
+table {
+    width:100%;
+    font-size:10pt;
+}
+tr {
+
+}
+th {
+    font-weight:bold;
+    text-align:left;
+    margin:1px;
+    padding:4px;
+    background:#EEF;
+}
+td {
+    text-align:left;
+    margin:1px;
+    padding:4px;
+    background:#EEF;
+}
+
+
+/* special elemenjs */
+#div_jsunic {
+    position:absolute;
+    top:10%;
+    margin-left:auto;
+     margin-right:auto;
+    left:0px;
+    right:0px;
+    width: 80%;
+    min-width:800px;
+    max-width:1200px;
+    background:#DDE;
+}
+#div_progress {
+    position:absolute;
+    top:5%;
+    margin-left:auto;
+     margin-right:auto;
+    left:0px;
+    right:0px;
+    width: 80%;
+    min-width:800px;
+    max-width:1200px;
+    height:20px;
+    background:#DDE;
+}
+#div_progress_in {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:0%;
+    height:20px;
+    background:#AEA;
+}
+#div_progress_tag {
+    position:absolute;
+    top:0px;
+    left:0px;
+    padding:2px;
+    font-weight:bold;
+    color:#FFF;
+}
+#div_progress_link {
+    position:absolute;
+    top:0px;
+    right:0px;
+    padding:2px;
+    font-weight:bold;
+}
+#div_navig {
+
+}
+#div_navig ul {
+    list-style-type:none;
+}
+#div_navig ul li {
+    display:inline;
+}
+#div_navig ul li a,
+    #div_navig ul li a:link,
+    #div_navig ul li a:visited,
+    #div_navig ul li a:hover,
+    #div_navig ul li a:focus,
+    #div_navig ul li a:active {
+    float:left;
+    display:block;
+    width:12%;
+    padding:5px;
+    background:#EEE;
+    border-left:5px solid #999;
+    text-decoration:none;
+    color:#000;
+    font-weight:bold;
+}
+#div_navig ul li a:hover {
+    background:#FFF;
+}
+#div_footer {
+    font-size:9pt;
+    color:#999;
+    width:100%;
+    text-align:center;
+    margin-top:20px;
+    padding-top:5px;
+    padding-bottom:5px;
+    border-top:1px solid #FFF;
+}
+
+.error {
+    padding:10px;
+    width:80%;
+    font-weight:bold;
+    border:2px solid #F00;
+    background:#FEE;
+    margin:10px;
+}
+.form_infobox {
+    display:block;
+    clear:both;
+
+    margin:5px;
+    margin-left:20px;
+    padding:5px;
+    font-weight:normal;
+    border:1px solid #000;
+    border-top:0px;
+    border-right:0px;
+    background:#CCD;
+    cursor:pointer;
+}
+.form_infoimg {
+    display:none;
+    float:left;
+    margin-left:5px;
+    margin-top:4px;
+
+    height:19px;
+    cursor:pointer;
+}
+
+.checkSystem_good {
+    font-weight:normal;
+    height:20px;
+    width:20px;
+}
+.checkSystem_bad {
+    font-weight:bold;
+    height:23px;
+    width:23px;
+}
+.checkSystem_neithernor {
+    font-weight:bold;
+    height:20px;
+    width:20px;
+}
+
+#div_info {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:25px;
+    padding-top:4px;
+    background:#FFA;
+    border-bottom:2px solid #FF0;
+    text-align:center;
+}
+#div_error {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:25px;
+    padding-top:4px;
+    background:#E66;
+    border-bottom:2px solid #F00;
+    text-align:center;
+}
+
+.table_info {
+    display:block;
+    cursor:pointer;
+    text-align:left;
+}
+.table_info_img {
+    display:none;
+    cursor:pointer;
+    height:17px;
+    margin-left:30px;
+}
+
+.packejs__statusclass_0,
+    .packejs__statusclass_0 tr,
+    .packejs__statusclass_0 td {
+    /* preParser-Error */
+    background:#FEE;
+}
+.packejs__statusclass_1,
+    .packejs__statusclass_1 tr,
+    .packejs__statusclass_1 td {
+    /* available */
+    background:#EEF;
+}
+.packejs__statusclass_2,
+    .packejs__statusclass_2 tr,
+    .packejs__statusclass_2 td {
+    /* installed */
+    background:#FFE;
+}
+.packejs__statusclass_3,
+    .packejs__statusclass_3 tr,
+    .packejs__statusclass_3 td,
+    .packejs__statusclass_7,
+    .packejs__statusclass_7 tr,
+    .packejs__statusclass_7 td {
+    /* update available */
+    background:#FFC;
+}
+.packejs__statusclass_4,
+    .packejs__statusclass_4 tr,
+    .packejs__statusclass_4 td {
+    /* uninstalled */
+    background:#EEF;
+}
+.packejs__statusclass_5,
+    .packejs__statusclass_5 tr,
+    .packejs__statusclass_5 td {
+    /* error */
+    background:#FEE;
+}
+.packejs__statusclass_6,
+    .packejs__statusclass_6 tr,
+    .packejs__statusclass_6 td,
+    .packejs__statusclass_8,
+    .packejs__statusclass_8 tr,
+    .packejs__statusclass_8 td {
+    /* parsed */
+    background:#FFD;
+}
+
+.div_jsunic_topright {
+    position:absolute;
+    top:2px;
+    left:2px;
+    text-align:right;
+    border:1px dashed #000;
+    padding:5px;
+    cursor:pointer;
+}
