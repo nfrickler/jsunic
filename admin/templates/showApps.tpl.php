@@ -13,7 +13,6 @@ global $AppHandler;
     <table>
 	<tr>
 	    <th>&nbsp;</th>
-	    <th><?php $this->set('SHOWAPPS__ID'); ?></th>
 	    <th><?php $this->set('SHOWAPPS__MODNAME'); ?></th>
 	    <th><?php $this->set('SHOWAPPS__VERSION'); ?></th>
 	    <th><?php $this->set('SHOWAPPS__MODDESCRIPTION'); ?></th>
@@ -21,14 +20,13 @@ global $AppHandler;
 	    <th><?php $this->set('SHOWAPPS__STATUS'); ?></th>
 	    <th><?php $this->set('SHOWAPPS__ACTION'); ?></th>
 	</tr>
-	<?php foreach ($AppHandler->getApps() as $index => $App) { ?>
+	<?php foreach ($AppHandler->getList() as $index => $App) { ?>
 	<tr class="packets__statusclass_<?php echo $App->getStatus(); ?>">
 	    <td>
-		<input type="checkbox" class="ts_checkbox" name="module__<?php echo $App->getInfo('id__module'); ?>" id="module__<?php echo $App->getInfo('id__module'); ?>" <?php if ($App->getInfo('is_activated')) echo 'checked="checked"'; ?> />
+		<input type="checkbox" name="module__<?php echo $App->getInfo('name'); ?>" id="module__<?php echo $App->getInfo('name'); ?>" <?php if ($App->getInfo('is_activated')) echo 'checked="checked"'; ?> />
 	    </td>
-	    <td><?php echo $App->getInfo('id__module'); ?></td>
 	    <td>
-		<label for="module__<?php echo $App->getInfo('id__module'); ?>" class="label_classic">
+		<label for="module__<?php echo $App->getInfo('name'); ?>" class="label_classic">
 		    <?php echo $App->getInfo('name'); ?>
 		</label>
 	    </td>
@@ -43,41 +41,41 @@ global $AppHandler;
 	    <td><?php echo $App->getInfo('author'); ?></td>
 	    <td><?php $this->set($App->getStatus(true)); ?></td>
 	    <td>
-		<?php switch ($App->getStatus()) { 
+		<?php switch ($App->getStatus()) {
 		    case 4:
 			?>
-			<a href="?event=installApp&amp;id=<?php echo $App->getInfo('id__module'); ?>">
+			<a href="?event=installApp&amp;name=<?php echo $App->getInfo('name'); ?>">
 			    <?php $this->set('SHOWAPPS__ACTION_INSTALL'); ?>
 			</a>
 			<?php
 			// no break
 		    case 5:
 			?>
-			<a href="?event=deleteApp&amp;id=<?php echo $App->getInfo('id__module'); ?>">
+			<a href="?event=deleteApp&amp;name=<?php echo $App->getInfo('name'); ?>">
 			    <?php $this->set('SHOWAPPS__ACTION_DELETE'); ?>
 			</a>
 			<?php
 			break;
 		    case 2:
 			?>
-			<a href="?event=uninstallApp&amp;id=<?php echo $App->getInfo('id__module'); ?>">
+			<a href="?event=uninstallApp&amp;name=<?php echo $App->getInfo('name'); ?>">
 			    <?php $this->set('SHOWAPPS__ACTION_UNINSTALL'); ?>
 			</a>
 			<?php
 			break;
 		    case 1:
 			?>
-			<a href="?event=installApp&amp;id=<?php echo $App->getInfo('id__module'); ?>">
+			<a href="?event=installApp&amp;name=<?php echo $App->getInfo('name'); ?>">
 			    <?php $this->set('SHOWAPPS__ACTION_INSTALL'); ?>
 			</a>
-			<a href="?event=deleteApp&amp;id=<?php echo $App->getInfo('id__module'); ?>">
+			<a href="?event=deleteApp&amp;id=<?php echo $App->getInfo('name'); ?>">
 			    <?php $this->set('SHOWAPPS__ACTION_DELETE'); ?>
 			</a>
 			<?php
 			break;
 		    case 3:
 			?>
-			<a href="?event=updateApp&amp;id=<?php echo $App->getInfo('id__module'); ?>">
+			<a href="?event=updateApp&amp;name=<?php echo $App->getInfo('name'); ?>">
 			    <?php $this->set('SHOWAPPS__ACTION_UPDATE'); ?>
 			</a>
 			<?php
@@ -87,7 +85,7 @@ global $AppHandler;
 	</tr>
 	<?php } ?>
     </table>
-    <input type="submit" name="submit_build" class="ts_submit" value="<?php $this->set('SHOWAPPS__RENDER'); ?>" />
-    <input type="submit" name="submit_setApps" class="ts_submit" value="<?php $this->set('SHOWAPPS__SUBMIT'); ?>" />
-    <input type="reset" class="ts_reset" value="<?php $this->set('SHOWAPPS__RESET'); ?>" />
+    <input type="submit" name="submit_build" value="<?php $this->set('SHOWAPPS__RENDER'); ?>" />
+    <input type="submit" name="submit_setApps" value="<?php $this->set('SHOWAPPS__SUBMIT'); ?>" />
+    <input type="reset" value="<?php $this->set('SHOWAPPS__RESET'); ?>" />
 </form>

@@ -3,7 +3,7 @@
  * This class offers an interface for global JSunic configuration saved in
  * the configuration file in config.php
  */
-class ConfigurationHandler {
+class Config {
 
     /** Content of config file
      * @var array $content
@@ -64,8 +64,8 @@ class ConfigurationHandler {
 		return $root.'/admin';
 	    case 'dir_runtime':
 		return $root.'';
-	    case 'root_folder':
-		return '';
+	    case 'dir_root':
+		return $root;
 	    case 'loglevel':
 		return 3;
 	    case 'debug_mode':

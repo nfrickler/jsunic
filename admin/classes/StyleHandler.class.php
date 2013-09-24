@@ -1,74 +1,55 @@
 <?php
 /**
- * Class to handle Style objects in general
+ * Class to handle Style objects
  */
-class StyleHandler {
+class StyleHandler extends PacketHandler {
 
-    /** Style objects of all existing styles
-     * @var array $styles
+    /**
+     * Get path to directory containing styles
+     *
+     * @return string
      */
-    private $styles;
+    public function getPath () {
+	global $Config;
+	return $Config->get('dir_root').'/styles/';
+    }
 
-    /** Make sure that a default style has been set
+    /**
+     * Set default style
      *
      * @return bool
      */
-    public function validateDefault () {
+    public function setDefault ($name) {
+	global $Config;
 
-	// get all styles
-	$styles = $this->getStyles();
+	// Does style exist?
+	if (!$this->get($name)) return false;
 
-	// is default?
-	$no = true;
-	$possible_default = false;
-	foreach ($styles as $index => $Value) {
-	    if ($Value->getInfo('is_default')) {
-		$no = false;
-	    } elseif ($Value->getStatus() == 5 OR $Value->getStatus() == 9) {
-		$possible_default = $Value;
-	    }
-	}
-
-	// set a random one, if possible
-	if ($no AND $possible_default) {
-	    $possible_default->setAsDefault();
-	}
+	// Save in Config
+	$Config->set('default_style', $name);
 
 	return true;
     }
 
-    /** Get all styles
-     * @param bool $force_update
-     *	Force to get new list from database (not a cached one from obj-var)?
+    /**
+     * Get default style
      *
-     * @return array
+     * @return string
      */
-    public function getStyles ($force_update = false) {
-	global $Database, $Config;
+    public function getDefault () {
+	global $Config;
+	return $Config->get('default_style');
+    }
 
-	// already in obj-var?
-	if (!$force_update AND isset($this->styles) AND !empty($this->styles)) return $this->styles;
-
-	// get available sources
-	$subfolders = FileHandler::getSubfolders($Config->get('dir_root').'/styles');
-	if (!is_array($subfolders)) return false;
-
-	// get style objects and save them in obj-var
-	$style_files = array();
-	foreach ($subfolders as $index => $value) {
-	    $style_files[] = new Style(false, $value);
-	}
-
-	// add already deleted styles
-	$this->styles = array();
-	foreach ($style_files as $index => $Value) {
-	    $this->styles[$Value->getInfo('name').'__'.$Value->getInfo('nameid')] = $Value;
-	}
-
-	// sort
-	ksort($this->styles);
-
-	return $this->styles;
+    /**
+     * Get object
+     * @var string $name
+     *  Name of object
+     *
+     * @return Object
+     */
+    public function getObject ($name) {
+	return new Style($name);
     }
 }
 ?>

@@ -1,7 +1,7 @@
 <app>
-    <name>user</name>
+    <name>core</name>
     <version>0.1</version>
-    <description>This app handles login and user account.</description>
+    <description>This is the core of JSunic.</description>
     <author>Nicolas Frinker &lt;authornicolas@tsunic.de&gt;</author>
     <link>https://tsunic.de</link>
 </app>

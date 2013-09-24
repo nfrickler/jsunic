@@ -22,7 +22,7 @@ global $TemplateEngine;
 global $Log;
 
 // get important objects
-$Config = new ConfigurationHandler();
+$Config = new Config();
 $TemplateEngine = new TemplateEngine();
 $Log = new Log($Config->get('loglevel'));
 
@@ -77,9 +77,7 @@ switch ($_GET['event']) {
 	$TemplateEngine->activate('showSetLogin');
 	break;
     case 'setLogin':
-	// include function
-	include_once 'functions/setLogin.func.php';
-	setLogin();
+	run('setLogin');
 	break;
     case 'showIndex':
 	$TemplateEngine->setData('html', array('title' => 'SHOWINDEX__TITLE'));
@@ -99,8 +97,7 @@ switch ($_GET['event']) {
 	$TemplateEngine->activate('showConfig');
 	break;
     case 'setConfig':
-	include_once 'functions/setConfig.func.php';
-	setConfig();
+	run('setConfig');
 	header('Location:?event=showConfig');
 	exit;
     case 'showTools':
@@ -112,8 +109,7 @@ switch ($_GET['event']) {
 	$TemplateEngine->activate('showResetAll');
 	break;
     case 'resetAll':
-	include_once 'functions/resetAll.func.php';
-	resetAll();
+	run('resetAll');
 	header('Location:?');
 	exit;
     case 'showApps':
@@ -121,7 +117,6 @@ switch ($_GET['event']) {
 	// start AppHandler
 	global $AppHandler;
 	$AppHandler = new AppHandler();
-	$Apps = $AppHandler->getApps();
 
 	$TemplateEngine->setData('html', array('title' => 'SHOWAPPS__TITLE'));
 	$TemplateEngine->activate('showApps');
@@ -151,23 +146,19 @@ switch ($_GET['event']) {
 	header('Location:?event=showApps');
 	exit;
     case 'installApp':
-	include_once 'functions/installApp.func.php';
-	installApp();
+	run('installApp');
 	header('Location:?event=showApps');
 	exit;
     case 'updateApp':
-	include_once 'functions/updateApp.func.php';
-	updateApp();
+	run('updateApp');
 	header('Location:?event=showApps');
 	exit;
     case 'uninstallApp':
-	include_once 'functions/uninstallApp.func.php';
-	uninstallApp();
+	run('uninstallApp');
 	header('Location:?event=showApps');
 	exit;
     case 'deleteApp':
-	include_once 'functions/deleteApp.func.php';
-	deleteApp();
+	run('deleteApp');
 	header('Location:?event=showApps');
 	exit;
     case 'showStyles':
@@ -175,7 +166,6 @@ switch ($_GET['event']) {
 	// start StyleHandler
 	global $StyleHandler;
 	$StyleHandler = new StyleHandler();
-	$Styles = $StyleHandler->getStyles();
 
 	$TemplateEngine->setData('html', array('title' => 'SHOWSTYLES__TITLE'));
 	$TemplateEngine->activate('showStyles');
@@ -186,18 +176,15 @@ switch ($_GET['event']) {
 	global $StyleHandler;
 	$StyleHandler = new StyleHandler();
 
-	include_once 'functions/setStyles.func.php';
-	setStyles();
+	run('setStyles');
 	header('Location:?event=showStyles');
 	exit;
     case 'setDefaultStyle':
-	include_once 'functions/setDefaultStyle.func.php';
-	setDefaultStyle();
+	run('setDefaultStyle');
 	header('Location:?event=showStyles');
 	exit;
     case 'deleteStyle':
-	include_once 'functions/deleteStyle.func.php';
-	deleteStyle();
+	run('deleteStyle');
 	header('Location:?event=showStyles');
 	exit;
     default:
@@ -231,4 +218,17 @@ if ($Config->get('installation') < 100) {
 
 // display output
 $TemplateEngine->display();
+
+/**
+ * Run functio with name $name
+ * @param string $name
+ *  Name of function to execute
+ *
+ * @return bool
+ */
+function run ($name) {
+    include_once "functions/$name.func.php";
+    eval("$name();");
+    return true;
+}
 ?>
