@@ -1,6 +1,6 @@
 <?php
-function parseAll () {
-    global $Config, $ModuleHandler, $Log;
+function build () {
+    global $Config, $AppHandler, $Log;
 
     // allow only, if logged in
     if (!isset($_SESSION['admin_auth']) OR empty($_SESSION['admin_auth']))
@@ -27,7 +27,7 @@ function parseAll () {
 	// is first call
 	$call_num = 0;
 	$SubcodeHandler = new ts_SubcodeHandler();
-	$modules_all = $ModuleHandler->getModules(true);
+	$modules_all = $AppHandler->getApps(true);
 	$Parser = new ts_Parser($Config->get('prefix'), $modules_all, $Config->get('debug_mode'));
 	$USERSYSTEM = 0;
 	$pre_system_online = false;

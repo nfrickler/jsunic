@@ -10,7 +10,7 @@ global $Config;
 <p>
     <?php $this->set('SHOWCONFIG__INFOTEXT'); ?>
 </p>
-<form action="?event=setConfig" method="post" class="ts_form">
+<form action="?event=setConfig" method="post">
     <fieldset>
 	<legend><?php $this->set('SHOWCONFIG__LEGEND_ENCRYPTION'); ?></legend>
 	<label for="set__encryption_class"><?php $this->set('SHOWCONFIG__ENCRYPTION_CLASS'); ?></label>
@@ -56,7 +56,7 @@ global $Config;
 	<legend><?php $this->set('SHOWCONFIG__LEGEND_PATHS'); ?></legend>
 	<label for="set__domain"><?php $this->set('SHOWCONFIG__DOMAIN'); ?></label>
 	<input type="text" name="set__domain" id="set__domain" value="<?php echo $Config->get('domain'); ?>" />
-	<img src="templates/images/info.gif" alt="Info" class="form_infoimg" id="domain_info_img" onclick="javascript:toggleInfo('domain_info');" />
+	<img src="templates/images/info.gif" alt="Info" class="form_infoimg" id="domain_img" onclick="javascript:toggleInfo('domain_info');" />
 	<div class="form_infobox" id="domain_info" onclick="javascript:toggleInfo('domain_info');">
 	    <img src="templates/images/arrow_top2downright.gif" class="form_infoimg_in" />
 	    <?php $this->set('SHOWCONFIG__DOMAIN_INFO'); ?>
@@ -150,13 +150,12 @@ global $Config;
     inputs[3] = 'system_secret_info';
     inputs[4] = 'default_language_info';
     inputs[5] = 'system_email_info';
-    inputs[6] = 'prefix_info';
-    inputs[7] = 'email_enabled_info';
-    inputs[8] = 'dir_admin_info';
-    inputs[9] = 'dir_runtime_info';
-    inputs[10] = 'system_online_info';
-    inputs[11] = 'allow_registration_info';
-    inputs[12] = 'domain_info';
+    inputs[6] = 'email_enabled_info';
+    inputs[7] = 'dir_admin_info';
+    inputs[8] = 'dir_runtime_info';
+    inputs[9] = 'system_online_info';
+    inputs[10] = 'allow_registration_info';
+    inputs[11] = 'domain_info';
 
     function hideInfo (id) {
 	document.getElementById(id).style.display = 'none';

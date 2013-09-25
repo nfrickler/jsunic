@@ -15,9 +15,9 @@ global $Config;
 	<th style="width:40%;"><?php $this->set('SHOWSYSTEMCHECK__FOLDER_RUNTIME'); ?></th>
 	<td  style="width:30px; text-align:center;">
 	    <?php if (is_writable($Config->get('dir_runtime'))) { ?>
-		<img src="templates/images/good.gif" alt="Ok" class="checkSystem_good" />
+		<img src="templates/images/green.gif" alt="Ok" class="checkSystem_good" />
 	    <?php } else { ?>
-		<img src="templates/images/bad.gif" alt="Bad" class="checkSystem_bad" />
+		<img src="templates/images/red.gif" alt="Bad" class="checkSystem_bad" />
 	    <?php } ?>
 	</td>
 	<td class="table_info" onclick="javascript:toggleInfo('folder_runtime_info');">
@@ -33,9 +33,9 @@ global $Config;
 	<th style="width:40%;"><?php $this->set('SHOWSYSTEMCHECK__FOLDER_DATA'); ?></th>
 	<td  style="width:30px; text-align:center;">
 	    <?php if (is_writable($Config->get('dir_data'))) { ?>
-		<img src="templates/images/good.gif" alt="Ok" class="checkSystem_good" />
+		<img src="templates/images/green.gif" alt="Ok" class="checkSystem_good" />
 	    <?php } else { ?>
-		<img src="templates/images/bad.gif" alt="Bad" class="checkSystem_bad" />
+		<img src="templates/images/red.gif" alt="Bad" class="checkSystem_bad" />
 	    <?php } ?>
 	</td>
 	<td class="table_info" onclick="javascript:toggleInfo('folder_data_info');">
@@ -50,9 +50,9 @@ global $Config;
 	<th><?php $this->set('SHOWSYSTEMCHECK__PHPVERSION'); ?></th>
 	<td style="text-align:center;">
 	    <?php if ((strnatcmp(phpversion(), '5.3') >= 0)) { ?>
-		<img src="templates/images/good.gif" alt="Ok" class="checkSystem_good" />
+		<img src="templates/images/green.gif" alt="Ok" class="checkSystem_good" />
 	    <?php } else { ?>
-		<img src="templates/images/bad.gif" alt="Bad" class="checkSystem_bad" />
+		<img src="templates/images/red.gif" alt="Bad" class="checkSystem_bad" />
 	    <?php } ?>
 	</td>
 	<td class="table_info" onclick="javascript:toggleInfo('phpversion_info');">
@@ -68,9 +68,9 @@ global $Config;
 	<th><?php $this->set('SHOWSYSTEMCHECK__IMAPFUNCTIONS'); ?></th>
 	<td style="text-align:center;">
 	    <?php if (function_exists('imap_timeout')) { ?>
-		<img src="templates/images/good.gif" alt="Ok" class="checkSystem_good" />
+		<img src="templates/images/green.gif" alt="Ok" class="checkSystem_good" />
 	    <?php } else { ?>
-		<img src="templates/images/neithernor.gif" alt="..." class="checkSystem_neithernor" />
+		<img src="templates/images/yellow.gif" alt="..." class="checkSystem_yellow" />
 	    <?php } ?>
 	</td>
 	<td class="table_info" onclick="javascript:toggleInfo('imapfunctions_info');">

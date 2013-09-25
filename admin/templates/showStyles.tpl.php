@@ -24,9 +24,9 @@ global $StyleHandler;
 	<td>
 	    <a href="?event=toggleActivate&amp;name=<?php echo $Style->get('name'); ?>">
 	    <?php if ($Style->get('activated')) { ?>
-		<img src="templates/images/good.gif" class="toggleImage" /></a>
+		<img src="templates/images/green.gif" class="toggleImage" /></a>
 	    <?php } else { ?>
-		<img src="templates/images/bad.gif" class="toggleImage" /></a>
+		<img src="templates/images/red.gif" class="toggleImage" /></a>
 	    <?php } ?>
 	</td>
 	<td>

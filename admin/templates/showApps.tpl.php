@@ -24,9 +24,9 @@ global $AppHandler;
 	<td>
 	    <a href="?event=toggleActivate&amp;type=app&amp;name=<?php echo $App->get('name'); ?>">
 	    <?php if ($App->get('activated')) { ?>
-		<img src="templates/images/good.gif" class="toggleImage" /></a>
+		<img src="templates/images/green.gif" class="toggleImage" /></a>
 	    <?php } else { ?>
-		<img src="templates/images/bad.gif" class="toggleImage" /></a>
+		<img src="templates/images/red.gif" class="toggleImage" /></a>
 	    <?php } ?>
 	</td>
 	<td>
