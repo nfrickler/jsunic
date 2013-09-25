@@ -1,5 +1,5 @@
 <app>
-    <name>user</name>
+    <name>users</name>
     <version>0.1</version>
     <description>This app handles login and user account.</description>
     <author>Nicolas Frinker &lt;authornicolas@tsunic.de&gt;</author>

@@ -46,9 +46,9 @@ class Parser {
 
 	// save modules
 	foreach ($modules_all as $index => $Value) {
-	    $this->modules[$Value->getInfo('name')] = array(
-		'id__module' => $Value->getInfo('id__module'),
-		'nameid' => $Value->getInfo('nameid')
+	    $this->modules[$Value->get('name')] = array(
+		'id__module' => $Value->get('id__module'),
+		'nameid' => $Value->get('nameid')
 	    );
 	}
     }

@@ -132,6 +132,11 @@ td {
     background:#EEF;
 }
 
+.toggleImage {
+    width:18px;
+    margin:4px;
+}
+
 
 /* special elemenjs */
 #div_jsunic {

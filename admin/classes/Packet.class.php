@@ -15,10 +15,11 @@ class Packet {
      */
     protected $name;
 
-    /** Array holding information about this packet from version.xml
-     * @var array $infofile
+    /**
+     * SimpleXML Object containing all data of this object
+     * @var SimpleXML
      */
-    protected $infofile = array();
+    protected $Xml;
 
     /** Constructor
      * @param string $name
@@ -34,7 +35,7 @@ class Packet {
      * @return string
      */
     public function getName () {
-	return $this->getInfo('name');
+	return $this->get('name');
     }
 
     /**
@@ -55,31 +56,67 @@ class Packet {
      *
      * @return mix
      */
-    public function getInfo ($name, $refresh = false) {
+    public function get ($name, $refresh = false) {
 
-	// Refresh?
-	if ($refresh) $this->info = array();
+	// Load version.xml
+	if (!$this->load()) return NULL;
 
-	// Return from cache
-	if (isset($this->info, $this->info[$name]) AND
-	    !empty($this->info[$name])
-	) return $this->info[$name];
-
-	// Load from version.xml
-	if (!file_exists($this->getPath().'/version.xml'))
-	    return NULL;
-	$xmldata = XmlHandler::readAll($this->getPath().'/version.xml');
-
-	// Save data in $this->info
-	$this->info = array();
-	foreach ($xmldata as $index => $values) {
-	    $this->info[$values['tag']] = $values['value'];
+	// Find and return value
+	foreach ($this->Xml->children() as $value) {
+	    if ($value->getName() == $name) {
+		$v = "$value";
+		if ($v === 'true') $v = true;
+		if ($v === 'false') $v = false;
+		return $v;
+	    }
 	}
 
-	// Return requested data
-	if (isset($this->info[$name])) return $this->info[$name];
-
 	return NULL;
+    }
+
+    /**
+     * Set value
+     *
+     * @return bool
+     */
+    public function set ($name, $newvalue) {
+
+	// Load version.xml
+	if (!$this->load()) return false;
+
+	$done = false;
+	if ($newvalue === true) $newvalue = 'true';
+	if ($newvalue === false) $newvalue = 'false';
+	if ($this->Xml->$name) {
+	    $this->Xml->$name = $newvalue;
+	} else {
+	    $this->Xml->addChild($name, $newvalue);
+	}
+	return $this->save();
+    }
+
+    /**
+     * Update version.xml
+     *
+     * @return bool
+     */
+    public function save () {
+	$this->Xml->asXml($this->getPath().'/version.xml');
+	return true;
+    }
+
+    /**
+     * Load version.xml into object
+     *
+     * @return bool
+     */
+    public function load () {
+	if (isset($this->Xml) and !empty($this->Xml)) return true;
+	if (!file_exists($this->getPath().'/version.xml')) {
+	    return false;
+	}
+	$this->Xml = simplexml_load_file($this->getPath().'/version.xml');
+	return true;
     }
 
     /**
@@ -101,6 +138,16 @@ class Packet {
 	// TODO
 
 	return "invalid";
+    }
+
+    /**
+     * Toggle activate status
+     *
+     * @return bool
+     */
+    public function toggleActivate () {
+	$current = $this->get('activated');
+	return $this->set('activated', !$this->get('activated'));
     }
 }
 ?>

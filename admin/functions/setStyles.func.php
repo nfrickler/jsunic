@@ -21,14 +21,14 @@ function setStyles () {
 
     // activate or deactivate styles
     foreach ($styles_all as $index => $Value) {
-	$new_status = (in_array($Value->getInfo('id__style'), $styles_activated)) ? true : false;
+	$new_status = (in_array($Value->get('id__style'), $styles_activated)) ? true : false;
 	if (!$Value->activate($new_status)) return false;
     }
 
     // set default style
     foreach ($styles_all as $index => $Value) {
-	if ($Value->getInfo('is_default')) {
-	    $Config->set('default_style', $Value->getInfo('id'));
+	if ($Value->get('is_default')) {
+	    $Config->set('default_style', $Value->get('id'));
 	}
     }
 

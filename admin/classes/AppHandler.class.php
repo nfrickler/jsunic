@@ -38,8 +38,8 @@ class AppHandler extends PacketHandler {
      * @return int
      */
     public function cb_sortByDependencies ($modA, $modB) {
-	$nameA = $modA->getInfo('name');
-	$nameB = $modB->getInfo('name');
+	$nameA = $modA->get('name');
+	$nameB = $modB->get('name');
 
 	// Does modA depend on modB?
 	if ($this->dependOn($modA, $modB)) {
@@ -72,10 +72,10 @@ class AppHandler extends PacketHandler {
 	if (!$modA or !$modB) return false;
 
 	// get name of B
-	$nameB = $modB->getInfo('name');
+	$nameB = $modB->get('name');
 
 	// get dependencies of A
-	$deps = $modA->getInfo('dependencies');
+	$deps = $modA->get('dependencies');
 
 	// A has no deps?
 	if (empty($deps)) return false;

@@ -34,7 +34,7 @@ class Config {
 
 	// get configuration from file
 	include $this->getPath();
-	$this->content = $configs;
+	$this->content = (isset($configs)) ? $configs : array();
 
 	return true;
     }

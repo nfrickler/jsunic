@@ -97,7 +97,7 @@ function parseAll () {
 
 	    // parse module
 	    if (!$Value->parse()) {
-		$_SESSION['admin_error'] = 'ERROR__RENDER (module: '.$Value->getInfo('name').')';
+		$_SESSION['admin_error'] = 'ERROR__RENDER (module: '.$Value->get('name').')';
 		return false;
 	    }
 	    $call_counter++;
@@ -135,10 +135,10 @@ function parseAll () {
 	$is_default_style = false;
 	foreach ($styles_all as $index => $Value) {
 	    if ($selected_default_style and
-		$Value->getInfo('id') == $selected_default_style
+		$Value->get('id') == $selected_default_style
 	    ) $is_default_style = true;
 	    if (!$Value->parse()) {
-		$_SESSION['admin_error'] = 'ERROR__RENDER (style: '.$Value->getInfo('name').')';
+		$_SESSION['admin_error'] = 'ERROR__RENDER (style: '.$Value->get('name').')';
 		return false;
 	    }
 	}
@@ -146,7 +146,7 @@ function parseAll () {
 	// set default style, if missing
 	if (!$is_default_style) {
 	    $first_style = array_shift($styles_all);
-	    $Config->set('default_style', $first_style->getInfo('id'));
+	    $Config->set('default_style', $first_style->get('id'));
 	}
 
 	// make sure, a default-style is chosen

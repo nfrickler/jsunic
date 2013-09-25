@@ -19,7 +19,7 @@ function setApps () {
 
     // activate or deactivate apps
     foreach ($apps_all as $index => $Value) {
-	$new_status = (in_array($Value->getInfo('id__app'), $apps_activated)) ? true : false;
+	$new_status = (in_array($Value->get('id__app'), $apps_activated)) ? true : false;
 	if (!$Value->activate($new_status)) return false;
     }
 

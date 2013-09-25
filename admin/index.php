@@ -112,6 +112,10 @@ switch ($_GET['event']) {
 	run('resetAll');
 	header('Location:?');
 	exit;
+    case 'toggleActivate':
+	run('toggleActivate');
+	header('Location:?');
+	break;
     case 'showApps':
 
 	// start AppHandler
