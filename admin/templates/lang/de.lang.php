@@ -60,47 +60,31 @@ $lang = array(
     'SHOWINDEX__DT_SYSTEMCHECK' => 'System überprüfen',
     'SHOWINDEX__DD_SYSTEMCHECK' => 'Überprüfe die Einstellungen deines Servers und den Status des Systems.',
 
-    // showModules
-    'SHOWAPPS__TITLE' => 'Modules',
-    'SHOWAPPS__H1' => 'JS_Admin | Module verwalten',
-    'SHOWAPPS__INFOTEXT' => 'Hier kannst du Module installieren/updaten/deinstallieren und die Laufzeitumgebung von JSunic (neu) bauen (Build). Die Reihenfolge der Liste entspricht der Installationsreihenfolge.',
+    // showApps
+    'SHOWAPPS__TITLE' => 'Apps',
+    'SHOWAPPS__H1' => 'JS_Admin | Apps verwalten',
+    'SHOWAPPS__INFOTEXT' => 'Aktiviere und deaktivere hier Apps. Anschließend kannst du JSunic neu bauen und dadurch die Änderungen deinen Nutzern verfügbar machen.',
     'SHOWAPPS__MODNAME' => 'Modulname',
     'SHOWAPPS__VERSION' => 'Version',
     'SHOWAPPS__MODDESCRIPTION' => 'Beschreibung',
     'SHOWAPPS__STATUS' => 'Status',
     'SHOWAPPS__AUTHOR' => 'Autor',
-    'SHOWAPPS__RENDER' => '(Re)Build JSunic',
-    'SHOWAPPS__SUBMIT' => 'Einstellungen speichern',
-    'SHOWAPPS__RESET' => 'Reset',
-    'SHOWAPPS__ID' => 'ID',
     'SHOWAPPS__ACTION' => 'Aktion',
     'SHOWAPPS__ACTION_DELETE' => 'Löschen',
-    'SHOWAPPS__ACTION_UNINSTALL' => 'Deinstallieren',
-    'SHOWAPPS__ACTION_INSTALL' => 'Installieren',
-    'SHOWAPPS__ACTION_UPDATE' => 'Updaten',
-
-    // installModule
-    'ERROR__INSTALLAPP' => 'Fehler bei der Installation!',
-    'INFO__INSTALLAPP' => 'Modul installiert.',
-
-    // updateModule
-    'ERROR__UPDATEAPP' => 'Fehler beim Update!',
-    'INFO__UPDATEAPP' => 'Modul upgedatet.',
-
-    // uninstallModule
-    'ERROR__UNINSTALLAPP' => 'Fehler beim Deinstallieren!',
-    'INFO__UNINSTALLAPP' => 'Modul deinstalliert.',
+    'SHOWAPPS__BUILD' => 'JSunic bauen',
+    'SHOWAPPS__BUILD_INFOTEXT' => 'Baue die Benutzerumgebung von JSunic. Dies wird alle aktivierten (und nur diese) Apps und Styles den Nutzern zugänglich machen.',
 
     // deleteModule
     'ERROR__DELETEAPP' => 'Fehler beim Löschen!',
     'INFO__DELETEAPP' => 'Modul gelöscht.',
 
-    // setModules
-    'INFO__SETAPPS_SUCCESS' => 'Änderungen wurden erfolgreich gespeichert.',
+    // toggleActivated
+    'TOGGLEACTIVATED__ERROR' => 'Paket konnte nicht de/aktiviert werden!',
+    'TOGGLEACTIVATED__INFO' => 'Paket de/aktiviert.',
 
-    // render
-    'INFO__RENDER_SUCCESS' => '(Re)Build der Software erfolgreich.',
-    'ERROR__RENDER' => 'Beim (Re)Build ist ein Fehler aufgetreten!',
+    // build
+    'BUILD__ERROR' => 'Beim Bauen von JSunic ist ein Fehler aufgetreten!',
+    'BUILD__SUCCESS' => 'JSunic erfolgreich gebaut.',
 
     // showStyles
     'SHOWSTYLES__TITLE' => 'Styles',

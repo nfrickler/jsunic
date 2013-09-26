@@ -91,25 +91,58 @@ select
 select {
     width:31%;
 }
-input[type="submit"] {
-    width:auto;
+input[type="submit"],
+.button_build
+{
     float:none;
-    display:inline;
+    clear:none;
+    border:0px;
+    background:#0F0;
+    width:auto;
+    min-width:0px;
+    background: linear-gradient(#8F8, #060);
     margin:5px;
-    padding:3px;
+    padding:4px;
     padding-left:10px;
     padding-right:10px;
-    background:#9F9;
+    border-radius:4px;
+    cursor:pointer;
+    font-weight:bold;
+    color:#000;
+    text-decoration:none;
+    box-shadow: 2px 2px 10px #787;
+    background-size:20px 50px;
+    transition: all 0.2s ease-in-out;
 }
-input[type="reset"] {
-    width:auto;
+.button_build:hover,
+input[type="submit"]:hover
+{
+    background-position:100px;
+}
+input[type="reset"]
+{
     float:none;
-    display:inline;
+    clear:none;
+    border:0px;
     margin:5px;
-    padding:3px;
+    width:auto;
+    min-width:0px;
+    padding:4px;
     padding-left:10px;
     padding-right:10px;
-    background:#F99;
+    border-radius:4px;
+    cursor:pointer;
+    font-weight:bold;
+    color:#000;
+    background:#F00;
+    background: linear-gradient(#F88, #F00);
+    box-shadow: 2px 2px 10px #877;
+    background-size:20px 50px;
+    transition: all 0.2s ease-in-out;
+}
+input[type="reset"]:hover
+{
+    background-position:100px;
 }
 table {
     width:100%;

@@ -22,7 +22,7 @@ global $AppHandler;
     <?php foreach ($AppHandler->getList() as $index => $App) { ?>
     <tr class="packets__statusclass_<?php echo $App->getStatus(); ?>">
 	<td>
-	    <a href="?event=toggleActivate&amp;type=app&amp;name=<?php echo $App->get('name'); ?>">
+	    <a href="?event=toggleActivated&amp;type=app&amp;name=<?php echo $App->get('name'); ?>">
 	    <?php if ($App->get('activated')) { ?>
 		<img src="templates/images/green.gif" class="toggleImage" /></a>
 	    <?php } else { ?>
@@ -52,4 +52,10 @@ global $AppHandler;
     </tr>
     <?php } ?>
 </table>
-<a href="?event=build"><?php $this->set('SHOWAPPS__BUILD'); ?></a>
+<p style="margin-top:10px;">
+    <img src="templates/images/arrow_top2downright.gif" />
+    <a href="?event=build" class="button_build"><?php $this->set('SHOWAPPS__BUILD'); ?></a>
+</p>
+<p>
+    <?php $this->set('SHOWAPPS__BUILD_INFOTEXT'); ?></a>
+</p>

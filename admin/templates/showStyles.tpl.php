@@ -22,7 +22,7 @@ global $StyleHandler;
     <?php foreach ($StyleHandler->getList() as $index => $Style) { ?>
     <tr class="packets__statusclass_<?php echo $Style->getStatus(); ?>">
 	<td>
-	    <a href="?event=toggleActivate&amp;name=<?php echo $Style->get('name'); ?>">
+	    <a href="?event=toggleActivated&amp;name=<?php echo $Style->get('name'); ?>">
 	    <?php if ($Style->get('activated')) { ?>
 		<img src="templates/images/green.gif" class="toggleImage" /></a>
 	    <?php } else { ?>

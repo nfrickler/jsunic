@@ -145,9 +145,18 @@ class Packet {
      *
      * @return bool
      */
-    public function toggleActivate () {
+    public function toggleActivated () {
 	$current = $this->get('activated');
 	return $this->set('activated', !$this->get('activated'));
+    }
+
+    /**
+     * Build process
+     *
+     * @return bool
+     */
+    public function build () {
+	return true;
     }
 }
 ?>

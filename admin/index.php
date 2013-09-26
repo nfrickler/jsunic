@@ -112,10 +112,9 @@ switch ($_GET['event']) {
 	run('resetAll');
 	header('Location:?');
 	exit;
-    case 'toggleActivate':
-	run('toggleActivate');
-	header('Location:?');
-	break;
+    case 'toggleActivated':
+	run('toggleActivated');
+	exit;
     case 'showApps':
 
 	// start AppHandler
@@ -138,15 +137,8 @@ switch ($_GET['event']) {
 	}
 	header('Location:?event=showApps');
 	exit;
-    case 'parseAll':
-
-	// start AppHandler
-	global $AppHandler;
-	$AppHandler = new AppHandler();
-
-	include_once 'functions/parseAll.func.php';
-	parseAll();
-
+    case 'build':
+	run('build');
 	header('Location:?event=showApps');
 	exit;
     case 'installApp':

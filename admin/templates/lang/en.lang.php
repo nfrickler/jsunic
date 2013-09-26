@@ -60,47 +60,32 @@ $lang = array(
     'SHOWINDEX__DT_SYSTEMCHECK' => 'Check system',
     'SHOWINDEX__DD_SYSTEMCHECK' => 'Check environment of the system.',
 
-    // showModules
-    'SHOWAPPS__TITLE' => 'Modules',
-    'SHOWAPPS__H1' => 'JS_Admin | Administrate modules',
-    'SHOWAPPS__INFOTEXT' => 'Here you can install/update/uninstall/remove modules. Moreover you can build the runtime-environment of JSunic. The order of the list is the same during installation.',
+    // showApps
+    'SHOWAPPS__TITLE' => 'Apps',
+    'SHOWAPPS__H1' => 'JS_Admin | Administrate apps',
+    'SHOWAPPS__INFOTEXT' => 'Activate and deactivate apps on this page. Afterwards you have to (re)build JSunic to make the changes effective for your users.',
     'SHOWAPPS__MODNAME' => 'Name of module',
     'SHOWAPPS__VERSION' => 'Version',
     'SHOWAPPS__MODDESCRIPTION' => 'Description',
     'SHOWAPPS__STATUS' => 'Status',
     'SHOWAPPS__AUTHOR' => 'Author',
-    'SHOWAPPS__RENDER' => '(Re)Build JSunic',
-    'SHOWAPPS__SUBMIT' => 'Save changes',
     'SHOWAPPS__RESET' => 'Reset',
-    'SHOWAPPS__ID' => 'ID',
     'SHOWAPPS__ACTION' => 'Action',
     'SHOWAPPS__ACTION_DELETE' => 'Delete',
-    'SHOWAPPS__ACTION_UNINSTALL' => 'Uninstall',
-    'SHOWAPPS__ACTION_INSTALL' => 'Install',
-    'SHOWAPPS__ACTION_UPDATE' => 'Update',
-
-    // installModule
-    'ERROR__INSTALLAPP' => 'An error occurred!',
-    'INFO__INSTALLAPP' => 'Module installed.',
-
-    // updateModule
-    'ERROR__UPDATEAPP' => 'An error occurred!',
-    'INFO__UPDATEAPP' => 'Module updated.',
-
-    // uninstallModule
-    'ERROR__UNINSTALLAPP' => 'An error occurred!',
-    'INFO__UNINSTALLAPP' => 'Module uninstalled.',
+    'SHOWAPPS__BUILD' => 'Build JSunic',
+    'SHOWAPPS__BUILD_INFOTEXT' => 'Build the runtime environment of JSunic. This will make all activated (and only these) apps and styles usable for your users.',
 
     // deleteModule
     'ERROR__DELETEAPP' => 'An error occurred!',
     'INFO__DELETEAPP' => 'Module removed.',
 
-    // setModules
-    'INFO__SETAPPS_SUCCESS' => 'Changes saved.',
+    // toggleActivated
+    'TOGGLEACTIVATED__ERROR' => 'Packet could not be de/activated!',
+    'TOGGLEACTIVATED__INFO' => 'Packet de/activated.',
 
-    // render
-    'INFO__RENDER_SUCCESS' => 'Parsing finished successfully.',
-    'ERROR__RENDER' => 'An error occurred while parsing the software!',
+    // build
+    'BUILD__ERROR' => 'An error occurred during build process!',
+    'BUILD__SUCCESS' => 'JSunic build successfully.',
 
     // showStyles
     'SHOWSTYLES__TITLE' => 'Styles',
