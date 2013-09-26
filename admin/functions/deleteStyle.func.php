@@ -1,21 +1,20 @@
 <?php
 function deleteStyle () {
 
-    // get id__style
-    $id__style = (isset($_GET['id']) AND is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-    if (empty($id__style)) return true;
+    // Get name
+    $name = (isset($_GET['name'])) ? $_GET['name'] : '';
+    if (empty($name)) return true;
 
-    // get style-object
-    $Style = new Style($id__style);
+    // Get Style object
+    $Style = new Style($name);
 
-    // delete
-    if (!$Style->deleteStyle()) {
-	// error
-	$_SESSION['admin_error'] = 'ERROR__DELETESTYLE';
+    // Delete Style
+    if (!$Style->delete()) {
+	$_SESSION['admin_error'] = 'DELETESTYLE__ERROR';
 	return false;
     }
 
-    $_SESSION['admin_info'] = 'INFO__DELETESTYLE';
+    $_SESSION['admin_info'] = 'DELETESTYLE__SUCCESS';
     return true;
 }
 ?>

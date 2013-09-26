@@ -5,28 +5,10 @@ $lang = array(
     'ERROR__PLEASELOGIN' => 'Please log in!',
     'ERROR__UNKNOWNERROR' => 'An error occurred!',
     'ERROR__LOGINERROR' => 'An error occurred while logging in!',
-    'ERROR__INITDATABASE' => 'An error occurred while initializing your database!',
-    'ERROR__CLASSAPP__PREPARSE' => 'PreParsing failed!',
-    'ERROR__CLASSSTYLE__PREPARSE' => 'PreParsing failed!',
 
     // info
     'INFO__SAVED' => 'Saved successfully.',
-    'INFO__INITDATABASE' => 'Database has been initialized successfully.',
     'INFO__SETPASSWORD' => 'Please choose a password for the software-backend first!',
-
-    // class
-    'APP__CLASS__STATUS_ERROR' => 'Error',
-    'APP__CLASS__STATUS_UNINSTALLED' => 'Uninstalled',
-    'APP__CLASS__STATUS_UPDATEWAITING' => 'Update is waiting...',
-    'APP__CLASS__STATUS_INSTALLED' => 'Installed',
-    'APP__CLASS__STATUS_AVAILABLE' => 'Available',
-    'APP__CLASS__STATUS_PREPARSINGERROR' => 'PreParser-Error',
-    'APP__CLASS__STATUS_PARSED' => 'Used',
-    'STYLE__CLASS__STATUS_ERROR' => 'Error',
-    'STYLE__CLASS__STATUS_AVAILABLE' => 'Available',
-    'STYLE__CLASS__STATUS_PREPARSINGERROR' => 'PreParser-Error',
-    'STYLE__CLASS__STATUS_PARSED' => 'Used',
-    'STYLE__CLASS__STATUS_DEFAULT' => 'Default',
 
     // showLogin
     'SHOWLOGIN__TITLE' => 'Login',
@@ -49,7 +31,7 @@ $lang = array(
     'SHOWINDEX__H1' => 'JS_Admin | Index',
     'SHOWINDEX__INFOTEXT' => 'You are in the administration-backend of JSunic. This backend enables you to administrate JSunic easily.',
     'SHOWINDEX__H2_INDEX' => 'This backend enables you to...',
-    'SHOWINDEX__DT_APPS' => 'Administrate modules',
+    'SHOWINDEX__DT_APPS' => 'Administrate apps',
     'SHOWINDEX__DD_APPS' => 'Manage all modules of JSunic and parse the software.',
     'SHOWINDEX__DT_CONFIG' => 'Change configuration',
     'SHOWINDEX__DD_CONFIG' => 'Change basic configuration of JSunic.',
@@ -64,20 +46,18 @@ $lang = array(
     'SHOWAPPS__TITLE' => 'Apps',
     'SHOWAPPS__H1' => 'JS_Admin | Administrate apps',
     'SHOWAPPS__INFOTEXT' => 'Activate and deactivate apps on this page. Afterwards you have to (re)build JSunic to make the changes effective for your users.',
-    'SHOWAPPS__MODNAME' => 'Name of module',
+    'SHOWAPPS__NAME' => 'Name of app',
     'SHOWAPPS__VERSION' => 'Version',
-    'SHOWAPPS__MODDESCRIPTION' => 'Description',
+    'SHOWAPPS__DESCRIPTION' => 'Description',
     'SHOWAPPS__STATUS' => 'Status',
     'SHOWAPPS__AUTHOR' => 'Author',
-    'SHOWAPPS__RESET' => 'Reset',
-    'SHOWAPPS__ACTION' => 'Action',
     'SHOWAPPS__ACTION_DELETE' => 'Delete',
     'SHOWAPPS__BUILD' => 'Build JSunic',
     'SHOWAPPS__BUILD_INFOTEXT' => 'Build the runtime environment of JSunic. This will make all activated (and only these) apps and styles usable for your users.',
 
-    // deleteModule
-    'ERROR__DELETEAPP' => 'An error occurred!',
-    'INFO__DELETEAPP' => 'Module removed.',
+    // deleteApp
+    'DELETEAPP__ERROR' => 'An error occurred during deletion!',
+    'DELETEAPP__SUCCESS' => 'App removed.',
 
     // toggleActivated
     'TOGGLEACTIVATED__ERROR' => 'Packet could not be de/activated!',
@@ -91,45 +71,24 @@ $lang = array(
     'SHOWSTYLES__TITLE' => 'Styles',
     'SHOWSTYLES__H1' => 'JS_Admin | Administrate styles',
     'SHOWSTYLES__INFOTEXT' => 'All styles on one page. Here you can administrate all styles in your style-directory.',
-    'SHOWSTYLES__MODNAME' => 'Name of style',
+    'SHOWSTYLES__NAME' => 'Name of style',
     'SHOWSTYLES__VERSION' => 'Version',
-    'SHOWSTYLES__MODDESCRIPTION' => 'Description',
+    'SHOWSTYLES__DESCRIPTION' => 'Description',
     'SHOWSTYLES__STATUS' => 'Status',
     'SHOWSTYLES__AUTHOR' => 'Author',
-    'SHOWSTYLES__SUBMIT' => 'Save changes',
-    'SHOWSTYLES__RESET' => 'Reset',
-    'SHOWSTYLES__ID' => 'ID',
-    'SHOWSTYLES__ACTION' => 'Action',
     'SHOWSTYLES__ACTION_DELETE' => 'Delete',
     'SHOWSTYLES__ACTION_SETDEFAULT' => 'As default',
 
-    // setStyles
-    'INFO__SETSTYLES_SUCCESS' => 'Changes saved.',
-
-    // setDefaultStyle
-    'ERROR__SETDEFAULTSTYLE' => 'Saving the default caused an error.',
-    'INFO__SETDEFAULTSTYLE' => 'Default has been saved.',
-
     // deleteStyle
-    'ERROR__DELETESTYLE' => 'An error occurred!',
-    'INFO__DELETESTYLE' => 'Style removed.',
+    'DELETESTYLE__ERROR' => 'An error occurred!',
+    'DELETESTYLE__SUCCESS' => 'Style removed.',
 
     // showTools
-    'SHOWTOOLS__TITLE' => 'Optimize',
-    'SHOWTOOLS__H1' => 'JS_Admin | Optimize',
-    'SHOWTOOLS__INFOTEXT' => 'This tools can help you to optimize your JSunic installation.',
-    'SHOWTOOLS__DT_INITDATABASE' => 'Initialize database',
-    'SHOWTOOLS__DD_INITDATABASE' => 'Before using JSunic some tables needs to be created in you database. Normally they should be created automatically, but this tool gives you more information about it.',
+    'SHOWTOOLS__TITLE' => 'Tools',
+    'SHOWTOOLS__H1' => 'JS_Admin | Tools',
+    'SHOWTOOLS__INFOTEXT' => 'This tools can help you with your JSunic installation.',
     'SHOWTOOLS__DT_RESETALL' => 'Reset JSunic',
     'SHOWTOOLS__DD_RESETALL' => 'This tool enables you to reset JSunic completely. All data of your current installation will be lost afterwards!',
-
-    // showInitDatabase
-    'SHOWINITDATABASE__TITLE' => 'Initialize database',
-    'SHOWINITDATABASE__H1' => 'JS_Admin | Initialize database',
-    'SHOWINITDATABASE__INFOTEXT' => 'To manage the modules and styles JSunic needs some tables in your database. Accessing this page, JSunic will try to create them.',
-    'SHOWINITDATABASE__DONE' => 'The required tables are available.',
-    'SHOWINITDATABASE__ERROR' => 'Tables aren\'t existing!',
-    'SHOWINITDATABASE__ERROR_LINK' => 'Retry initialization',
 
     // showResetAll
     'SHOWRESETALL__TITLE' => 'Reset all',
@@ -146,18 +105,6 @@ $lang = array(
     'SHOWCONFIG__H1' => 'JS_Admin | Edit configuration',
     'SHOWCONFIG__INFOTEXT' => 'Change the configuration of JSunic easily via this formular.',
     'SHOWCONFIG__LEGEND_DATABASE' => 'Database',
-    'SHOWCONFIG__DB_CLASS' => 'Database type',
-    'SHOWCONFIG__DB_CLASS_INFO' => 'Choose a database-type for JSunic.',
-    'SHOWCONFIG__DB_HOST' => 'Host',
-    'SHOWCONFIG__DB_HOST_INFO' => 'Host of your database.',
-    'SHOWCONFIG__DB_USER' => 'User',
-    'SHOWCONFIG__DB_USER_INFO' => 'User of your database.',
-    'SHOWCONFIG__DB_PASS' => 'Password',
-    'SHOWCONFIG__DB_PASS_INFO' => 'Password of your database.',
-    'SHOWCONFIG__DB_DATABASE' => 'Database',
-    'SHOWCONFIG__DB_DATABASE_INFO' => 'Name of database to be used by JSunic.',
-    'SHOWCONFIG__PREFIX' => 'Preffix',
-    'SHOWCONFIG__PREFIX_INFO' => 'This prefix will be attached to all tables in your database used by JSunic. Do not change this setting on a running system!',
     'SHOWCONFIG__LEGEND_ENCRYPTION' => 'Encryption',
     'SHOWCONFIG__ENCRYPTION_CLASS' => 'Encryption type',
     'SHOWCONFIG__ENCRYPTION_CLASS_INFO' => 'Choose an encryption type. Do not change this password on a running system, causing serious damage to your data.',
@@ -186,8 +133,6 @@ $lang = array(
     'SHOWCONFIG__DOMAIN_INFO' => 'The domain of your webserver.',
     'SHOWCONFIG__DIR_ADMIN' => 'admin directory',
     'SHOWCONFIG__DIR_ADMIN_INFO' => 'Absolute path to admin directory of JSunic. Only administrator needs web access to this directory.',
-    'SHOWCONFIG__DIR_DATA' => 'data directory',
-    'SHOWCONFIG__DIR_DATA_INFO' => 'Absolute path to data directory of JSunic. Only webserver needs access to this directory.',
     'SHOWCONFIG__DIR_RUNTIME' => 'runtime directory',
     'SHOWCONFIG__DIR_RUNTIME_INFO' => 'Absolute path to runtime directory of JSunic. This is the public directory.',
 
@@ -217,7 +162,7 @@ $lang = array(
     // html
     'HTML__INSTALLATIONPROGRESS' => 'Installation progress',
     'HTML__INDEX' => 'Index',
-    'HTML__APPS' => 'Modules',
+    'HTML__APPS' => 'Apps',
     'HTML__CONFIG' => 'Configuration',
     'HTML__STYLES' => 'Styles',
     'HTML__TOOL' => 'Tools',

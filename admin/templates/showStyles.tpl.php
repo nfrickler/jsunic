@@ -12,9 +12,9 @@ global $StyleHandler;
 <table>
     <tr>
 	<th>&nbsp;</th>
-	<th><?php $this->set('SHOWSTYLES__MODNAME'); ?></th>
+	<th><?php $this->set('SHOWSTYLES__NAME'); ?></th>
 	<th><?php $this->set('SHOWSTYLES__VERSION'); ?></th>
-	<th><?php $this->set('SHOWSTYLES__MODDESCRIPTION'); ?></th>
+	<th><?php $this->set('SHOWSTYLES__DESCRIPTION'); ?></th>
 	<th><?php $this->set('SHOWSTYLES__AUTHOR'); ?></th>
 	<th><?php $this->set('SHOWSTYLES__STATUS'); ?></th>
 	<th>&nbsp;</th>

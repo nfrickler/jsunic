@@ -156,7 +156,19 @@ class Packet {
      * @return bool
      */
     public function build () {
-	return true;
+	return false;
+    }
+
+    /**
+     * Delete packet
+     *
+     * @return bool
+     */
+    public function delete () {
+
+	//TODO
+
+	return false;
     }
 }
 ?>

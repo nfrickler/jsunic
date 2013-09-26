@@ -1,21 +1,20 @@
 <?php
 function deleteApp () {
 
-    // get id__module
-    $id__module = (isset($_GET['id']) AND is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-    if (empty($id__module)) return true;
+    // Get name of app
+    $name = (isset($_GET['name'])) ? $_GET['name'] : '';
+    if (empty($name)) return true;
 
-    // get module-object
-    $App = new App($id__module);
+    // get App object
+    $App = new App($name);
 
     // delete
-    if (!$App->deleteApp()) {
-	// error
-	$_SESSION['admin_error'] = 'ERROR__DELETEAPP';
+    if (!$App->delete()) {
+	$_SESSION['admin_error'] = 'DELETEAPP__ERROR';
 	return false;
     }
 
-    $_SESSION['admin_info'] = 'INFO__DELETEAPP';
+    $_SESSION['admin_info'] = 'DELETEAPP__SUCCESS';
     return true;
 }
 ?>

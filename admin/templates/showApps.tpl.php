@@ -12,12 +12,12 @@ global $AppHandler;
 <table>
     <tr>
 	<th>&nbsp;</th>
-	<th><?php $this->set('SHOWAPPS__MODNAME'); ?></th>
+	<th><?php $this->set('SHOWAPPS__NAME'); ?></th>
 	<th><?php $this->set('SHOWAPPS__VERSION'); ?></th>
-	<th><?php $this->set('SHOWAPPS__MODDESCRIPTION'); ?></th>
+	<th><?php $this->set('SHOWAPPS__DESCRIPTION'); ?></th>
 	<th><?php $this->set('SHOWAPPS__AUTHOR'); ?></th>
 	<th><?php $this->set('SHOWAPPS__STATUS'); ?></th>
-	<th><?php $this->set('SHOWAPPS__ACTION'); ?></th>
+	<th>&nbsp;</th>
     </tr>
     <?php foreach ($AppHandler->getList() as $index => $App) { ?>
     <tr class="packets__statusclass_<?php echo $App->getStatus(); ?>">
@@ -39,14 +39,9 @@ global $AppHandler;
 	<td><?php echo $App->get('author'); ?></td>
 	<td><?php $this->set($App->getStatus(true)); ?></td>
 	<td>
-	    <?php switch ($App->getStatus()) {
-	    case 5:
-		?>
-		<a href="?event=deleteApp&amp;name=<?php echo $App->get('name'); ?>">
+	    <?php if (!$App->get('activated')) { ?>
+	    <a href="?event=deleteApp&amp;name=<?php echo $App->get('name'); ?>">
 		<?php $this->set('SHOWAPPS__ACTION_DELETE'); ?></a>
-		<?php
-		break;
-		?>
 	    <?php } ?>
 	</td>
     </tr>
