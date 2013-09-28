@@ -170,5 +170,5 @@ class Packet {
 
 	return false;
     }
-}
+
 ?>
