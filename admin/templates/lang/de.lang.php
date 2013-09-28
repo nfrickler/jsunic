@@ -54,6 +54,7 @@ $lang = array(
     'SHOWAPPS__ACTION_DELETE' => 'Löschen',
     'SHOWAPPS__BUILD' => 'JSunic bauen',
     'SHOWAPPS__BUILD_INFOTEXT' => 'Baue die Benutzerumgebung von JSunic. Dies wird alle aktivierten (und nur diese) Apps und Styles den Nutzern zugänglich machen.',
+    'SHOWAPPS__NOAPPS' => 'Es wurden keine Apps gefunden!',
 
     // deleteApp
     'DELETEAPP__ERROR' => 'Fehler beim Löschen!',
@@ -82,6 +83,7 @@ $lang = array(
     'SHOWSTYLES__ACTION' => 'Aktion',
     'SHOWSTYLES__ACTION_DELETE' => 'Löschen',
     'SHOWSTYLES__ACTION_SETDEFAULT' => 'Als Standard',
+    'SHOWSTYLES__NOSTYLES' => 'Es wurden keine Styles gefunden!',
 
     // deleteStyle
     'DELETESTYLE__ERROR' => 'Fehler beim Löschen!',

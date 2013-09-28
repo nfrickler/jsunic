@@ -9,6 +9,7 @@ global $StyleHandler;
 <p>
     <?php $this->set('SHOWSTYLES__INFOTEXT'); ?>
 </p>
+<?php if ($StyleHandler->getList()) { ?>
 <table>
     <tr>
 	<th>&nbsp;</th>
@@ -49,3 +50,8 @@ global $StyleHandler;
     </tr>
     <?php } ?>
 </table>
+<?php } else { ?>
+<p style="font-weight:bold;">
+    <?php $this->set('SHOWSTYLES__NOSTYLES'); ?>
+</p>
+<?php } ?>

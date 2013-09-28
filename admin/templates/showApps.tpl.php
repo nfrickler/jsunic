@@ -9,6 +9,7 @@ global $AppHandler;
 <p>
     <?php $this->set('SHOWAPPS__INFOTEXT'); ?>
 </p>
+<?php if ($AppHandler->getList()) { ?>
 <table>
     <tr>
 	<th>&nbsp;</th>
@@ -54,3 +55,8 @@ global $AppHandler;
 <p>
     <?php $this->set('SHOWAPPS__BUILD_INFOTEXT'); ?></a>
 </p>
+<?php } else { ?>
+<p style="font-weight:bold;">
+    <?php $this->set('SHOWAPPS__NOAPPS'); ?>
+</p>
+<?php } ?>

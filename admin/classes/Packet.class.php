@@ -165,10 +165,7 @@ class Packet {
      * @return bool
      */
     public function delete () {
-
-	//TODO
-
-	return false;
+	return FileHandler::deleteFolder($this->getPath());
     }
-
+}
 ?>

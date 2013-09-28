@@ -54,6 +54,7 @@ $lang = array(
     'SHOWAPPS__ACTION_DELETE' => 'Delete',
     'SHOWAPPS__BUILD' => 'Build JSunic',
     'SHOWAPPS__BUILD_INFOTEXT' => 'Build the runtime environment of JSunic. This will make all activated (and only these) apps and styles usable for your users.',
+    'SHOWAPPS__NOAPPS' => 'No apps found!',
 
     // deleteApp
     'DELETEAPP__ERROR' => 'An error occurred during deletion!',
@@ -78,6 +79,7 @@ $lang = array(
     'SHOWSTYLES__AUTHOR' => 'Author',
     'SHOWSTYLES__ACTION_DELETE' => 'Delete',
     'SHOWSTYLES__ACTION_SETDEFAULT' => 'As default',
+    'SHOWSTYLES__NOSTYLES' => 'No styles found!',
 
     // deleteStyle
     'DELETESTYLE__ERROR' => 'An error occurred!',
