@@ -1,20 +1,6 @@
-
-/**
- * Init function to boot up the system
- */
-var JSunic;
-function init () {
-
-    // Create JSunic object
-    JSunic = new JSunicObj();
-
-    // show login
-    JSunic.appview('users', 'login');
-}
-
 /**
  * JSunic object
- * This object offers the most important methods and attributes
+ * This is the core object of JSunic and provides the basic functionality
  */
 function JSunicObj () {
 
@@ -149,7 +135,7 @@ function JSunicObj () {
 		JSunic.info("Login successful.");
 	    },
 	    function (response) {
-		JSunic.fatalError("Failed to load MBR!");
+		JSunic.error("Failed to load MBR!");
 	    },
 	    'xml'
 	);
@@ -246,7 +232,19 @@ function JSunicObj () {
      */
     this.app = app;
     function app (name) {
-	alert('start app "'+name+'"');
+
+	// load app
+	this.loadOnce(
+	    this.path_apps+name+"/"+name+".min.js",
+	    function (response) {
+		// Run init
+		eval(name+"__init();");
+	    },
+	    function (response) {
+		JSunic.error("Failed to load app!");
+	    },
+	    'script'
+	);
     }
 
     /**
@@ -292,7 +290,7 @@ function JSunicObj () {
     function loadLanguage (app) {
 
 	this.loadOnce(
-	    this.path_apps+app+"/lang/"+this.lang+".js",	
+	    this.path_apps+app+"/lang/"+this.lang+".js",
 	    function (response) {
 		// load language in lang_translations
 		$.extend(JSunic.lang_translations, lang);
@@ -317,7 +315,7 @@ function JSunicObj () {
      * Fatale errors. Exit JSunic
      */
     this.error = error;
-    function fatalError (msg) {
+    function error (msg) {
 	alert("Fatal error: "+msg);
 	location.href = '?';
     }
@@ -386,10 +384,11 @@ function JSunicObj () {
 		/* discard */
 	    },
 	    error: function (response) {
+		var req = JSunic.getAjax(uri);
 		if (req) {
 		    req.ok = -1;
 		    req.response = response;
-		    if (error_cb) error_cb(response);
+		    if (fail_cb) fail_cb(response);
 		}
 		/* discard */
 	    }
@@ -408,55 +407,6 @@ function JSunicObj () {
 	}
     }
 };
-
-/**
- * Log user in
- */
-function login () {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-
-    // Validate email + password!
-    if (password.length < 1 || email.length < 1) {
-	JSunic.error("Missing email or password!");
-	return false;
-    }
-    // TODO
-
-    // generate symkey
-    var salt = email;
-    JSunic.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
-
-    // try to log in
-    JSunic.login(email);
-
-    return false;
-}
-
-/**
- * Register new user
- */
-function register () {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-    var mbr = document.getElementById("mbr").value;
-
-    // Validate email + password + mbr!
-    if (password.length < 1 || email.length < 1 || mbr.length < 1) {
-	JSunic.error("Missing email, password or data service!");
-	return false;
-    }
-    // TODO
-
-    // generate symkey
-    var salt = email;
-    JSunic.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
-
-    // try to log in
-    JSunic.register(email, mbr);
-
-    return false;
-}
 
 /**
  * Remove duplicate elements in array

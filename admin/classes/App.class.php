@@ -28,6 +28,10 @@ class App extends Packet {
 	$path_libs = $this->getPath()."/libs/";
 	$files = FileHandler::getSubfiles($path_libs);
 	foreach ($files as $index => $value) {
+
+	    // Skip temporary files
+	    if (substr($value, -4) == ".swp") continue;
+
 	    $content = FileHandler::readFile($path_libs.$value);
 	    if (!FileHandler::writeFile($path_min, "\n".$content, false)) {
 		return false;
