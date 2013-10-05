@@ -7,6 +7,16 @@ function core__init () {
     // Create JSunic object
     JSunic = new JSunicObj();
 
-    // Start users app
-    JSunic.app('users');
+    // App or event given?
+    var Input = new InputObj();
+    var in_app = Input.get("app");
+    var in_event = Input.get("event");
+
+    if (in_app && in_event) {
+	// Load requested event
+	JSunic.appview(in_app, in_event);
+    } else {
+	// Start users app
+	JSunic.app('users');
+    }
 }

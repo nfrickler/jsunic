@@ -135,7 +135,7 @@ function JSunicObj () {
 		JSunic.info("Login successful.");
 	    },
 	    function (response) {
-		JSunic.error("Failed to load MBR!");
+		JSunic.fatalError("Failed to load MBR!");
 	    },
 	    'xml'
 	);
@@ -312,12 +312,13 @@ function JSunicObj () {
     }
 
     /**
-     * Fatale errors. Exit JSunic
+     * Fatal errors. Exit JSunic
      */
-    this.error = error;
-    function error (msg) {
+    this.fatalError = fatalError;
+    function fatalError (msg) {
 	alert("Fatal error: "+msg);
-	location.href = '?';
+	location.href = '?app=core&event=fatal&error='
+	    +encodeURIComponent(msg);
     }
 
     /**

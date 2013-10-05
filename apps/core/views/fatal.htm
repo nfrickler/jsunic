@@ -1,0 +1,21 @@
+<div id="core__fatal">
+    <h1>CORE__FATAL__H1</h1>
+    <p>
+	CORE__FATAL__INFOTEXT
+    </p>
+    <p>
+	<a href="?">CORE__FATAL__TOLOGIN</a>
+    </p>
+    <h3>CORE__FATAL__ERRORINFO</h3>
+    <p id="core__fatal__errorinfo">
+	Unknown
+    </p>
+    <script type="text/javascript">
+	var Input = new InputObj();
+	var msg = Input.get("error");
+	if (msg) {
+	    document.getElementById('core__fatal__errorinfo')
+		.innerHTML = msg;
+	}
+    </script>
+</div>
