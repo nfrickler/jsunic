@@ -27,6 +27,10 @@ class App extends Packet {
 	// Merge all javascript files into one
 	$path_libs = $this->getPath()."/libs/";
 	$files = FileHandler::getSubfiles($path_libs);
+
+	// Sort files by name
+	sort($files);
+
 	foreach ($files as $index => $value) {
 
 	    // Skip temporary files

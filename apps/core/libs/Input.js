@@ -32,7 +32,7 @@ function InputObj() {
      */
     this.normalize = normalize;
     function normalize (input) {
-	var Regex = /[^a-zA-Z0-9_-]/g;
+	var Regex = /[^\s\.\?\!,a-zA-Z0-9_-]/g;
 	input = input.replace(Regex, "?");
 	return input;
     }

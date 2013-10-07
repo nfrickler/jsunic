@@ -12,6 +12,9 @@ function core__init () {
     var in_app = Input.get("app");
     var in_event = Input.get("event");
 
+    // Load config.json
+    JSunic.Config.load();
+
     if (in_app && in_event) {
 	// Load requested event
 	JSunic.appview(in_app, in_event);

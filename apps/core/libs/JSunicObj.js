@@ -64,6 +64,11 @@ function JSunicObj () {
     this.ajax_req = new Array();
 
     /**
+     * Config object
+     */
+    this.Config = new ConfigObj("config.json");
+
+    /**
      * Save data packet via ajax call
      */
     this.save = save;
@@ -334,7 +339,7 @@ function JSunicObj () {
      * Wrapper for ajax calls, that should only be called once
      */
     this.loadOnce = loadOnce;
-    function loadOnce (uri, success_cb, fail_cb, type) {
+    function loadOnce (uri, success_cb, fail_cb, type, async = true) {
 
 	// Check, if already loaded
 	for (var i in this.ajax_req) {
@@ -349,7 +354,7 @@ function JSunicObj () {
 	}
 
 	// Load
-	this.load(uri, success_cb, fail_cb, type);
+	this.load(uri, success_cb, fail_cb, type, async);
 	return true;
     }
 
@@ -357,7 +362,7 @@ function JSunicObj () {
      * Wrapper for ajax calls
      */
     this.load = load;
-    function load (uri, success_cb, fail_cb, type) {
+    function load (uri, success_cb, fail_cb, type, async = true) {
 
 	// Delete old requests
 	var ajax = this.getAjax(uri);
@@ -375,6 +380,7 @@ function JSunicObj () {
 	$.ajax({
 	    url: uri,
 	    dataType: type,
+	    async: async,
 	    success: function (response) {
 		var req = JSunic.getAjax(uri);
 		if (req) {
