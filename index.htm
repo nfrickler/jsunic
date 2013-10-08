@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>JSunic 0.1</title>
+    <title>JSUNIC__VERSION</title>
     <link rel="stylesheet" type="text/css"
 	href="styles/default/format.css" />
 
@@ -27,13 +27,43 @@
 </head>
 <body onload="core__init();">
     <div id="notifications"></div>
-    <div id="navig">
-	<ul>
-	    <li>Home</li>
-	</ul>
-    </div>
+    <div id="rootpopup"></div>
     <div id="root">
-	<!-- empty -->
+	<div id="header">
+	    <a href="?"><img id="logo" alt="Logo" src="logo.png" /></a>
+	    <h1 id="logotext">JSUNIC__VERSION</h1>
+	    <div id="header_right">
+		<form action="">
+		    <select>
+			<option>English</option>
+			<option>Deutsch</option>
+		    </select>
+		    <input type="submit" value="Translate"/>
+		</form>
+		<a href="#">Help</a>
+		<a href="#" onclick="users__logout();">
+		    USERS__LOGOUT</a>
+	    </div>
+	</div>
+	<div id="navigframe">
+	    <ul id="navig">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">Apps</a></li>
+	    </ul>
+	    <ul id="subnavig">
+	    </ul>
+	</div>
+	<div id="contentframe">
+	    <div id="content">
+		<!-- empty -->
+	    </div>
+	</div>
+	<div id="div__footer">
+	    <div id="div__footer_middle">
+		Powered by <a href="http://tsunic.de" target="_blank">
+		    JSUNIC__VERSION</a>
+	    </div>
+	</div>
     </div>
 </body>
 </html>

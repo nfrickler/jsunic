@@ -1,6 +1,6 @@
 /**
  * User object
- * An object for representation of current user
+ * An object as representation of current user
  */
 function UserObj () {
 
@@ -14,7 +14,7 @@ function UserObj () {
     /**
      * AES object
      */
-    this.aes_bits= 256;
+    this.aes_bits = 256;
     this.aes = null;
 
     /**
@@ -32,7 +32,7 @@ function UserObj () {
 		if (!data) {
 		    // login failed!
 		    JSunic.error("Login failed!");
-		    JSunic.appview('users', 'login');
+		    JSunic.app('users');
 		    JSunic.ready = true;
 		    return;
 		}
@@ -56,7 +56,7 @@ function UserObj () {
 	// load MBR (master boot record)
 	JSunic.loadOnce(
 	    JSunic.mbr_path+"index.php?id="+encodeURIComponent(email)+
-		"&data="+encodeURIComponent(0),
+		"&data="+encodeURIComponent(1),
 	    function (response) {
 		var data = $(response).find("data").text();
 		var error = $(response).find("error").text();
@@ -68,13 +68,13 @@ function UserObj () {
 		    return;
 		}
 
-		// decrypt data
+		// decrypt data if required
 		data = JSunic.decrypt(data);
 
 		if (!data) {
 		    // login failed!
 		    JSunic.error("Registration failed!");
-		    JSunic.appview('users', 'login');
+		    JSunic.app('users', 'register', false);
 		    JSunic.ready = true;
 		    return;
 		}
@@ -87,6 +87,17 @@ function UserObj () {
 	    },
 	    'xml'
 	);
+    }
+
+    /**
+     * Log user out
+     */
+    this.logout = logout;
+    function logout () {
+	JSunic.User = null;
+	this.symkey = false;
+	JSunic.info("Logout successful.");
+	JSunic.app('users');
     }
 
     /**

@@ -283,105 +283,128 @@ input[type="radio"]+div+label
 input[type="checkbox"],
 input[type="radio"]
 {
-margin:5px;
-margin-top:10px;
-margin-left:200px;
-background:#FFF;
-width:auto;
+    margin:5px;
+    margin-top:10px;
+    margin-left:200px;
+    background:#FFF;
+    width:auto;
 }
 
 /* ############### 3. Structure and design ################### */
 
+#rootpopup {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+    width:100%;
+    height:100%;
+    background:#444;
+}
+#rootpopup > div {
+    position:relative;
+    top:10%;
+    width:70%;
+    min-width:200px;
+    max-width:1200px;
+    padding:10px;
+    margin-left:auto;
+    margin-right:auto;
+    background:#FFF;
+    border-radius:5px;
+/*
+*/
+}
 #root {
-margin-left:auto;
-margin-right:auto;
-width:80%;
-min-width:200px;
-max-width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
+    min-width:200px;
+    max-width:1200px;
 }
 #header {
-position:relative;
-top:0px;
-height:80px;
-width:100%;
+    position:relative;
+    top:0px;
+    height:80px;
+    width:100%;
 
-background: #006;
-background: linear-gradient(#000, #006);
+    background: #006;
+    background: linear-gradient(#000, #006);
 }
 #navig {
-position:relative;
-width:100%;
-background:#444;
+    position:relative;
+    width:100%;
+    background:#444;
 }
 #subnavig {
-position:relative;
-width:100%;
-background:#888;
+    position:relative;
+    width:100%;
+    background:#888;
 }
 #contentframe {
-position:relative;
-min-height:200px;
-width:100%;
-background:#FFF;
-border: 4px solid #EEE;
-border-radius:0 0 10px 10px;
-border-top:0px;
+    position:relative;
+    min-height:200px;
+    width:100%;
+    background:#FFF;
+    border: 4px solid #EEE;
+    border-radius:0 0 10px 10px;
+    border-top:0px;
 }
 #content {
-margin:8px;
-padding:8px;
-padding-bottom:20px;
+    margin:8px;
+    padding:8px;
+    padding-bottom:20px;
 }
 
 /* ################# header ####################### */
 #logo {
-float:left;
-height:60px;
-margin:4px;
+    float:left;
+    height:60px;
+    margin:4px;
 }
 #logotext {
-float:left;
-color:#FFF;
-margin:10px;
+    float:left;
+    color:#FFF;
+    margin:10px;
 }
 #header_right {
-position:absolute;
-right:0px;
-top:4px;
+    position:absolute;
+    right:0px;
+    top:4px;
 }
 #header_right form {
-padding:1px;
-box-shadow:none;
-border-radius:7px;
-float:left;
+    padding:1px;
+    box-shadow:none;
+    border-radius:7px;
+    float:left;
 }
 #header_right input {
-padding:2px;
-float:left;
-box-shadow:none;
-margin-top:1px;
-width:auto;
-min-width:none;
+    padding:2px;
+    float:left;
+    box-shadow:none;
+    margin-top:1px;
+    width:auto;
+    min-width:none;
 }
 #header_right input:after {
-clear:none;
+    clear:none;
 }
 #header_right input[type="submit"] {
-float:right;
-margin-right:10px;
+    float:right;
+    margin-right:10px;
 }
 #header_right select {
-background:transparent;
-display:inline-block;
-border:0px;
-border-radius:4px;
-color:#DDD;
+    background:transparent;
+    display:inline-block;
+    border:0px;
+    border-radius:4px;
+    color:#DDD;
 }
 #header_right select:hover,
 #header_right select:focus,
 #header_right select:active
 {
-color:#AAA;
+    color:#AAA;
 }
 #header_right a:link,
 #header_right a:visited,
@@ -389,18 +412,18 @@ color:#AAA;
 #header_right a:active,
 #header_right a:hover
 {
-color:#DDD;
-font-weight:bold;
-text-decoration:none;
-font-size:10pt;
-margin-right:5px;
-padding:2px;
+    color:#DDD;
+    font-weight:bold;
+    text-decoration:none;
+    font-size:10pt;
+    margin-right:5px;
+    padding:2px;
 }
 #header_right a:focus,
 #header_right a:active,
 #header_right a:hover
 {
-text-decoration:underline;
+    text-decoration:underline;
 }
 
 #login {
@@ -419,155 +442,155 @@ text-decoration:underline;
 
 
 #div__footer {
-text-align:center;
-font-size:9pt;
-color:#666;
-padding-top:7px;
-padding-bottom:20px;
+    text-align:center;
+    font-size:9pt;
+    color:#666;
+    padding-top:7px;
+    padding-bottom:20px;
 }
 #div__footer_left {
-float:left;
-width:20%;
-text-align:left;
-margin-top:20px;
+    float:left;
+    width:20%;
+    text-align:left;
+    margin-top:20px;
 }
 #div__footer_middle {
-float:left;
-width:60%;
-text-align:center;
+    float:left;
+    width:60%;
+    text-align:center;
 }
 #div__footer_right {
-float:left;
-width:20%;
-text-align:right;
-margin-top:20px;
+    float:left;
+    width:20%;
+    text-align:right;
+    margin-top:20px;
 }
 #div__settings {
-position:absolute;
-top:40%;
-right:0px;
-width:28px;
-padding:2px;
-padding-right:4px;
-background:#003;
-text-align:center;
-border-radius:3px;
+    position:absolute;
+    top:40%;
+    right:0px;
+    width:28px;
+    padding:2px;
+    padding-right:4px;
+    background:#003;
+    text-align:center;
+    border-radius:3px;
 }
 
 /* ############### 3.1 Navigation ################### */
 
 #navig {
-list-style:none;
-width:100%;
-margin:0px;
-padding:0px;
-background:#111;
-background:linear-gradient(#444, #111);
-box-shadow:0 2px 1px #9c9c9c;
+    list-style:none;
+    width:100%;
+    margin:0px;
+    padding:0px;
+    background:#111;
+    background:linear-gradient(#444, #111);
+    box-shadow:0 2px 1px #9c9c9c;
 }
 #navig li {
-float:left;
-padding:0 0 0 0;
-position:relative;
-min-width:100px;
+    float:left;
+    padding:0 0 0 0;
+    position:relative;
+    min-width:100px;
 }
 #navig a {
-float:left;
-padding:5px 20px 5px 20px;
-color:#999;
-font:bold 12px/25px;
-text-decoration:none;
-text-shadow:0 1px 0 #000;
-border-radius:5px;
+    float:left;
+    padding:5px 20px 5px 20px;
+    color:#999;
+    font:bold 12px/25px;
+    text-decoration:none;
+    text-shadow:0 1px 0 #000;
+    border-radius:5px;
 }
 #navig li:hover > a {
-color:#fafafa;
-background:#00A;
+    color:#fafafa;
+    background:#00A;
 }
 #navig li:hover > ul {
-display: block;
+    display: block;
 }
 
 /* Sub-menu */
 #navig ul {
-list-style:none;
-margin:0px;
-padding:0px;
-display:none;
-position:absolute;
-top:30px;
-left:0;
-z-index:99999;
-background:#444;
-background:linear-gradient(#444, #111);
-border-radius:5px;
+    list-style:none;
+    margin:0px;
+    padding:0px;
+    display:none;
+    position:absolute;
+    top:30px;
+    left:0;
+    z-index:99999;
+    background:#444;
+    background:linear-gradient(#444, #111);
+    border-radius:5px;
 }
 #navig ul li {
-float:none;
-margin:0;
-padding:0;
-display:block;
-box-shadow:0 1px 0 #111111, 0 2px 0 #777777;
+    float:none;
+    margin:0;
+    padding:0;
+    display:block;
+    box-shadow:0 1px 0 #111111, 0 2px 0 #777777;
 }
 #navig ul li:last-child {
-box-shadow: none;
+    box-shadow: none;
 }
 #navig ul a {
-padding:10px;
-height:auto;
-line-height:1;
-display:block;
-white-space:nowrap;
-float:none;
-text-transform:none;
+    padding:10px;
+    height:auto;
+    line-height:1;
+    display:block;
+    white-space:nowrap;
+    float:none;
+    text-transform:none;
 }
 #navig ul a:hover {
-background:#0186ba;
-background:linear-gradient(#04acec,  #0186ba);
+    background:#0186ba;
+    background:linear-gradient(#04acec,  #0186ba);
 }
 #navig ul li:first-child a {
-border-radius:5px 5px 0 0;
+    border-radius:5px 5px 0 0;
 }
 #navig ul li:last-child a {
-border-radius:0 0 5px 5px;
+    border-radius:0 0 5px 5px;
 }
 #navig:after,
 #subnavig:after
 {
-visibility:hidden;
-display:block;
-font-size:0pt;
-content:" ";
-clear:both;
-height:0px;
+    visibility:hidden;
+    display:block;
+    font-size:0pt;
+    content:" ";
+    clear:both;
+    height:0px;
 }
 
 #subnavig {
-list-style:none;
-margin:0px;
-padding:0px;
-background:#888;
+    list-style:none;
+    margin:0px;
+    padding:0px;
+    background:#888;
 }
 #subnavig li {
-position:relative;
-float:left;
-padding:0px;
-margin:1px;
+    position:relative;
+    float:left;
+    padding:0px;
+    margin:1px;
 }
 #subnavig li a {
-float:left;
-min-width:100px;
-text-align:center;
-padding:5px;
-margin:0px;
-color:#FFF;
-font:bold 10pt;
-text-decoration:none;
-border-radius:0 0 5px 5px;
+    float:left;
+    min-width:100px;
+    text-align:center;
+    padding:5px;
+    margin:0px;
+    color:#FFF;
+    font:bold 10pt;
+    text-decoration:none;
+    border-radius:0 0 5px 5px;
 }
 #subnavig li:hover > a {
-color:#000;
-background:#DDD;
+    color:#000;
+    background:#DDD;
 }
 
 /* ############### 4. Misc ################### */
@@ -575,97 +598,97 @@ background:#DDD;
 /* *********************** special lists ******************** */
 
 .childlist {
-background: #FFF;
-padding:5px;
-padding-left:20px;
+    background: #FFF;
+    padding:5px;
+    padding-left:20px;
 }
 
 /* ############### TSunic classes ################### */
 
 .ts_subbox
 {
-margin-top:20px;
+    margin-top:20px;
 }
 .ts_suplinkbox
 {
-margin:0px;
-padding:0px;
-margin-left:10px;
-margin-bottom:15px;
-border-bottom: 1px solid #999;
+    margin:0px;
+    padding:0px;
+    margin-left:10px;
+    margin-bottom:15px;
+    border-bottom: 1px solid #999;
 }
 .ts_suplinkbox a,
 .ts_suplinkbox a:link,
 .ts_suplinkbox a:visited
 {
-border-left:2px solid #999;
-padding:1px;
-margin:0px;
-padding-left:6px;
-padding-right:6px;
+    border-left:2px solid #999;
+    padding:1px;
+    margin:0px;
+    padding-left:6px;
+    padding-right:6px;
 }
 .ts_suplinkbox a:hover {
-text-decoration:none;
-border-bottom:2px solid #00F;
-border-top:1px solid #00F;
-background:#DDF;
+    text-decoration:none;
+    border-bottom:2px solid #00F;
+    border-top:1px solid #00F;
+    background:#DDF;
 }
 
 .ts_sublinkbox
 {
-text-align:right;
-margin:0px;
-margin-top:10px;
-padding:0px;
-margin-left:10px;
-margin-bottom:15px;
-border-bottom: 1px solid #999;
+    text-align:right;
+    margin:0px;
+    margin-top:10px;
+    padding:0px;
+    margin-left:10px;
+    margin-bottom:15px;
+    border-bottom: 1px solid #999;
 }
 .ts_sublinkbox a,
 .ts_sublinkbox a:link,
 .ts_sublinkbox a:visited
 {
-border-right:2px solid #999;
-padding:0px;
-margin:0px;
-padding-left:6px;
-padding-right:6px;
+    border-right:2px solid #999;
+    padding:0px;
+    margin:0px;
+    padding-left:6px;
+    padding-right:6px;
 }
 .ts_sublinkbox a:hover {
-text-decoration:none;
-border-bottom:2px solid #00F;
-border-top:1px solid #00F;
-background:#DDF;
+    text-decoration:none;
+    border-bottom:2px solid #00F;
+    border-top:1px solid #00F;
+    background:#DDF;
 }
 
 /* other classes and objects */
 .div_error {
-width:100%;
-background:#F99;
-padding:2px;
-font-size:10pt;
-font-weight:bold;
-margin-bottom:20px;
-border-radius:5px;
+    width:100%;
+    background:#F99;
+    padding:2px;
+    font-size:10pt;
+    font-weight:bold;
+    margin-bottom:20px;
+    border-radius:5px;
 }
 .div_info {
-width:100%;
-background:#FF9;
-padding:2px;
-font-size:10pt;
-font-weight:bold;
-margin-bottom:20px;
-border-radius:5px;
+    width:100%;
+    background:#FF9;
+    padding:2px;
+    font-size:10pt;
+    font-weight:bold;
+    margin-bottom:20px;
+    border-radius:5px;
 }
 
 /* ########################## popup ############################### */
 .ts_js_blackbg {
-position:fixed;
-top:0px;
-left:0px;
-height:100%;
-width:100%;
-background:url(../../files/project/bg_shadow.png);
+    position:fixed;
+    top:0px;
+    left:0px;
+    height:100%;
+    width:100%;
+    background:url(../../files/project/bg_shadow.png);
 }
 .ts_js_popup {
     position:absolute;
@@ -819,7 +842,7 @@ background:url(../../files/project/bg_shadow.png);
 
 /* formstyle */
 .formstyle th,
-    .formstyle tr th {
+.formstyle tr th {
     font-weight:bold;
     background:#AA8;
     text-align:right;
@@ -829,7 +852,7 @@ background:url(../../files/project/bg_shadow.png);
     min-width:120px;
 }
 .formstyle td,
-    .formstyle tr td {
+.formstyle tr td {
     font-weight:normal;
     background:#DDC;
     text-align:left;

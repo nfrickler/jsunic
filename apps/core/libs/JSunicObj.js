@@ -5,6 +5,11 @@
 function JSunicObj () {
 
     /**
+     * Current version of JSunic
+     */
+    this.version = "JSunic 0.1";
+
+    /**
      * Temporary data of ajax-calls
      */
     this.tmp_id = 0;
@@ -155,13 +160,21 @@ function JSunicObj () {
      * Load app-view
      */
     this.appview = appview;
-    function appview (app, view) {
+    function appview (app, view, content = true) {
 
 	// load view
 	this.loadOnce(
 	    this.path_apps+app+"/views/"+view+".htm",
 	    function (response) {
-		$("#root").html(response);
+		if (content) {
+		    $("#content").html(response);
+		    $("#root").css("display", "block");
+		    $("#rootpopup").css("display", "none");
+		} else {
+		    $("#rootpopup").html(response);
+		    $("#root").css("display", "none");
+		    $("#rootpopup").css("display", "block");
+		}
 		JSunic.loadLanguage(app);
 	    },
 	    function (response) {
@@ -179,6 +192,7 @@ function JSunicObj () {
 	// Set language
 	document.body.innerHTML = document.body.innerHTML.replace(
 	    /\b[A-Z][A-Z0-9_]+\b/g, function(match, contents, offset, s) {
+		if (match == "JSUNIC__VERSION") return JSunic.version;
 		if (match in JSunic.lang_translations) {
 		    return JSunic.lang_translations[match];
 		}

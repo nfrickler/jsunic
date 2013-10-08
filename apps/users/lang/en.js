@@ -1,5 +1,8 @@
 lang = {
 
+    // logout
+    USERS__LOGOUT: "Logout",
+
     // login
     USERS__LOGIN__H1: "Welcome to JSunic",
     USERS__LOGIN__INFOTEXT: "Please log in to get access to your data.",
