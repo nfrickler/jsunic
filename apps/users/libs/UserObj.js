@@ -23,7 +23,7 @@ function UserObj () {
     this.login = login;
     function login (email) {
 	JSunic.loadOnce(
-	    JSunic.mbr+"index.php?id="+encodeURIComponent(email),
+	    JSunic.mbr_path+"index.php?id="+encodeURIComponent(email),
 	    function (response) {
 		var data = $(response).find("data").text();
 
@@ -36,8 +36,8 @@ function UserObj () {
 		    JSunic.ready = true;
 		    return;
 		}
-		JSunic.path = data;
-		JSunic.appview('users', 'desktop');
+		JSunic.boot_path = data;
+		JSunic.appview('core', 'desktop');
 		JSunic.info("Login successful.");
 	    },
 	    function (response) {
@@ -51,15 +51,12 @@ function UserObj () {
      * Register new user
      */
     this.register = register;
-    function register (email, mbr) {
-
-	// encrypt mbr
-	mbr = JSunic.encrypt(mbr);
+    function register (email) {
 
 	// load MBR (master boot record)
 	JSunic.loadOnce(
-	    JSunic.mbr+"index.php?id="+encodeURIComponent(email)+
-		"&data="+encodeURIComponent(mbr),
+	    JSunic.mbr_path+"index.php?id="+encodeURIComponent(email)+
+		"&data="+encodeURIComponent(0),
 	    function (response) {
 		var data = $(response).find("data").text();
 		var error = $(response).find("error").text();
@@ -82,7 +79,7 @@ function UserObj () {
 		    return;
 		}
 		JSunic.path = data;
-		JSunic.appview('users', 'login');
+		JSunic.appview('core', 'desktop');
 		JSunic.info("Registration successful.");
 	    },
 	    function (response) {
@@ -132,4 +129,35 @@ function UserObj () {
 
 	return data.substr(this.enc_infix.length);
     }
+
+    /**
+     * Is valid password?
+     */
+    this.validPassword = validPassword;
+    function validPassword (password) {
+	// TODO
+	if (password.length < 1)
+	    return false;
+	return true;
+    }
+
+    /**
+     * Is valid email?
+     */
+    this.validEmail = validEmail;
+    function validEmail (email) {
+	// TODO
+	if (email.length < 1)
+	    return false;
+	return true;
+    }
+
+    /**
+     * Set symkey from password
+     */
+    this.setSymkey_pass = setSymkey_pass;
+    function setSymkey_pass (email, password) {
+	var salt = email;
+	this.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
+    } 
 };

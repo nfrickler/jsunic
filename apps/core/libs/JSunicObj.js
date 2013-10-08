@@ -21,9 +21,14 @@ function JSunicObj () {
     this.idle= 0;
 
     /**
-     * Path to mbr
+     * Path to boot packet
      */
-    this.mbr = "http://localhost/jsunic/services/mbr/";
+    this.boot_path;
+
+    /**
+     * Path to mbr service
+     */
+    this.mbr_path = "http://localhost/jsunic/services/mbr/";
 
     /**
      * Path to apps
@@ -215,7 +220,6 @@ function JSunicObj () {
      */
     this.fatalError = fatalError;
     function fatalError (msg) {
-	alert("Fatal error: "+msg);
 	location.href = '?app=core&event=fatal&error='
 	    +encodeURIComponent(msg);
     }
@@ -227,7 +231,6 @@ function JSunicObj () {
     function info (msg) {
 	alert("Info: "+msg);
     }
-
 
     /**
      * Wrapper for ajax calls, that should only be called once

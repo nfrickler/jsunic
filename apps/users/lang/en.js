@@ -26,8 +26,5 @@ lang = {
     USERS__REGISTER__FORM__PASSWORD: "Password",
     USERS__REGISTER__FORM__PASSWORD__HELP: "Choose a password for your account.",
     USERS__REGISTER__FORM__PASSWORD__PLACEHOLDER: "Your password",
-    USERS__REGISTER__FORM__MBR: "Storage service",
-    USERS__REGISTER__FORM__MBR__HELP: "Provide a link to your storage service. This service will be used to save your initial encrypted data.",
-    USERS__REGISTER__FORM__MBR__PLACEHOLDER: "Link to storage service",
     USERS__REGISTER__FORM__SUBMIT: "Register"
 };
