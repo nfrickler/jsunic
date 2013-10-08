@@ -4,6 +4,7 @@
 function users__login () {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+    JSunic.User = new UserObj();
 
     // Validate email + password!
     if (password.length < 1 || email.length < 1) {
@@ -17,7 +18,7 @@ function users__login () {
     JSunic.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
 
     // try to log in
-    JSunic.login(email);
+    JSunic.User.login(email);
 
     return false;
 }

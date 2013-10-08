@@ -5,6 +5,7 @@ function users__register () {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var mbr = document.getElementById("mbr").value;
+    JSunic.User = new UserObj();
 
     // Validate email + password + mbr!
     if (password.length < 1 || email.length < 1 || mbr.length < 1) {
@@ -18,7 +19,7 @@ function users__register () {
     JSunic.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
 
     // try to log in
-    JSunic.register(email, mbr);
+    JSunic.User.register(email, mbr);
 
     return false;
 }
