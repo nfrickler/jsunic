@@ -37,6 +37,7 @@ function ConfigObj (path) {
 	    this.path,
 	    function (response) {
 		JSunic.Config.config = response;
+		JSunic.Config.initLanguage();
 	    },
 	    function (response) {
 		document.write(
@@ -45,5 +46,20 @@ function ConfigObj (path) {
 	    'json',
 	    true
 	);
+    }
+
+    /**
+     * Preset language with browser language
+     */
+    this.initLanguage = initLanguage;
+    function initLanguage () {
+	var fulllang = navigator.language || navigator.userLanguage;
+	var splitted = fulllang.split("-");
+	var newlang = splitted[0];
+	this.set("lang", newlang);
+
+	$('#core__language option').removeAttr('selected');
+	$("#core__language option[value='"+newlang+"']")
+	    .attr('selected',true);
     }
 }

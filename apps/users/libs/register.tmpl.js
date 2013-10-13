@@ -2,8 +2,9 @@
  * Register new user
  */
 function users__register () {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    var email = document.getElementById("users__register__email").value;
+    var password =
+	document.getElementById("users__register__password").value;
     JSunic.User = new UserObj();
 
     // Validate email + password!

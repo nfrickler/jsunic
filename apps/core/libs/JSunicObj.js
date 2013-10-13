@@ -41,14 +41,15 @@ function JSunicObj () {
     this.path_apps = "http://localhost/jsunic/apps/";
 
     /**
-     * Selected language
-     */
-    this.lang = "en";
-
-    /**
      * Array of language replacements
      */
     this.lang_translations = new Array();
+
+    /**
+     * Current app and template
+     */
+    this.current_app;
+    this.current_view;
 
     /**
      * App-View cache
@@ -141,6 +142,7 @@ function JSunicObj () {
      */
     this.app = app;
     function app (name) {
+	this.current_app = name;
 
 	// load app
 	this.loadOnce(
@@ -161,6 +163,8 @@ function JSunicObj () {
      */
     this.appview = appview;
     function appview (app, view, content = true) {
+	this.current_app = app;
+	this.current_view = view;
 
 	// load view
 	this.loadOnce(
@@ -185,6 +189,14 @@ function JSunicObj () {
     }
 
     /**
+     * Reload current view
+     */
+    this.reload = reload;
+    function reload () {
+	this.appview(this.current_app, this.current_view);
+    }
+
+    /**
      * Parse current HTML
      */
     this.parseHTML = parseHTML;
@@ -205,10 +217,10 @@ function JSunicObj () {
      * Load language
      */
     this.loadLanguage = loadLanguage;
-    function loadLanguage (app) {
-
+    function loadLanguage (app, language = false) {
+	if (!language) language = JSunic.Config.get("lang");
 	this.loadOnce(
-	    this.path_apps+app+"/lang/"+this.lang+".js",
+	    this.path_apps+app+"/lang/"+language+".js",
 	    function (response) {
 		// load language in lang_translations
 		$.extend(JSunic.lang_translations, lang);
@@ -216,7 +228,15 @@ function JSunicObj () {
 		JSunic.ready = true;
 	    },
 	    function (response) {
-		alert('error: '+msg);
+
+		// Fallback to english
+		if (language != "en") {
+		    JSunic.loadLanguage(app, "en");
+		    return;
+		}
+
+		// Error: Language files not available!
+		alert('error: '+response);
 	    }
 	);
     }

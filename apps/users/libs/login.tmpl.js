@@ -2,8 +2,8 @@
  * Log user in
  */
 function users__login () {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    var email = document.getElementById("users__login__email").value;
+    var password = document.getElementById("users__login__password").value;
     JSunic.User = new UserObj();
 
     // Validate email + password!

@@ -33,12 +33,12 @@
 	    <a href="?"><img id="logo" alt="Logo" src="logo.png" /></a>
 	    <h1 id="logotext">JSUNIC__VERSION</h1>
 	    <div id="header_right">
-		<form action="">
-		    <select>
-			<option>English</option>
-			<option>Deutsch</option>
+		<form action="#">
+		    <select id="core__language"
+			onchange="core__setLanguage();">
+			<option value="en">English</option>
+			<option value="de">Deutsch</option>
 		    </select>
-		    <input type="submit" value="Translate"/>
 		</form>
 		<a href="#">Help</a>
 		<a href="#" onclick="users__logout();">

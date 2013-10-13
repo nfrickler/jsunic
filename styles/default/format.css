@@ -373,18 +373,25 @@ input[type="radio"]
     top:4px;
 }
 #header_right form {
-    padding:1px;
+    padding:0px;
+    margin:0px;
     box-shadow:none;
     border-radius:7px;
     float:left;
 }
-#header_right input {
-    padding:2px;
+#core__langeuage {
     float:left;
     box-shadow:none;
-    margin-top:1px;
     width:auto;
     min-width:none;
+    padding:0px;
+    margin:0px;
+    margin-top:1px;
+}
+#core__language option {
+    margin:0px;
+    padding:0px;
+    font-size:9pt;
 }
 #header_right input:after {
     clear:none;
