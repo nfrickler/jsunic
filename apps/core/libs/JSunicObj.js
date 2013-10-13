@@ -162,7 +162,8 @@ function JSunicObj () {
      * Load app-view
      */
     this.appview = appview;
-    function appview (app, view, content = true) {
+    function appview (app, view, content) {
+	if (typeof content === 'undefined') content = true;
 	this.current_app = app;
 	this.current_view = view;
 
@@ -201,8 +202,21 @@ function JSunicObj () {
      */
     this.parseHTML = parseHTML;
     function parseHTML () {
-	// Set language
-	document.body.innerHTML = document.body.innerHTML.replace(
+
+	// Set language in document
+	document.body.innerHTML =
+	    JSunic.parseHTML_language(document.body.innerHTML);
+
+	// Set language in title
+	document.title = JSunic.parseHTML_language(document.title);
+    }
+
+    /**
+     * Parse input for language replacements
+     */
+    this.parseHTML_language = parseHTML_language;
+    function parseHTML_language (input) {
+	return input.replace(
 	    /\b[A-Z][A-Z0-9_]+\b/g, function(match, contents, offset, s) {
 		if (match == "JSUNIC__VERSION") return JSunic.version;
 		if (match in JSunic.lang_translations) {
@@ -217,7 +231,8 @@ function JSunicObj () {
      * Load language
      */
     this.loadLanguage = loadLanguage;
-    function loadLanguage (app, language = false) {
+    function loadLanguage (app, language) {
+	if (typeof language === 'undefined') language = false;
 	if (!language) language = JSunic.Config.get("lang");
 	this.loadOnce(
 	    this.path_apps+app+"/lang/"+language+".js",
@@ -270,7 +285,8 @@ function JSunicObj () {
      * Wrapper for ajax calls, that should only be called once
      */
     this.loadOnce = loadOnce;
-    function loadOnce (uri, success_cb, fail_cb, type, async = true) {
+    function loadOnce (uri, success_cb, fail_cb, type, async) {
+	if (typeof async === 'undefined') async = true;
 
 	// Check, if already loaded
 	for (var i in this.ajax_req) {
@@ -293,7 +309,8 @@ function JSunicObj () {
      * Wrapper for ajax calls
      */
     this.load = load;
-    function load (uri, success_cb, fail_cb, type, async = true) {
+    function load (uri, success_cb, fail_cb, type, async) {
+	if (typeof async === 'undefined') async = true;
 
 	// Delete old requests
 	var ajax = this.getAjax(uri);
@@ -344,19 +361,4 @@ function JSunicObj () {
 	    }
 	}
     }
-};
-
-/**
- * Remove duplicate elements in array
- */
-function arrayUnique (array) {
-    var a = array.concat();
-    for(var i = 0; i < a.length; i++) {
-	for(var j = i+1; j < a.length; j++) {
-	    if(a[i] === a[j])
-		a.splice(j--, 1);
-	}
-    }
-
-    return a;
 };
