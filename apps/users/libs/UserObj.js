@@ -22,28 +22,19 @@ function UserObj () {
      */
     this.login = login;
     function login (email) {
-	JSunic.loadOnce(
-	    JSunic.mbr_path+"index.php?id="+encodeURIComponent(email),
-	    function (response) {
-		var data = $(response).find("data").text();
 
-		// decrypt data
-		data = JSunic.decrypt(data);
-		if (!data) {
-		    // login failed!
-		    JSunic.error("Login failed!");
-		    JSunic.app('users');
-		    JSunic.ready = true;
-		    return;
-		}
-		JSunic.boot_path = data;
-		JSunic.appview('core', 'desktop');
+	// Load Mbr
+	var Mbr = new MbrObj(JSunic.mbr_path, email);
+	Mbr.load(
+	    function () {
 		JSunic.info("Login successful.");
+
+		// Get Boot object
+		JSunic.Boot = new BootObj(Mbr.data);
 	    },
-	    function (response) {
+	    function () {
 		JSunic.fatalError("Failed to load MBR!");
-	    },
-	    'xml'
+	    }		
 	);
     }
 

@@ -31,6 +31,11 @@ function JSunicObj () {
     this.boot_path;
 
     /**
+     * Boot object
+     */
+    this.Boot = null;
+
+    /**
      * Path to mbr service
      */
     this.mbr_path = "http://localhost/jsunic/services/mbr/";
@@ -180,6 +185,15 @@ function JSunicObj () {
 		    $("#root").css("display", "none");
 		    $("#rootpopup").css("display", "block");
 		}
+
+		// Try to run JavaScript code of view
+		var isfkt = false;
+		var initname = app+'__'+view+'__init'
+		eval('if (typeof '+initname+' === "function") isfkt = true;');
+		// TODO: Replace setTimeout with sth. better
+		// Function must be called _after_ page has been loaded!
+		if (isfkt) setTimeout(initname+'();', 100);
+
 		JSunic.loadLanguage(app);
 	    },
 	    function (response) {
