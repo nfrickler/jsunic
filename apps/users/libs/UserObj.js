@@ -24,17 +24,18 @@ function UserObj () {
     function login (email) {
 
 	// Load Mbr
-	var Mbr = new MbrObj(JSunic.mbr_path, email);
-	Mbr.load(
+	JSunic.Mbr = new MbrObj(JSunic.mbr_path, email);
+	JSunic.Mbr.load(
 	    function () {
 		JSunic.info("Login successful.");
 
 		// Get Boot object
-		JSunic.Boot = new BootObj(Mbr.data);
+		JSunic.Boot = new BootObj(
+		    JSunic.Mbr.boot_path, JSunic.Mbr.boot_id);
 	    },
 	    function () {
 		JSunic.fatalError("Failed to load MBR!");
-	    }		
+	    }
 	);
     }
 
@@ -44,39 +45,19 @@ function UserObj () {
     this.register = register;
     function register (email) {
 
-	// load MBR (master boot record)
-	JSunic.loadOnce(
-	    JSunic.mbr_path+"index.php?id="+encodeURIComponent(email)+
-		"&data="+encodeURIComponent(1),
-	    function (response) {
-		var data = $(response).find("data").text();
-		var error = $(response).find("error").text();
-
-		// error?
-		if (!data && error) {
-		    JSunic.error("Registration failed ("+error+")");
-		    JSunic.ready = true;
-		    return;
-		}
-
-		// decrypt data if required
-		data = JSunic.decrypt(data);
-
-		if (!data) {
-		    // login failed!
-		    JSunic.error("Registration failed!");
-		    JSunic.app('users', 'register', false);
-		    JSunic.ready = true;
-		    return;
-		}
-		JSunic.path = data;
-		JSunic.appview('core', 'desktop');
+	// Load Mbr
+	JSunic.Mbr = new MbrObj(JSunic.mbr_path, email);
+	JSunic.Mbr.save(
+	    function () {
 		JSunic.info("Registration successful.");
+
+		// Get Boot object
+		JSunic.Boot = new BootObj(
+		    JSunic.Mbr.boot_path, JSunic.Mbr.boot_id);
 	    },
-	    function (response) {
-		JSunic.error("An error occurred during registration!");
-	    },
-	    'xml'
+	    function () {
+		JSunic.error("Registration failed!");
+	    }
 	);
     }
 

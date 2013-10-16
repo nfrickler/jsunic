@@ -3,6 +3,7 @@
 //DEBUG
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
+$DEBUG = true;
 
 // Load configuration
 $config = array(
@@ -53,7 +54,8 @@ if ($id) {
 	    ON DUPLICATE KEY UPDATE data = '$data'
 	;";
 	if (!$Db->doUpdate($sql)) {
-	    error("Update failed!");
+	    error("Update failed!".
+		($DEBUG ? "(".$Db->getError().")" : ""));
 	}
 	send("Updated");
     } elseif ($data === 0) {
@@ -64,7 +66,8 @@ if ($id) {
 	;";
 	$result = $Db->doSelect($sql);
 	if (!$result)
-	    error("Fetch failed!");
+	    error("Fetch failed!".
+		($DEBUG ? "(".$Db->getError().")" : ""));
 	send($result[0]['data']);
     } else {
 	// Delete
@@ -72,7 +75,8 @@ if ($id) {
 	    WHERE id = '".$id."'
 	;";
 	if (!$Db->doDelete($sql))
-	    error("Update failed!");
+	    error("Delete failed!".
+		($DEBUG ? "(".$Db->getError().")" : ""));
 	send("Deleted");
     }
 } else {
@@ -82,7 +86,8 @@ if ($id) {
 	    SET data = '".$data."'
 	;";
 	if (!$Db->doUpdate($sql))
-	    error("Update failed!");
+	    error("Insert failed!".
+		($DEBUG ? "(".$Db->getError().")" : ""));
 	send($Db->lastId());
     } else {
 	error("Missing data!");
@@ -94,7 +99,7 @@ if ($id) {
  */
 function error ($msg) {
     echo "<error>".$msg."</error>";
-    die();
+    exit;
 }
 
 /**
@@ -102,5 +107,6 @@ function error ($msg) {
  */
 function send ($data) {
     echo "<root><data>".$data."</data></root>";
+    exit;
 }
 ?>

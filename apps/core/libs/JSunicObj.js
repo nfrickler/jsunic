@@ -41,6 +41,11 @@ function JSunicObj () {
     this.mbr_path = "http://localhost/jsunic/services/mbr/";
 
     /**
+     * MBR object
+     */
+    this.Mbr = null;
+
+    /**
      * Path to apps
      */
     this.path_apps = "http://localhost/jsunic/apps/";

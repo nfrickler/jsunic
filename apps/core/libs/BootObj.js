@@ -45,16 +45,15 @@ function BootObj (path, id) {
      */
     this.load = load;
     function load () {
+	var Boot = this;
 	BootObj.prototype.load.call(
 	    this,
 	    function (response) {
-		$.extend(this, this, response);
-		alert('Boot loaded');
 		JSunic.appview('core', 'desktop');
 	    },
 	    function (response) {
 		// No Boot packet found. Init new one...
-		JSunic.Boot.init();
+		Boot.init();
 	    }
 	);
     }
@@ -70,11 +69,16 @@ function BootObj (path, id) {
     /**
      * Set path to MBR
      */
-    this.setMBR = setMBR;
-    function setMBR (path) {
-	this.path = path;
-	this.resave();
+    this.updateMBR = updateMBR;
+    function updateMBR (success_cb, fail_cb) {
+	JSunic.Mbr.boot_path = this.path;
+	JSunic.Mbr.boot_id = this.id;
+	JSunic.Mbr.save(
+	    success_cb,
+	    fail_cb
+	);
 
+	// TODO: Delete old mbr
     }
 
     this.load();

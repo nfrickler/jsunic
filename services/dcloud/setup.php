@@ -28,10 +28,10 @@ $Db = new Mysql(
 $type = "int(11)";
 switch ($config['keytype']) {
 case "int":
-    $type = "int(11)";
+    $type = "int(11) NOT NULL AUTO_INCREMENT";
     break;
 case "varchar":
-    $type = "varchar(200)";
+    $type = "varchar(200) NOT NULL";
     break;
 default:
     echo "Error: Invalid keytype!";
@@ -40,7 +40,7 @@ default:
 
 // Create table in database
 $sql = "CREATE TABLE IF NOT EXISTS `".$config['table']."` (
-  `id` $type  NOT NULL,
+  `id` $type,
   `data` text NOT NULL,
   `timestamp` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
