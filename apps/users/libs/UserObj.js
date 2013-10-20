@@ -24,14 +24,15 @@ function UserObj () {
     function login (email) {
 
 	// Load Mbr
-	JSunic.Mbr = new MbrObj(JSunic.mbr_path, email);
+	JSunic.Mbr = new MbrObj();
+	JSunic.Mbr.setPacketId(JSunic.mbr_path, email);
 	JSunic.Mbr.load(
 	    function () {
 		JSunic.info("Login successful.");
 
 		// Get Boot object
-		JSunic.Boot = new BootObj(
-		    JSunic.Mbr.boot_path, JSunic.Mbr.boot_id);
+		JSunic.Boot = new BootObj(JSunic.Mbr.boot_packetId,
+		    JSunic.Mbr.boot_path);
 	    },
 	    function () {
 		JSunic.fatalError("Failed to load MBR!");
@@ -46,14 +47,15 @@ function UserObj () {
     function register (email) {
 
 	// Load Mbr
-	JSunic.Mbr = new MbrObj(JSunic.mbr_path, email);
+	JSunic.Mbr = new MbrObj();
+	JSunic.Mbr.setPacketId(JSunic.mbr_path, email);
 	JSunic.Mbr.save(
 	    function () {
 		JSunic.info("Registration successful.");
 
 		// Get Boot object
-		JSunic.Boot = new BootObj(
-		    JSunic.Mbr.boot_path, JSunic.Mbr.boot_id);
+		JSunic.Boot = new BootObj(JSunic.Mbr.boot_packetId,
+		    JSunic.Mbr.boot_path);
 	    },
 	    function () {
 		JSunic.error("Registration failed!");
@@ -77,6 +79,10 @@ function UserObj () {
      */
     this.encrypt = encrypt;
     function encrypt (data) {
+
+	// TODO: Enable encryption again (disabled for debugging)
+	return data;
+
 	if (this.aes == null) this.aes =
 	    new pidCrypt.AES.CBC();
 	data = this.enc_prefix+this.aes.encryptText(
@@ -96,6 +102,7 @@ function UserObj () {
 	// remove prefix
 	if (data.substr(0, this.enc_prefix.length) != this.enc_prefix) {
 	    // data not encrypted
+	    // TODO: We should enforce encryption here!
 	    return data
 	}
 	data = data.substr(this.enc_prefix.length);
@@ -142,5 +149,5 @@ function UserObj () {
     function setSymkey_pass (email, password) {
 	var salt = email;
 	this.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
-    } 
+    }
 };

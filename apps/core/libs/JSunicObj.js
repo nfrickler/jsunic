@@ -288,6 +288,11 @@ function JSunicObj () {
      */
     this.fatalError = fatalError;
     function fatalError (msg) {
+
+	// TODO: remove alert (debugging only)
+	alert('FatalError: '+msg);
+	return;
+
 	location.href = '?app=core&event=fatal&error='
 	    +encodeURIComponent(msg);
     }
@@ -379,5 +384,14 @@ function JSunicObj () {
 		return this.ajax_req[i];
 	    }
 	}
+    }
+
+    /**
+     * Convert packetId to path
+     */
+    this.packetId2path = packetId2path;
+    function packetId2path (packetId) {
+	if (this.Boot) return this.Boot.packetId2path(packetId);
+	return packetId;
     }
 };

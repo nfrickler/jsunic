@@ -4,7 +4,6 @@
 function core__bootinit () {
     var boot_path = $("#core__bootinit__path").val();
     JSunic.Boot.addStorage(boot_path);
-    JSunic.Boot.path = boot_path;
 
     JSunic.Boot.save(
 	function () {

@@ -2,7 +2,11 @@
  * Mbr packet
  */
 MbrObj.prototype = new Packet();
-function MbrObj (path, id) {
-    this.path = path;
-    this.id = id;
+function MbrObj (packetId) {
+    this.packetId = packetId;
+
+    this.setPacketId = setPacketId;
+    function setPacketId (path, email) {
+	this.packetId = path+"?id="+encodeURIComponent(email);
+    }
 }

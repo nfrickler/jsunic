@@ -1,22 +1,12 @@
 /**
  * Packet object. This is prototype of all objects that can be saved as packet
  */
-function Packet (path, id) {
+function Packet (packetId) {
 
     /**
-     * Storage path
+     * PacketId
      */
-    this.path = path;
-
-    /**
-     * ID
-     */
-    this.id = id;
-
-    /**
-     * Decrypted content of packet
-     */
-    this.data;
+    this.packetId = packetId;
 
     /**
      * Load this object
@@ -24,15 +14,16 @@ function Packet (path, id) {
     this.load = load;
     function load (success_cb, fail_cb) {
 
-	// Fail, if undefined path or id
-	if (!this.path || !this.id) {
+	// Get path
+	var path = JSunic.packetId2path(this.packetId);
+	if (!path) {
 	    fail_cb();
 	    return;
 	}
 
 	var Current = this;
 	JSunic.loadOnce(
-	    this.path+"index.php?id="+encodeURIComponent(this.id),
+	    path,
 	    function (response) {
 		var rawdata = $(response).find("data").text();
 
@@ -63,15 +54,25 @@ function Packet (path, id) {
     this.save = save;
     function save (success_cb, fail_cb, async) {
 
+	// Get path
+	if (!this.packetId) this.packetId = 0;
+	var path = JSunic.packetId2path(this.packetId);
+	if (!path) {
+	    fail_cb();
+	    return;
+	}
+
 	// Encrypt data
-	var jsonstring = JSON.stringify(this);
+	var jsonstring = JSON.stringify(this, function (name, value) {
+	    if (name == "packetId")
+		return undefined;
+	    return value;   
+	});
 	jsonstring = JSunic.encrypt(jsonstring);
 
 	var Current = this;
 	JSunic.loadOnce(
-	    this.path+"index.php?"+
-		((this.id) ? "id="+encodeURIComponent(this.id)+"&" : "")+
-		"data="+encodeURIComponent(jsonstring),
+	    path+"&data="+encodeURIComponent(jsonstring),
 	    function (response) {
 		var rawdata = $(response).find("data").text();
 		var error = $(response).find("error").text();
@@ -81,7 +82,7 @@ function Packet (path, id) {
 		    return;
 		}
 		if (!isNaN(rawdata)) {
-		    Current.id = rawdata;
+		    Current.packetId += ">"+rawdata;
 		    success_cb(rawdata);
 		    return;
 		}
@@ -101,8 +102,16 @@ function Packet (path, id) {
      */
     this.remove = remove;
     function remove () {
+
+	// Get path
+	var path = JSunic.packetId2path(this.packetId);
+	if (!path) {
+	    fail_cb();
+	    return;
+	}
+
 	JSunic.loadOnce(
-	    this.path+"index.php?id="+encodeURIComponent(this.id)+"&data=0",
+	    path+"&data=0",
 	    function (response) {
 		var rawdata = $(response).find("data").text();
 

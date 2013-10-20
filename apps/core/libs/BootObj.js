@@ -2,9 +2,8 @@
  * Boot packet
  */
 BootObj.prototype = new Packet();
-function BootObj (path, id) {
-    this.path = path;
-    this.id = id;
+function BootObj (packetId, path) {
+    this.packetId = packetId;
 
     /**
      * Symkey of user
@@ -30,6 +29,7 @@ function BootObj (path, id) {
      * Storage locations
      */
     this.storages = new Array();
+    if (path) this.storages.push(path);
 
     /**
      * Initialize Boot
@@ -71,14 +71,39 @@ function BootObj (path, id) {
      */
     this.updateMBR = updateMBR;
     function updateMBR (success_cb, fail_cb) {
-	JSunic.Mbr.boot_path = this.path;
-	JSunic.Mbr.boot_id = this.id;
+
+	// Save location of Boot in Mbr
+	var packetPath = this.packetId2path(this.packetId);
+	var splitted = packetPath.split('?');
+	JSunic.Mbr.boot_path = splitted[0];
+	JSunic.Mbr.boot_packetId = this.packetId;
 	JSunic.Mbr.save(
 	    success_cb,
 	    fail_cb
 	);
 
 	// TODO: Delete old mbr
+    }
+
+    /**
+     * Convert packetId to path
+     */
+    this.packetId2path = packetId2path;
+    function packetId2path (packetId) {
+
+	// New packetId
+	if (!packetId) {
+	    return this.storages[0]+'?';
+	}
+
+	// Split packetId (storageId>ObjectId)
+	var splitted = packetId.split('>');
+	if (splitted.length < 2) return packetId;
+	if (isNaN(splitted[0]) || isNaN(splitted[1])) return false;
+
+	// Return path
+	if (!this.storages[splitted[0]]) return false;
+	return this.storages[splitted[0]]+'?id='+splitted[1];
     }
 
     this.load();
