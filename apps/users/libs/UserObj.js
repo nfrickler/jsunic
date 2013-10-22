@@ -29,10 +29,10 @@ function UserObj () {
 	JSunic.Mbr.load(
 	    function () {
 		JSunic.info("Login successful.");
-
 		// Get Boot object
 		JSunic.Boot = new BootObj(JSunic.Mbr.boot_packetId,
 		    JSunic.Mbr.boot_path);
+		JSunic.Boot.load();
 	    },
 	    function () {
 		JSunic.fatalError("Failed to load MBR!");
@@ -56,6 +56,7 @@ function UserObj () {
 		// Get Boot object
 		JSunic.Boot = new BootObj(JSunic.Mbr.boot_packetId,
 		    JSunic.Mbr.boot_path);
+		JSunic.Boot.load();
 	    },
 	    function () {
 		JSunic.error("Registration failed!");

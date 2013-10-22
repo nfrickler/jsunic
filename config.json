@@ -1,5 +1,6 @@
 {
     "style": "default",
     "mbr": "services/mbr/",
-    "storagedefault": "services/dcloud/"
+    "storagedefault": "services/dcloud/",
+    "appstore": "appstore.json"
 }

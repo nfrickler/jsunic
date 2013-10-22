@@ -105,6 +105,4 @@ function BootObj (packetId, path) {
 	if (!this.storages[splitted[0]]) return false;
 	return this.storages[splitted[0]]+'?id='+splitted[1];
     }
-
-    this.load();
 }

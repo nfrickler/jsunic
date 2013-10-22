@@ -1,0 +1,11 @@
+{
+    "apps": {
+	"contacts": {
+	    "name": "Contacts",
+	    "apppath": "apps/contacts/",
+	    "description": "Administrate contacts"
+	}
+    }
+}
+
+
