@@ -1,7 +1,9 @@
 lang = {
 
     // meta
+    CORE__INDEX__HOME: "Home",
     CORE__INDEX__APPS: "Apps",
+    CORE__INDEX__LOGOUT: "Logout",
 
     // bootinit
     CORE__BOOTINIT__H1: "Storage path",
@@ -25,6 +27,10 @@ lang = {
     CORE__APPSTORE__FORM__PATH__PLACEHOLDER: "AppPath to App...",
     CORE__APPSTORE__FORM__PATH__HELP: "Enter the AppPath of the App you want to install.",
     CORE__APPSTORE__FORM__SUBMIT: "Load information of App",
+
+    // appinfo
+    CORE__APPINFO__INSTALL: "Install app",
+    CORE__APPINFO__QUIT: "Quit",
 
     // fatal
     CORE__FATAL__H1: "Fatal Error!",

@@ -44,7 +44,7 @@ function ConfigObj (path) {
 		    "Installation is incomplete (config missing)!");
 	    },
 	    'json',
-	    true
+	    false
 	);
     }
 

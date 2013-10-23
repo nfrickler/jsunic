@@ -177,16 +177,20 @@ function JSunicObj () {
 	this.current_app = app;
 	this.current_view = view;
 
-	// load view
-	this.loadOnce(
-	    this.path_apps+app+"/views/"+view+".htm",
+	// Load language
+	JSunic.loadLanguage(app);
+
+	// Load view
+	this.loadview(
+	    app,
+	    view,
 	    function (response) {
 		if (content) {
-		    $("#content").html(response);
+		    $('#content').html(JSunic.parse(response));
 		    $("#root").css("display", "block");
 		    $("#rootpopup").css("display", "none");
 		} else {
-		    $("#rootpopup").html(response);
+		    $('#rootpopup').html(JSunic.parse(response));
 		    $("#root").css("display", "none");
 		    $("#rootpopup").css("display", "block");
 		}
@@ -198,12 +202,22 @@ function JSunicObj () {
 		// TODO: Replace setTimeout with sth. better
 		// Function must be called _after_ page has been loaded!
 		if (isfkt) setTimeout(initname+'();', 100);
-
-		JSunic.loadLanguage(app);
 	    },
 	    function (response) {
 		JSunic.error("Failed to load view!");
-	    },
+	    }
+	);
+    }
+
+    /**
+     * Load appview
+     */
+    this.loadview = loadview;
+    function loadview (app, view, success_cb, fail_cb) {
+	this.loadOnce(
+	    this.path_apps+app+"/views/"+view+".htm",
+	    success_cb,
+	    fail_cb,
 	    'html'
 	);
     }
@@ -217,17 +231,12 @@ function JSunicObj () {
     }
 
     /**
-     * Parse current HTML
+     * Parse input and insert language
      */
-    this.parseHTML = parseHTML;
-    function parseHTML () {
-
-	// Set language in document
-	document.body.innerHTML =
-	    JSunic.parseHTML_language(document.body.innerHTML);
-
-	// Set language in title
-	document.title = JSunic.parseHTML_language(document.title);
+    this.parse = parse;
+    function parse (input) {
+	if (!input) return '';
+	return JSunic.parseHTML_language(input);
     }
 
     /**
@@ -258,8 +267,6 @@ function JSunicObj () {
 	    function (response) {
 		// load language in lang_translations
 		$.extend(JSunic.lang_translations, lang);
-		JSunic.parseHTML();
-		JSunic.ready = true;
 	    },
 	    function (response) {
 
@@ -270,8 +277,10 @@ function JSunicObj () {
 		}
 
 		// Error: Language files not available!
-		alert('error: '+response);
-	    }
+		JSunic.error("Missing english language file for app '"+app+"'");
+	    },
+	    undefined,
+	    false
 	);
     }
 

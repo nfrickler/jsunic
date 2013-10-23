@@ -15,6 +15,13 @@ function core__init () {
     // Load config.json
     JSunic.Config.load();
 
+    // Load language
+    JSunic.loadLanguage('core');
+
+    // Parse HTML
+    $('body').html(JSunic.parse($('body').html()));
+    $('title').html(JSunic.parse($('title').html()));
+
     if (in_app && in_event) {
 	// Load requested event
 	JSunic.appview(in_app, in_event);
