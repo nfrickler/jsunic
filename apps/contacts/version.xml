@@ -1,0 +1,7 @@
+<app>
+    <name>contacts</name>
+    <version>0.1</version>
+    <description>This gives the ability to administrate contacts.</description>
+    <author>Nicolas Frinker &lt;authornicolas@tsunic.de&gt;</author>
+    <link>https://tsunic.de</link>
+</app>

@@ -1,5 +1,5 @@
 /**
- * JavaScript of view "fatal"
+ * JavaScript of view "appstore"
  */
 function core__appstore__init () {
 
@@ -64,7 +64,6 @@ function core__appstore__appinfo (App) {
 		$('#core__appinfo').remove();
 	    });
 	    $('#core__appinfo__install').click(function () {
-		alert('clicked on install');
 		core__appinfo__install(App);
 	    });
 	},

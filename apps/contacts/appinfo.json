@@ -1,4 +1,5 @@
 {
-    "name": "Contacts",
+    "name": "contacts",
+    "pubname": "Contacts",
     "description": "Contact administration"
 }

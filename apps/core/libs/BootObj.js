@@ -50,6 +50,7 @@ function BootObj (packetId, path) {
 	    this,
 	    function (response) {
 		JSunic.appview('core', 'desktop');
+		Boot.updateNavigation();
 	    },
 	    function (response) {
 		// No Boot packet found. Init new one...
@@ -59,11 +60,41 @@ function BootObj (packetId, path) {
     }
 
     /**
+     * Update navigation
+     */
+    this.updateNavigation = updateNavigation;
+    function updateNavigation () {
+	var Boot = this;
+	var naviglist = $('#core__index__navig__apps');
+	for (var i = 0; i < this.apps.length; i++) {
+	    var id = "core__index__navig__apps__"+this.apps[i].name;
+	    var existing_element = $("#"+id);
+	    if (!existing_element.length) {
+		naviglist.append("<li id='"+id+"'><a href='#'>"+this.apps[i].pubname+"</a></li>");
+		var name = this.apps[i].name;
+		$("#"+id+" a").click(function () {
+		    JSunic.app(name);
+		});
+	    }
+	}
+    }
+
+    /**
      * Add storage location
      */
     this.addStorage = addStorage;
     function addStorage (path) {
 	this.storages.push(path);
+    }
+
+    /**
+     * Add App
+     */
+    this.addApp = addApp;
+    function addApp (App) {
+	this.apps.push(App);
+	this.save();
+	this.updateNavigation();
     }
 
     /**

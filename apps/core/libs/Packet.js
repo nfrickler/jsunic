@@ -53,6 +53,12 @@ function Packet (packetId) {
      */
     this.save = save;
     function save (success_cb, fail_cb, async) {
+	if (typeof success_cb == 'undefined') {
+	    success_cb = function () { return; }
+	}
+	if (typeof fail_cb == 'undefined') {
+	    fail_cb = function () { return; }
+	}
 
 	// Get path
 	if (!this.packetId) this.packetId = 0;
