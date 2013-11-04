@@ -1,15 +1,21 @@
 <div id="core__appstore">
     <h1>CORE__APPSTORE__H1</h1>
     <p>CORE__APPSTORE__INFOTEXT</p>
-    <h2>CORE__APPSTORE__H1__LIST</h2>
-    <p>CORE__APPSTORE__LIST__INFOTEXT</p>
-    <div id="core__appstore__list__div">
-	<p>CORE__APPSTORE__LIST__EMPTY</p>
+    <h2>CORE__APPSTORE__H1__FEATURED</h2>
+    <p>CORE__APPSTORE__FEATURED__INFOTEXT</p>
+    <div id="core__appstore__featured__list" class="core__appstore__list">
+	<p>CORE__APPSTORE__FEATURED__EMPTY</p>
+    </div>
+    <div style="clear:both;"></div>
+    <h2>CORE__APPSTORE__H1__INSTALLED</h2>
+    <p>CORE__APPSTORE__INSTALLED__INFOTEXT</p>
+    <div id="core__appstore__installed__list" class="core__appstore__list">
+	<p>CORE__APPSTORE__INSTALLED__EMPTY</p>
     </div>
     <div style="clear:both;"></div>
     <h2>CORE__APPSTORE__H1__PATH</h2>
     <p>CORE__APPSTORE__PATH__INFOTEXT</p>
-    <form action="#" onsubmit="core__appstore__path();">
+    <form action="#" onsubmit="core__appstore__form__path__submit();">
 	<fieldset>
 	    <legend>CORE__APPSTORE__FORM__LEGEND</legend>
 	    <label for="core__appstore__path">

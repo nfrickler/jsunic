@@ -578,10 +578,10 @@ input[type="radio"]
     padding-left:20px;
 }
 
-.core__applist__list {
+.core__appstore__list ul {
     list-style-type:none;
 }
-.core__applist__list li {
+.core__appstore__list ul li {
     display:block;
     float:left;
     padding:4px;
@@ -590,7 +590,7 @@ input[type="radio"]
     border:1px solid #EEE;
     cursor:pointer;
 }
-.core__applist__list li:hover {
+.core__appstore__list ul li:hover {
     background:#DDD;
 }
 .core__applist__list__name {

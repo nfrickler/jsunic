@@ -28,4 +28,18 @@ function AppObj (apppath) {
 	    false
 	);
     }
+
+    /**
+     * Is this App installed?
+     */
+    this.isInstalled = isInstalled;
+    function isInstalled () {
+	for (var installed in JSunic.Boot.apps) {
+	    if (this.name == JSunic.Boot.apps[installed].name) {
+		return true;
+	    }
+	}
+
+	return false;
+    }
 }

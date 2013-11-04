@@ -64,18 +64,19 @@ function BootObj (packetId, path) {
      */
     this.updateNavigation = updateNavigation;
     function updateNavigation () {
-	var Boot = this;
+
+	// Clear navigation
+	$('#core__index__navig__apps li').remove();
+
+	// Recreate navigation
 	var naviglist = $('#core__index__navig__apps');
 	for (var i = 0; i < this.apps.length; i++) {
 	    var id = "core__index__navig__apps__"+this.apps[i].name;
-	    var existing_element = $("#"+id);
-	    if (!existing_element.length) {
-		naviglist.append("<li id='"+id+"'><a href='#'>"+this.apps[i].pubname+"</a></li>");
-		var name = this.apps[i].name;
-		$("#"+id+" a").click(function () {
-		    JSunic.app(name);
-		});
-	    }
+	    naviglist.append("<li id='"+id+"'><a href='#'>"+this.apps[i].pubname+"</a></li>");
+	    var name = this.apps[i].name;
+	    $("#"+id+" a").click(function () {
+		JSunic.app(name);
+	    });
 	}
     }
 
@@ -93,6 +94,16 @@ function BootObj (packetId, path) {
     this.addApp = addApp;
     function addApp (App) {
 	this.apps.push(App);
+	this.save();
+	this.updateNavigation();
+    }
+
+    /**
+     * Remove App
+     */
+    this.removeApp = removeApp;
+    function removeApp (App) {
+	this.apps.splice(this.apps.indexOf(App), 1);
 	this.save();
 	this.updateNavigation();
     }
