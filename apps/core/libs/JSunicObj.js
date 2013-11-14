@@ -46,6 +46,11 @@ function JSunicObj () {
     this.Mbr = null;
 
     /**
+     * Index object list
+     */
+    this.index = {};
+
+    /**
      * Path to apps
      */
     this.path_apps = "http://localhost/jsunic/apps/";
@@ -148,24 +153,42 @@ function JSunicObj () {
     }
 
     /**
+     * Add index object
+     */
+    this.addIndex = addIndex;
+    function addIndex (app, indexobj) {
+	this.index[app] = indexobj;
+    }
+
+    /**
+     * Get Index object of App
+     */
+    this.getIndex = getIndex;
+    function getIndex (app) {
+	return this.index[app];
+    }
+
+    /**
      * Start app
      */
     this.app = app;
     function app (name) {
 	this.current_app = name;
 
-	// load app
+	// Load <<app>>.min.js
 	this.loadOnce(
 	    this.path_apps+name+"/"+name+".min.js",
 	    function (response) {
-		// Run init
-		eval(name+"__init();");
 	    },
 	    function (response) {
 		JSunic.error("Failed to load app!");
 	    },
-	    'script'
+	    'script',
+	    false
 	);
+
+	// Run init function
+	eval(name+'__init();');
     }
 
     /**

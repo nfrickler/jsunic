@@ -9,6 +9,34 @@ function Packet (packetId) {
     this.packetId = packetId;
 
     /**
+     * Object information
+     */
+    this.data = [
+	/*
+	{
+	    "type": "text",
+	    "id": "uniqueid",
+	    "name": "Displayname",
+	    "description": "Some description of this data",
+	    "value": "The data",
+	},
+	*/
+    ];
+
+    /**
+     * Object links to other objects
+     */
+    this.olinks = [
+	/*
+	{
+	    "name": "Example link",
+	    "packetId": 0,
+	    "description": "This is an example",
+	},
+	*/
+    ];
+
+    /**
      * Load this object
      */
     this.load = load;
@@ -72,7 +100,7 @@ function Packet (packetId) {
 	var jsonstring = JSON.stringify(this, function (name, value) {
 	    if (name == "packetId")
 		return undefined;
-	    return value;   
+	    return value;
 	});
 	jsonstring = JSunic.encrypt(jsonstring);
 
@@ -133,5 +161,34 @@ function Packet (packetId) {
 	    },
 	    'xml'
 	);
+    }
+
+    /**
+     * Get index of this object
+     */
+    this.getIndex = getIndex;
+    function getIndex () {
+	return {
+	    "packetId": this.packetId,
+	};
+    }
+
+    /**
+     * Print table of contents
+     */
+    this.printData = printData;
+    function printData (div) {
+	div.html('');
+	div.append('<table>');
+	for (var i = 0; i < this.data.length; i++) {
+	    var dataobj = this.data[i];
+	    div.append(
+		'<tr id="'+dataobj.id+'">'+
+		'    <th>'+dataobj.name+'</th>'+
+		'    <td>'+dataobj.value+'</td>'+
+		'</tr>'
+	    );
+	}
+	div.append('</table>');
     }
 }
