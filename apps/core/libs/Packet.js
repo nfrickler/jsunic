@@ -41,6 +41,12 @@ function Packet (packetId) {
      */
     this.load = load;
     function load (success_cb, fail_cb) {
+	if (typeof success_cb == 'undefined') {
+	    success_cb = function () { return; }
+	}
+	if (typeof fail_cb == 'undefined') {
+	    fail_cb = function () { return; }
+	}
 
 	// Get path
 	var path = JSunic.packetId2path(this.packetId);
@@ -72,15 +78,55 @@ function Packet (packetId) {
 	    function (response) {
 		fail_cb();
 	    },
-	    'xml'
+	    'xml',
+	    false
 	);
+    }
+
+    /**
+     * Save attribute
+     */
+    this.saveAttribute = function (name, value) {
+	var found = false;
+	for (var i = 0; i < this.data.length; i++) {
+	    if (this.data[i].id == name) {
+		this.data[i].value = value;
+		found = true;
+		break;
+	    }
+	}
+	if (!found) {
+	    this.data.push({
+		'name': name,
+		'value': value,
+	    });
+	}
+	this.save();
+    }
+
+    /**
+     * Get attributes
+     */
+    this.getAttributes = function () {
+	return this.data;
+    }
+
+    /**
+     * Get certain attribute
+     */
+    this.getAttribute = function (id) {
+	for (var i = 0; i < this.data.length; i++) {
+	    if (this.data[i].id == id) {
+		return this.data[i];
+	    }
+	}
+	return undefined;
     }
 
     /**
      * Save this object
      */
-    this.save = save;
-    function save (success_cb, fail_cb, async) {
+    this.save = function (success_cb, fail_cb, async) {
 	if (typeof success_cb == 'undefined') {
 	    success_cb = function () { return; }
 	}
@@ -97,8 +143,11 @@ function Packet (packetId) {
 	}
 
 	// Encrypt data
+	this.classname = this.constructor;
 	var jsonstring = JSON.stringify(this, function (name, value) {
 	    if (name == "packetId")
+		return undefined;
+	    if (name.substr(0,2) == '__')
 		return undefined;
 	    return value;
 	});
@@ -117,6 +166,7 @@ function Packet (packetId) {
 		}
 		if (!isNaN(rawdata)) {
 		    Current.packetId += ">"+rawdata;
+
 		    success_cb(rawdata);
 		    return;
 		}
@@ -127,7 +177,7 @@ function Packet (packetId) {
 		fail_cb(response);
 	    },
 	    'xml',
-	    async
+	    false
 	);
     }
 
@@ -171,24 +221,5 @@ function Packet (packetId) {
 	return {
 	    "packetId": this.packetId,
 	};
-    }
-
-    /**
-     * Print table of contents
-     */
-    this.printData = printData;
-    function printData (div) {
-	div.html('');
-	div.append('<table>');
-	for (var i = 0; i < this.data.length; i++) {
-	    var dataobj = this.data[i];
-	    div.append(
-		'<tr id="'+dataobj.id+'">'+
-		'    <th>'+dataobj.name+'</th>'+
-		'    <td>'+dataobj.value+'</td>'+
-		'</tr>'
-	    );
-	}
-	div.append('</table>');
     }
 }

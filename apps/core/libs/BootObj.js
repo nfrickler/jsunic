@@ -6,6 +6,12 @@ function BootObj (packetId, path) {
     this.packetId = packetId;
 
     /**
+     * Index object list
+     */
+    this.index = {};
+    this.__index = {};
+
+    /**
      * Symkey of user
      */
     this.symkey;
@@ -146,5 +152,22 @@ function BootObj (packetId, path) {
 	// Return path
 	if (!this.storages[splitted[0]]) return false;
 	return this.storages[splitted[0]]+'?id='+splitted[1];
+    }
+
+    /**
+     * Get Index object of App
+     */
+    this.appIndex = function (app) {
+	if (!this.index[app]) {
+	    this.__index[app] = new IndexObj();
+	    this.__index[app].save();
+	    this.index[app] = this.__index[app].packetId;
+	    this.save();
+	}
+	if (!this.__index[app]) {
+	    this.__index[app] = new IndexObj(this.index[app]);
+	    this.__index[app].load();
+	}
+	return this.__index[app];
     }
 }

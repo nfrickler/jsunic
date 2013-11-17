@@ -46,11 +46,6 @@ function JSunicObj () {
     this.Mbr = null;
 
     /**
-     * Index object list
-     */
-    this.index = {};
-
-    /**
      * Path to apps
      */
     this.path_apps = "http://localhost/jsunic/apps/";
@@ -150,22 +145,6 @@ function JSunicObj () {
 	    },
 	    'xml'
 	);
-    }
-
-    /**
-     * Add index object
-     */
-    this.addIndex = addIndex;
-    function addIndex (app, indexobj) {
-	this.index[app] = indexobj;
-    }
-
-    /**
-     * Get Index object of App
-     */
-    this.getIndex = getIndex;
-    function getIndex (app) {
-	return this.index[app];
     }
 
     /**

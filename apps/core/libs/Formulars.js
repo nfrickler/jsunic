@@ -4,26 +4,53 @@
 function FormsObj () {
 
     /**
+     * Print table of contents
+     */
+    this.printForm = function (tableid, obj) {
+	var table = $(tableid);
+	table.html('');
+	var attributes = obj.getAttributes();
+	for (var i = 0; i < attributes.length; i++) {
+	    var dataobj = attributes[i];
+	    table.append(
+		'<tr id="'+dataobj.id+'">'+
+		'    <th>'+JSunic.parse(dataobj.name)+'</th>'+
+		'    <td>'+JSunic.parse(dataobj.value)+'</td>'+
+		'</tr>'
+	    );
+	}
+    }
+
+    /**
      * Make all values of form editable
      */
-    this.makeEditable = makeEditable;
-    function makeEditable (tableid) {
+    this.makeEditable = function (tableid, obj) {
 
-	$('#'+tableid+' td').dblclick(function () {
+	$(tableid+' td').dblclick(function () {
 	    var origvalue = $(this).text();
 
 	    $(this).html('<input type="text" value="'+origvalue+'" />');
-	    $(this).children().first().focus();
+	    var input = $(this).children().first();
+	    input.focus();
 
-	    $(this).children().first().keypress(function (e) {
+	    // Save by pressing enter
+	    input.keypress(function (e) {
 		if (e.which == 13) {
 		    var newContent = $(this).val();
+		    var name = $(this).closest('tr').attr('id');
 		    $(this).parent().text(newContent);
-
-		    // TODO Save new value in Packet
+		    obj.saveAttribute(name, newContent);
 		}
 	    });
 	});
 
+    }
+
+    /**
+     * Make all attributes editable and show input box
+     */
+    this.makeNew = function (tableid, obj) {
+	this.makeEditable(tableid, obj);
+	$(tableid+' td').dblclick();
     }
 }
