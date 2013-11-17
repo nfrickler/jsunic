@@ -1,10 +1,16 @@
 /**
- * Register new user
+ * JavaScript part of view register
  */
+function users__register__init () {
+    $('#users__register__form').submit(function (e) {
+	e.preventDefault();
+	users__register();
+    });
+}
+
 function users__register () {
-    var email = document.getElementById("users__register__email").value;
-    var password =
-	document.getElementById("users__register__password").value;
+    var email = $('#users__login__email').val();
+    var password = $('#users__login__password').val();
     JSunic.User = new UserObj();
 
     // Validate email + password!
@@ -20,6 +26,4 @@ function users__register () {
 
     // try to log in
     JSunic.User.register(email);
-
-    return false;
 }

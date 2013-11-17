@@ -39,8 +39,7 @@ function Packet (packetId) {
     /**
      * Load this object
      */
-    this.load = load;
-    function load (success_cb, fail_cb) {
+    this.load = function (success_cb, fail_cb) {
 	if (typeof success_cb == 'undefined') {
 	    success_cb = function () { return; }
 	}
@@ -217,8 +216,7 @@ function Packet (packetId) {
     /**
      * Get index of this object
      */
-    this.getIndex = getIndex;
-    function getIndex () {
+    this.getIndex = function () {
 	return {
 	    "packetId": this.packetId,
 	};

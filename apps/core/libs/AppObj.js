@@ -11,8 +11,7 @@ function AppObj (apppath) {
     /**
      * Load app information
      */
-    this.load = load;
-    function load (success_cb, fail_cb) {
+    this.load = function (success_cb, fail_cb) {
 	var Current = this;
 	JSunic.load(
 	    apppath+"appinfo.json",
@@ -32,8 +31,7 @@ function AppObj (apppath) {
     /**
      * Is this App installed?
      */
-    this.isInstalled = isInstalled;
-    function isInstalled () {
+    this.isInstalled = function () {
 	for (var installed in JSunic.Boot.apps) {
 	    if (this.name == JSunic.Boot.apps[installed].name) {
 		return true;

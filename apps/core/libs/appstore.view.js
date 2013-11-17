@@ -7,6 +7,13 @@ function core__appstore__init () {
     var path = JSunic.Config.get('appstore');
     if (!path) return;
 
+    // Submit on path form
+    $('#core__appstore__form').submit(function (e) {
+	e.preventDefault();
+	core__appstore__form__path__submit();
+	return false;	
+    });
+
     // Add all installed apps to list
     if (JSunic.Boot.apps.length) {
 	$('#core__appstore__installed__list').html("<ul></ul>");
@@ -106,7 +113,9 @@ function core__appstore__appinfo (App) {
 	    });
 
 	    if (App.isInstalled()) {
-		$('#core__appinfo__install').html(JSunic.parse('CORE__APPINFO__UNINSTALL'));
+		$('#core__appinfo__install').html(
+		    JSunic.parse('CORE__APPINFO__UNINSTALL')
+		);
 		$('#core__appinfo__install').click(function () {
 		    core__appinfo__uninstall(App);
 		});

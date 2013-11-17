@@ -20,8 +20,7 @@ function UserObj () {
     /**
      * Log user in by loading master boot record (MBR)
      */
-    this.login = login;
-    function login (email) {
+    this.login = function (email) {
 
 	// Load Mbr
 	JSunic.Mbr = new MbrObj();
@@ -43,8 +42,7 @@ function UserObj () {
     /**
      * Register new user
      */
-    this.register = register;
-    function register (email) {
+    this.register = function (email) {
 
 	// Load Mbr
 	JSunic.Mbr = new MbrObj();
@@ -67,19 +65,17 @@ function UserObj () {
     /**
      * Log user out
      */
-    this.logout = logout;
-    function logout () {
+    this.logout = function () {
 	JSunic.User = null;
 	this.symkey = false;
 	JSunic.info("Logout successful.");
-	JSunic.app('users');
+	JSunic.open('#users');
     }
 
     /**
      * Encrypt data
      */
-    this.encrypt = encrypt;
-    function encrypt (data) {
+    this.encrypt = function (data) {
 
 	// TODO: Enable encryption again (disabled for debugging)
 	return data;
@@ -95,8 +91,7 @@ function UserObj () {
     /**
      * Decrypt data
      */
-    this.decrypt = decrypt;
-    function decrypt (data) {
+    this.decrypt = function (data) {
 	if (this.aes == null) this.aes =
 	    new pidCrypt.AES.CBC();
 
@@ -124,8 +119,7 @@ function UserObj () {
     /**
      * Is valid password?
      */
-    this.validPassword = validPassword;
-    function validPassword (password) {
+    this.validPassword = function (password) {
 	// TODO
 	if (password.length < 1)
 	    return false;
@@ -135,8 +129,7 @@ function UserObj () {
     /**
      * Is valid email?
      */
-    this.validEmail = validEmail;
-    function validEmail (email) {
+    this.validEmail = function (email) {
 	// TODO
 	if (email.length < 1)
 	    return false;
@@ -146,8 +139,7 @@ function UserObj () {
     /**
      * Set symkey from password
      */
-    this.setSymkey_pass = setSymkey_pass;
-    function setSymkey_pass (email, password) {
+    this.setSymkey_pass = function (email, password) {
 	var salt = email;
 	this.symkey = CryptoJS.PBKDF2(password, salt, { keySize: 512/32 });
     }

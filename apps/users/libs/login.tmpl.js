@@ -1,9 +1,17 @@
 /**
- * Log user in
+ * JavaScript part of view login
  */
+function users__login__init () {
+    $('#users__login__form').submit(function (e) {
+	e.preventDefault();
+	users__login();
+	return false;
+    });
+}
+
 function users__login () {
-    var email = document.getElementById("users__login__email").value;
-    var password = document.getElementById("users__login__password").value;
+    var email = $('#users__login__email').val();
+    var password = $('#users__login__password').val();
     JSunic.User = new UserObj();
 
     // Validate email + password!
@@ -19,6 +27,4 @@ function users__login () {
 
     // try to log in
     JSunic.User.login(email);
-
-    return false;
 }

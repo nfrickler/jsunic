@@ -84,8 +84,7 @@ function JSunicObj () {
     /**
      * Save data packet via ajax call
      */
-    this.save = save;
-    function save (data, id) {
+    this.save = function (data, id) {
 
 	// Create new packet, if no id given
 	if (!id) id = 0;
@@ -111,8 +110,7 @@ function JSunicObj () {
     /**
      * Encrypt data of User
      */
-    this.encrypt = encrypt;
-    function encrypt (data) {
+    this.encrypt = function (data) {
 	if (this.User) return this.User.encrypt(data);
 	this.fatalError("Encryption not ready!");
     }
@@ -120,8 +118,7 @@ function JSunicObj () {
     /**
      * Decrypt data of User
      */
-    this.decrypt = decrypt;
-    function decrypt (data) {
+    this.decrypt = function (data) {
 	if (this.User) return this.User.decrypt(data);
 	this.fatalError("Decryption not ready!");
     }
@@ -129,8 +126,7 @@ function JSunicObj () {
     /**
      * Load data packet via ajax call
      */
-    this.get = get;
-    function get (id) {
+    this.get = function (id) {
 	this.loadOnce(
 	    this.path+"index.php?id="+id,
 	    function (response) {
@@ -148,10 +144,24 @@ function JSunicObj () {
     }
 
     /**
+     * Open link (#appname&viewname&param1=value1&param2=value2)
+     */
+    this.open = function (hashcode) {
+	request = new RequestObj(hashcode);
+	request.open();
+    }
+
+    /**
+     * Get current request
+     */
+    this.getRequest = function () {
+	return request;
+    }
+
+    /**
      * Start app
      */
-    this.app = app;
-    function app (name) {
+    this.app = function (name) {
 	this.current_app = name;
 
 	// Load <<app>>.min.js
@@ -173,9 +183,8 @@ function JSunicObj () {
     /**
      * Load app-view
      */
-    this.appview = appview;
-    function appview (app, view, content) {
-	if (typeof content === 'undefined') content = true;
+    this.appview = function (app, view, isRootpopup) {
+	if (typeof isRootpopup === 'undefined') content = false;
 	this.current_app = app;
 	this.current_view = view;
 
@@ -187,23 +196,21 @@ function JSunicObj () {
 	    app,
 	    view,
 	    function (response) {
-		if (content) {
-		    $('#content').html(JSunic.parse(response));
-		    $("#root").css("display", "block");
-		    $("#rootpopup").css("display", "none");
-		} else {
+		if (isRootpopup) {
 		    $('#rootpopup').html(JSunic.parse(response));
 		    $("#root").css("display", "none");
 		    $("#rootpopup").css("display", "block");
+		} else {
+		    $('#content').html(JSunic.parse(response));
+		    $("#root").css("display", "block");
+		    $("#rootpopup").css("display", "none");
 		}
 
 		// Try to run JavaScript code of view
-		var isfkt = false;
-		var initname = app+'__'+view+'__init'
-		eval('if (typeof '+initname+' === "function") isfkt = true;');
-		// TODO: Replace setTimeout with sth. better
-		// Function must be called _after_ page has been loaded!
-		if (isfkt) setTimeout(initname+'();', 100);
+		var initname = app+'__'+view+'__init';
+		if (typeof window[initname] === "function") {
+		    window[initname]();
+		}
 	    },
 	    function (response) {
 		JSunic.error("Failed to load view!");
@@ -214,8 +221,7 @@ function JSunicObj () {
     /**
      * Load appview
      */
-    this.loadview = loadview;
-    function loadview (app, view, success_cb, fail_cb) {
+    this.loadview = function (app, view, success_cb, fail_cb) {
 	this.loadOnce(
 	    this.path_apps+app+"/views/"+view+".htm",
 	    success_cb,
@@ -227,16 +233,14 @@ function JSunicObj () {
     /**
      * Reload current view
      */
-    this.reload = reload;
-    function reload () {
-	this.appview(this.current_app, this.current_view);
+    this.reload = function () {
+	request.open();
     }
 
     /**
      * Parse input and insert language
      */
-    this.parse = parse;
-    function parse (input) {
+    this.parse = function (input) {
 	if (!input) return '';
 	return JSunic.parseHTML_language(input);
     }
@@ -244,8 +248,7 @@ function JSunicObj () {
     /**
      * Parse input for language replacements
      */
-    this.parseHTML_language = parseHTML_language;
-    function parseHTML_language (input) {
+     this.parseHTML_language = function (input) {
 	return input.replace(
 	    /\b[A-Z][A-Z0-9_]+\b/g, function(match, contents, offset, s) {
 		if (match == "JSUNIC__VERSION") return JSunic.version;
@@ -260,8 +263,7 @@ function JSunicObj () {
     /**
      * Load language
      */
-    this.loadLanguage = loadLanguage;
-    function loadLanguage (app, language) {
+    this.loadLanguage = function (app, language) {
 	if (typeof language === 'undefined') language = false;
 	if (!language) language = JSunic.Config.get("lang");
 	this.loadOnce(
@@ -289,16 +291,22 @@ function JSunicObj () {
     /**
      * Handle errors
      */
-    this.error = error;
-    function error (msg) {
+    this.error = function (msg) {
+	this.log(msg);
 	alert("Error: "+msg);
+    }
+
+    /**
+     * Log message
+     */
+    this.log = function (msg) {
+	console.log(msg);
     }
 
     /**
      * Fatal errors. Exit JSunic
      */
-    this.fatalError = fatalError;
-    function fatalError (msg) {
+    this.fatalError = function (msg) {
 
 	// TODO: remove alert (debugging only)
 	alert('FatalError: '+msg);
@@ -311,16 +319,15 @@ function JSunicObj () {
     /**
      * Handle infos
      */
-    this.info= info;
-    function info (msg) {
+    this.info = function (msg) {
+	this.log(msg);
 	alert("Info: "+msg);
     }
 
     /**
      * Wrapper for ajax calls, that should only be called once
      */
-    this.loadOnce = loadOnce;
-    function loadOnce (uri, success_cb, fail_cb, type, async) {
+    this.loadOnce = function (uri, success_cb, fail_cb, type, async) {
 	if (typeof async === 'undefined') async = true;
 
 	// Check, if already loaded
@@ -343,8 +350,7 @@ function JSunicObj () {
     /**
      * Wrapper for ajax calls
      */
-    this.load = load;
-    function load (uri, success_cb, fail_cb, type, async) {
+    this.load = function (uri, success_cb, fail_cb, type, async) {
 	if (typeof async === 'undefined') async = true;
 
 	// Delete old requests
@@ -363,7 +369,9 @@ function JSunicObj () {
 	$.ajax({
 	    url: uri,
 	    dataType: type,
-	    async: async,
+	   // TODO: enable async
+	   // async: async,
+	    async: false,
 	    success: function (response) {
 		var req = JSunic.getAjax(uri);
 		if (req) {
@@ -388,8 +396,7 @@ function JSunicObj () {
     /**
      * Get ajax object to uri
      */
-    this.getAjax = getAjax;
-    function getAjax (uri) {
+    this.getAjax = function (uri) {
 	for (var i in this.ajax_req) {
 	    if (this.ajax_req[i].uri == uri) {
 		return this.ajax_req[i];
@@ -400,8 +407,7 @@ function JSunicObj () {
     /**
      * Convert packetId to path
      */
-    this.packetId2path = packetId2path;
-    function packetId2path (packetId) {
+    this.packetId2path = function (packetId) {
 	if (this.Boot) return this.Boot.packetId2path(packetId);
 	return packetId;
     }

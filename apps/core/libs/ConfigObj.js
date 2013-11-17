@@ -14,16 +14,14 @@ function ConfigObj (path) {
     /**
      * Get setting
      */
-    this.get = get;
-    function get (name) {
+    this.get = function (name) {
 	return this.config[name];
     }
 
     /**
      * Set setting
      */
-    this.set = set;
-    function set (name, value) {
+    this.set = function (name, value) {
 	if (!this.config) this.load();
 	this.config[name] = value;
     }
@@ -31,8 +29,7 @@ function ConfigObj (path) {
     /**
      * Load configuration from config file
      */
-    this.load = load;
-    function load () {
+    this.load = function () {
 	JSunic.loadOnce(
 	    this.path,
 	    function (response) {
@@ -51,8 +48,7 @@ function ConfigObj (path) {
     /**
      * Preset language with browser language
      */
-    this.initLanguage = initLanguage;
-    function initLanguage () {
+    this.initLanguage = function () {
 	var fulllang = navigator.language || navigator.userLanguage;
 	var splitted = fulllang.split("-");
 	var newlang = splitted[0];

@@ -2,5 +2,5 @@
  * Init function
  */
 function users__init () {
-    JSunic.appview("users", "login", false);
+    JSunic.open('#users&login&rootpopup');
 }

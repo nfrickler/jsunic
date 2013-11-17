@@ -47,8 +47,4 @@ function contacts__index__init () {
 	    JSunic.appview('contacts', 'profile');
 	});
     }
-
-    $('#contacts__index__addcontact').click(function () {
-	JSunic.appview('contacts', 'form_contact');
-    });
 }

@@ -29,8 +29,7 @@ function Contacts__ContactObj (packetId) {
     /**
      * Get index of this object
      */
-    this.getIndex = getIndex;
-    function getIndex () {
+    this.getIndex = function () {
 	return {
 	    "fk_packetId": this.packetId,
 	    "type": "Contacts__ContactObj",

@@ -25,8 +25,9 @@
     <script type="text/javascript" src="apps/core/core.min.js"></script>
     <!-- TODO: Change to minimized jquery later on -->
     <script type="text/javascript" src="libs/jquery/jquery-dev.js"></script>
+    <script type="text/javascript" src="apps/core/libs/bootstrap.js"></script>
 </head>
-<body onload="core__init();">
+<body>
     <div id="notifications"></div>
     <div id="rootpopup"></div>
     <div id="root">
@@ -48,10 +49,9 @@
 	</div>
 	<div id="navigframe">
 	    <ul id="navig">
-		<li><a href="#">Home</a></li>
+		<li><a href="#core&desktop">Home</a></li>
 		<li>
-		    <a href="#" onclick="JSunic.appview('core', 'appstore');">
-		    CORE__INDEX__APPS</a>
+		    <a href="#core&appstore">CORE__INDEX__APPS</a>
 		    <ul id="core__index__navig__apps"></ul>
 		</li>
 	    </ul>
