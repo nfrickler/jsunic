@@ -17,5 +17,9 @@ lang = {
     'CONTACTS__FORM_CONTACT__H1_NEW': 'Add new contact',
     'CONTACTS__FORM_CONTACT__INFOTEXT_NEW': 'Fill in the following form to add a new contact to your list.',
     'CONTACTS__FORM_CONTACT__SUBMIT_NEW': 'Save new contact',
+    'CONTACTS__FORM_CONTACT__DELETE': 'Delete contact',
+    'CONTACTS__FORM_CONTACT__EDITALL': 'Edit all values',
+    'CONTACTS__FORM_CONTACT__DELETE__SUCCESS': 'Contact deleted.',
+    'CONTACTS__FORM_CONTACT__DELETE__ERROR': 'Contact could not be deleted!',
 
 };

@@ -127,12 +127,10 @@ function Packet (packetId) {
      * Save this object
      */
     this.save = function (success_cb, fail_cb, async) {
-	if (typeof success_cb == 'undefined') {
+	if (typeof success_cb == 'undefined')
 	    success_cb = function () { return; }
-	}
-	if (typeof fail_cb == 'undefined') {
+	if (typeof fail_cb == 'undefined')
 	    fail_cb = function () { return; }
-	}
 
 	// Get path
 	if (!this.packetId) this.packetId = 0;
@@ -184,8 +182,11 @@ function Packet (packetId) {
     /**
      * Remove this object
      */
-    this.remove = remove;
-    function remove () {
+    this.remove = function (success_cb, fail_cb) {
+	if (typeof success_cb == 'undefined')
+	    success_cb = function () { return; }
+	if (typeof fail_cb == 'undefined')
+	    fail_cb = function () { return; }
 
 	// Get path
 	var path = JSunic.packetId2path(this.packetId);

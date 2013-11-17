@@ -54,4 +54,21 @@ function Contacts__ContactObj (packetId) {
 	    ]
 	);
     }
+
+    /**
+     * Remove this object
+     */
+    this.remove = function (success_cb, fail_cb) {
+	var that = this;
+	Contacts__ContactObj.prototype.remove.apply(
+	    this,
+	    [
+	    function (response) {
+		JSunic.Boot.appIndex('contacts').removeObj(that);
+		success_cb(response);
+	    },
+	    fail_cb
+	    ]
+	);
+    }
 };

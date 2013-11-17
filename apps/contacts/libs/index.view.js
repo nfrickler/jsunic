@@ -13,8 +13,12 @@ function contacts__index__init () {
     var attrlist = ['firstname', 'lastname', 'dateofbirth'];
     var tableobj = $('#contacts__index__list');
 
-    // Print table header
     if (contactlist.length > 0) {
+
+	// Clear NOCONTACTS
+	tableobj.html('');
+
+	// Print table header
 	var cur = contactlist[0];
 	tableobj.append('<tr>');
 	$.each(attrlist, function (index, value) {

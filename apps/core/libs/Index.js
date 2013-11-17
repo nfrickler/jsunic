@@ -47,6 +47,7 @@ function IndexObj (packetId) {
 		this.objectlist.slice(i, 1);
 	    }
 	}
+	this.save();
     }
 
     /**

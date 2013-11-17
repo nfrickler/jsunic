@@ -26,12 +26,12 @@ function FormsObj () {
      */
     this.makeEditable = function (tableid, obj) {
 
-	$(tableid+' td').dblclick(function () {
-	    var origvalue = $(this).text();
+	$(tableid+' tr').dblclick(function () {
+	    var tdfield = $(this).children('td').first();
+	    var origvalue = tdfield.text();
 
-	    $(this).html('<input type="text" value="'+origvalue+'" />');
-	    var input = $(this).children().first();
-	    input.focus();
+	    tdfield.html('<input type="text" value="'+origvalue+'" />');
+	    var input = tdfield.children('input').first();
 
 	    // Save by pressing enter
 	    input.keypress(function (e) {
@@ -44,6 +44,8 @@ function FormsObj () {
 	    });
 	});
 
+	// Set focus on first input
+	$(':input:enabled:visible:first').focus();
     }
 
     /**
