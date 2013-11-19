@@ -49,11 +49,12 @@ function BootObj (packetId, path) {
      * Load configuration from config file
      */
     this.load = function () {
-	var Boot = this;
+	var Boot = this
+	var packetfound = false;
 	BootObj.prototype.load.call(
 	    this,
 	    function (response) {
-		JSunic.open('#core&desktop');
+		packetfound = true;
 		Boot.updateNavigation();
 	    },
 	    function (response) {

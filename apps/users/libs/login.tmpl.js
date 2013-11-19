@@ -26,5 +26,15 @@ function users__login () {
     JSunic.User.setSymkey_pass(email, password);
 
     // try to log in
-    JSunic.User.login(email);
+    if (JSunic.User.login(email)) {
+	JSunic.info('Login successful.');
+	var redirect = JSunic.getRequest().param('redirect');
+	if (redirect) {
+	    JSunic.open(atob(redirect));
+	} else {
+	    JSunic.open('#core&desktop');
+	}
+    } else {
+	JSunic.error('Login failed!');
+    }
 }

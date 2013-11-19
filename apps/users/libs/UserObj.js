@@ -25,18 +25,18 @@ function UserObj () {
 	// Load Mbr
 	JSunic.Mbr = new MbrObj();
 	JSunic.Mbr.setPacketId(JSunic.mbr_path, email);
+	var success = false;
 	JSunic.Mbr.load(
-	    function () {
-		JSunic.info("Login successful.");
-		// Get Boot object
-		JSunic.Boot = new BootObj(JSunic.Mbr.boot_packetId,
-		    JSunic.Mbr.boot_path);
-		JSunic.Boot.load();
-	    },
-	    function () {
-		JSunic.fatalError("Failed to load MBR!");
-	    }
+	    function () { success = true; }
 	);
+	if (!success) return false;
+
+	// Get Boot object
+	JSunic.Boot = new BootObj(JSunic.Mbr.boot_packetId,
+	    JSunic.Mbr.boot_path);
+	JSunic.Boot.load();
+
+	return true;
     }
 
     /**

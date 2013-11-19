@@ -124,6 +124,25 @@ function JSunicObj () {
     }
 
     /**
+     * Has user access to specified view?
+     * If not redirect to login
+     */
+    this.access = function (app, view, param) {
+	// TODO: App specific access handling
+	if (app == 'users' && (view == 'login' || view == 'register'))
+	    return true;
+
+	// Is logged in?
+	if (!this.Boot) {
+	    JSunic.open('#users&login&rootpopup&redirect='+
+		encodeURIComponent(btoa(request.getLink())));
+	    return false;
+	}
+
+	return true;
+    }
+
+    /**
      * Load data packet via ajax call
      */
     this.get = function (id) {
@@ -161,7 +180,8 @@ function JSunicObj () {
     /**
      * Start app
      */
-    this.app = function (name) {
+    this.app = function (name, doInit) {
+	if (typeof doInit == 'undefined') doInit = true;
 	this.current_app = name;
 
 	// Load <<app>>.min.js
@@ -177,16 +197,20 @@ function JSunicObj () {
 	);
 
 	// Run init function
-	eval(name+'__init();');
+	if (doInit) eval(name+'__init();');
     }
 
     /**
      * Load app-view
      */
     this.appview = function (app, view, isRootpopup) {
+	if (!this.access(app, view)) return false;
 	if (typeof isRootpopup === 'undefined') content = false;
 	this.current_app = app;
 	this.current_view = view;
+
+	// Load app
+	this.app(app, false);
 
 	// Load language
 	JSunic.loadLanguage(app);

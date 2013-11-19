@@ -3,7 +3,8 @@
  * This object represents a JSunic request and offers easy access to the
  * parameters
  */
-function RequestObj(link) {
+function RequestObj(i_link) {
+    var link = i_link;
     var appname;
     var viewname;
     var params = {};
@@ -11,7 +12,7 @@ function RequestObj(link) {
     /**
      * Init request
      */
-    var _init = function (link) {
+    var _init = function () {
 	var appcode = link.split('&');
 
 	appname = (appcode.length > 0) ? appcode[0] : '#core';
@@ -25,7 +26,7 @@ function RequestObj(link) {
 	    for (var i = 0; i < appcode.length; i++) {
 		var splitted = appcode[i].split('=', 2);
 		params[_uri2value(splitted[0])] = (splitted.length > 1)
-		    ? _uri2value(decodesplitted[1]) : true;
+		    ? _uri2value(splitted[1]) : true;
 	    }
 	}
     }
@@ -41,7 +42,7 @@ function RequestObj(link) {
      * Normalize input
      */
     var _normalize = function (input) {
-	var Regex = /[^\s\.\?\!,a-zA-Z0-9_-]/g;
+	var Regex = /[^\s\.\?\!,a-zA-Z0-9_=#-]/g;
 	input = input.replace(Regex, "?");
 	return input;
     }
@@ -66,5 +67,12 @@ function RequestObj(link) {
 	return params[name];
     }
 
-    _init(link);
+    /**
+     * Get link
+     */
+    this.getLink = function () {
+	return link;
+    }
+
+    _init();
 }
