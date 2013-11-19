@@ -294,16 +294,17 @@ input[type="radio"]
 
 /* ############### 3. Structure and design ################### */
 
-#rootpopup {
-    position:absolute;
+.rootpopup {
+    position:fixed;
     top:0px;
     left:0px;
-    display:none;
+    display:block;
     width:100%;
     height:100%;
     background:#444;
+    z-index:1000;
 }
-#rootpopup > div {
+.rootpopup > div {
     position:relative;
     top:10%;
     width:70%;

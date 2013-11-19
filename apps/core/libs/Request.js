@@ -53,7 +53,7 @@ function RequestObj(i_link) {
     this.open = function () {
 	if (viewname) {
 	    JSunic.log('Open view "'+appname+'__'+viewname+'"');
-	    JSunic.appview(appname, viewname, this.param('rootpopup'));
+	    JSunic.appview(appname, viewname);
 	} else {
 	    JSunic.log('Open App "'+appname+'"');
 	    JSunic.app(appname);

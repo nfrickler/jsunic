@@ -21,11 +21,6 @@ function JSunicObj () {
     this.path = "";
 
     /**
-     * Time of idle
-     */
-    this.idle= 0;
-
-    /**
      * Path to boot packet
      */
     this.boot_path;
@@ -134,7 +129,7 @@ function JSunicObj () {
 
 	// Is logged in?
 	if (!this.Boot) {
-	    JSunic.open('#users&login&rootpopup&redirect='+
+	    JSunic.open('#users&login&redirect='+
 		encodeURIComponent(btoa(request.getLink())));
 	    return false;
 	}
@@ -220,15 +215,9 @@ function JSunicObj () {
 	    app,
 	    view,
 	    function (response) {
-		if (isRootpopup) {
-		    $('#rootpopup').html(JSunic.parse(response));
-		    $("#root").css("display", "none");
-		    $("#rootpopup").css("display", "block");
-		} else {
-		    $('#content').html(JSunic.parse(response));
-		    $("#root").css("display", "block");
-		    $("#rootpopup").css("display", "none");
-		}
+
+		// Set view as content
+		$('#content').html(JSunic.parse(response));
 
 		// Try to run JavaScript code of view
 		var initname = app+'__'+view+'__init';
